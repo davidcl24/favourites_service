@@ -33,7 +33,7 @@ func init() {
 }
 
 func main() {
-	router.Mount("/api/faavourites", favouritesRouters())
+	router.Mount("/api/favourites", favouritesRouters())
 	http.ListenAndServe(":4000", router)
 }
 
