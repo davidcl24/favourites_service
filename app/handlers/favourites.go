@@ -28,7 +28,7 @@ func (f *FavouriteHandler) ListUserFavourites(w http.ResponseWriter, r *http.Req
 	}
 }
 
-func (f FavouriteHandler) GetFavourite(w http.ResponseWriter, r *http.Request) {
+func (f *FavouriteHandler) GetFavourite(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
 
 	fav, err := f.DB.GetFavouriteByID(id)
@@ -49,7 +49,7 @@ func (f FavouriteHandler) GetFavourite(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (f FavouriteHandler) CreateFavourite(w http.ResponseWriter, r *http.Request) {
+func (f *FavouriteHandler) CreateFavourite(w http.ResponseWriter, r *http.Request) {
 	var favourite models.Favourite
 
 	err := json.NewDecoder(r.Body).Decode(&favourite)
@@ -71,7 +71,7 @@ func (f FavouriteHandler) CreateFavourite(w http.ResponseWriter, r *http.Request
 	}
 }
 
-func (f FavouriteHandler) DeleteFavourite(w http.ResponseWriter, r *http.Request) {
+func (f *FavouriteHandler) DeleteFavourite(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
 	fav, err := f.DB.DeleteFavourite(id)
 
@@ -86,7 +86,7 @@ func (f FavouriteHandler) DeleteFavourite(w http.ResponseWriter, r *http.Request
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func (f FavouriteHandler) ClearUserFavourites(w http.ResponseWriter, r *http.Request) {
+func (f *FavouriteHandler) ClearUserFavourites(w http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(chi.URLParam(r, "user_id"))
 	historyElements, err := f.DB.ClearUserFavourites(userId)
 
