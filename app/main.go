@@ -34,7 +34,7 @@ func init() {
 
 func main() {
 	router.Mount("/api/favourites", favouritesRouters())
-	http.ListenAndServe(":4000", router)
+	http.ListenAndServe(":7600", router)
 }
 
 func favouritesRouters() chi.Router {
