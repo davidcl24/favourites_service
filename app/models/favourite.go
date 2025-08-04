@@ -6,10 +6,10 @@ import (
 )
 
 type Favourite struct {
-	ID      int `json:"id"`
-	UserID  int `json:"user_id"`
-	MovieID int `json:"movie_id"`
-	ShowID  int `json:"show_id"`
+	ID      int  `json:"id"`
+	UserID  int  `json:"user_id"`
+	MovieID *int `json:"movie_id"`
+	ShowID  *int `json:"show_id"`
 }
 
 func (db *DB) GetAllUserFavourites(userId int) ([]*Favourite, error) {
