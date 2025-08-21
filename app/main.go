@@ -21,7 +21,7 @@ func init() {
 	router.Use(middleware.Logger)
 	router.Use(middleware.Recoverer)
 
-	dbConfig := *config.NewEnvDBConfig()
+	dbConfig := config.NewEnvDBConfig()
 
 	connectionString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		dbConfig.Host, dbConfig.Port, dbConfig.Username, dbConfig.Password, dbConfig.Database)
