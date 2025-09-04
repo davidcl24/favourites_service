@@ -45,6 +45,8 @@ func favouritesRouters() chi.Router {
 	router.Use(middleware.Logger)
 
 	router.Get("/user/{user_id}", favouritesHandler.ListUserFavourites)
+	router.Get("/user/{user_id}/movie/{movie_id}", favouritesHandler.GetUserMovieFavourite)
+	router.Get("/user/{user_id}/show/{show_id}", favouritesHandler.GetUserShowFavourite)
 	router.Get("/{id}", favouritesHandler.GetFavourite)
 	router.Post("/", favouritesHandler.CreateFavourite)
 	router.Delete("/{id}", favouritesHandler.DeleteFavourite)

@@ -37,6 +37,42 @@ func (db *DB) GetAllUserFavourites(userId int) ([]*Favourite, error) {
 	return favourites, nil
 }
 
+func (db *DB) GetMovieFavouriteFromUser(userId int, movieId int) (*Favourite, error) {
+	query := `
+		SELECT id, user_id, movie_id, show_id
+		FROM favourites
+		WHERE user_id = $1 AND movie_id = $2`
+	fav := &Favourite{}
+
+	err := db.Conn.QueryRow(query, userId, movieId).Scan(&fav.ID, &fav.UserID, &fav.MovieID, &fav.ShowID)
+	var opErr *net.OpError
+	if errors.As(err, &opErr) {
+		return nil, err
+	}
+	if err != nil {
+		return nil, nil
+	}
+	return fav, nil
+}
+
+func (db *DB) GetShowFavouriteFromUser(userId int, showId int) (*Favourite, error) {
+	query := `
+		SELECT id, user_id, movie_id, show_id
+		FROM favourites
+		WHERE user_id = $1 AND show_id = $2`
+	fav := &Favourite{}
+
+	err := db.Conn.QueryRow(query, userId, showId).Scan(&fav.ID, &fav.UserID, &fav.MovieID, &fav.ShowID)
+	var opErr *net.OpError
+	if errors.As(err, &opErr) {
+		return nil, err
+	}
+	if err != nil {
+		return nil, nil
+	}
+	return fav, nil
+}
+
 func (db *DB) GetFavouriteByID(id int) (*Favourite, error) {
 	query := `
 		SELECT id, user_id, movie_id, show_id

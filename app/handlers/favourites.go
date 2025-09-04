@@ -28,6 +28,50 @@ func (f *FavouriteHandler) ListUserFavourites(w http.ResponseWriter, r *http.Req
 	}
 }
 
+func (f *FavouriteHandler) GetUserMovieFavourite(w http.ResponseWriter, r *http.Request) {
+	userId, _ := strconv.Atoi(chi.URLParam(r, "user_id"))
+	movieId, _ := strconv.Atoi(chi.URLParam(r, "movie_id"))
+
+	fav, err := f.DB.GetMovieFavouriteFromUser(userId, movieId)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if fav == nil {
+		http.Error(w, "Element not found", http.StatusNotFound)
+	} else {
+		err = json.NewEncoder(w).Encode(fav)
+		if err != nil {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+	}
+}
+
+func (f *FavouriteHandler) GetUserShowFavourite(w http.ResponseWriter, r *http.Request) {
+	userId, _ := strconv.Atoi(chi.URLParam(r, "user_id"))
+	showId, _ := strconv.Atoi(chi.URLParam(r, "showid"))
+
+	fav, err := f.DB.GetShowFavouriteFromUser(userId, showId)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if fav == nil {
+		http.Error(w, "Element not found", http.StatusNotFound)
+	} else {
+		err = json.NewEncoder(w).Encode(fav)
+		if err != nil {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+	}
+}
+
 func (f *FavouriteHandler) GetFavourite(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
 
