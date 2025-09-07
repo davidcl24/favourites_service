@@ -52,7 +52,7 @@ func (f *FavouriteHandler) GetUserMovieFavourite(w http.ResponseWriter, r *http.
 
 func (f *FavouriteHandler) GetUserShowFavourite(w http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(chi.URLParam(r, "user_id"))
-	showId, _ := strconv.Atoi(chi.URLParam(r, "showid"))
+	showId, _ := strconv.Atoi(chi.URLParam(r, "show_id"))
 
 	fav, err := f.DB.GetShowFavouriteFromUser(userId, showId)
 
