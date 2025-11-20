@@ -19,7 +19,7 @@ RUN go mod download
 COPY . .
 
 # Compilar binario totalmente estático
-RUN go build -ldflags="-s -w" -o server ./cmd/server
+RUN go build -ldflags="-s -w" -o server ./app
 
 # ============================
 # 2) Final: imagen scratch
