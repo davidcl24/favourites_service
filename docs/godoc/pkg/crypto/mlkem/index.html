@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>mlkem - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.24.3";</script>
+<script src="../../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="../../index.html">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="../../index.html">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://localhost:8081/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package mlkem
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "crypto/mlkem"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+				<dd><a href="index.html#pkg-examples" class="examplesLink">Examples</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>Package mlkem implements the quantum-resistant key encapsulation method
+ML-KEM (formerly known as Kyber), as specified in <a href="https://doi.org/10.6028/NIST.FIPS.203">NIST FIPS 203</a>.
+<p>Most applications should use the ML-KEM-768 parameter set, as implemented by
+<a href="index.html#DecapsulationKey768">DecapsulationKey768</a> and <a href="index.html#EncapsulationKey768">EncapsulationKey768</a>.
+
+				<div id="example_" class="toggle">
+	<div class="collapsed">
+		<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+	</div>
+	<div class="expanded">
+		<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+		
+		
+		
+			<p>Code:</p>
+			<pre class="code">package mlkem_test
+
+import (
+    &#34;crypto/mlkem&#34;
+    &#34;log&#34;
+)
+
+func Example() {
+    <span class="comment">// Alice generates a new key pair and sends the encapsulation key to Bob.</span>
+    dk, err := mlkem.GenerateKey768()
+    if err != nil {
+        log.Fatal(err)
+    }
+    encapsulationKey := dk.EncapsulationKey().Bytes()
+
+    <span class="comment">// Bob uses the encapsulation key to encapsulate a shared secret, and sends</span>
+    <span class="comment">// back the ciphertext to Alice.</span>
+    ciphertext := Bob(encapsulationKey)
+
+    <span class="comment">// Alice decapsulates the shared secret from the ciphertext.</span>
+    sharedSecret, err := dk.Decapsulate(ciphertext)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    <span class="comment">// Alice and Bob now share a secret.</span>
+    _ = sharedSecret
+}
+
+func Bob(encapsulationKey []byte) (ciphertext []byte) {
+    <span class="comment">// Bob encapsulates a shared secret using the encapsulation key.</span>
+    ek, err := mlkem.NewEncapsulationKey768(encapsulationKey)
+    if err != nil {
+        log.Fatal(err)
+    }
+    sharedSecret, ciphertext := ek.Encapsulate()
+
+    <span class="comment">// Alice and Bob now share a secret.</span>
+    _ = sharedSecret
+
+    <span class="comment">// Bob sends the ciphertext to Alice.</span>
+    return ciphertext
+}
+</pre>
+			
+		
+	</div>
+</div>
+
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+				<dd><a href="index.html#pkg-constants">Constants</a></dd>
+			
+			
+			
+			
+				
+				<dd><a href="index.html#DecapsulationKey1024">type DecapsulationKey1024</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#GenerateKey1024">func GenerateKey1024() (*DecapsulationKey1024, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewDecapsulationKey1024">func NewDecapsulationKey1024(seed []byte) (*DecapsulationKey1024, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DecapsulationKey1024.Bytes">func (dk *DecapsulationKey1024) Bytes() []byte</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DecapsulationKey1024.Decapsulate">func (dk *DecapsulationKey1024) Decapsulate(ciphertext []byte) (sharedKey []byte, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DecapsulationKey1024.EncapsulationKey">func (dk *DecapsulationKey1024) EncapsulationKey() *EncapsulationKey1024</a></dd>
+				
+			
+				
+				<dd><a href="index.html#DecapsulationKey768">type DecapsulationKey768</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#GenerateKey768">func GenerateKey768() (*DecapsulationKey768, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewDecapsulationKey768">func NewDecapsulationKey768(seed []byte) (*DecapsulationKey768, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DecapsulationKey768.Bytes">func (dk *DecapsulationKey768) Bytes() []byte</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DecapsulationKey768.Decapsulate">func (dk *DecapsulationKey768) Decapsulate(ciphertext []byte) (sharedKey []byte, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DecapsulationKey768.EncapsulationKey">func (dk *DecapsulationKey768) EncapsulationKey() *EncapsulationKey768</a></dd>
+				
+			
+				
+				<dd><a href="index.html#EncapsulationKey1024">type EncapsulationKey1024</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewEncapsulationKey1024">func NewEncapsulationKey1024(encapsulationKey []byte) (*EncapsulationKey1024, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#EncapsulationKey1024.Bytes">func (ek *EncapsulationKey1024) Bytes() []byte</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#EncapsulationKey1024.Encapsulate">func (ek *EncapsulationKey1024) Encapsulate() (sharedKey, ciphertext []byte)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#EncapsulationKey768">type EncapsulationKey768</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewEncapsulationKey768">func NewEncapsulationKey768(encapsulationKey []byte) (*EncapsulationKey768, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#EncapsulationKey768.Bytes">func (ek *EncapsulationKey768) Bytes() []byte</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#EncapsulationKey768.Encapsulate">func (ek *EncapsulationKey768) Encapsulate() (sharedKey, ciphertext []byte)</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+		<div id="pkg-examples">
+			<h3>Examples</h3>
+			<div class="js-expandAll expandAll collapsed">(Expand All)</div>
+			<dl>
+			
+			<dd><a class="exampleLink" href="index.html#example_">Package</a></dd>
+			
+			</dl>
+		</div>
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:8081/src/crypto/mlkem/mlkem.go">mlkem.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				
+				<pre>const (
+    <span class="comment">// SharedKeySize is the size of a shared key produced by ML-KEM.</span>
+    <span id="SharedKeySize">SharedKeySize</span> = 32
+
+    <span class="comment">// SeedSize is the size of a seed used to generate a decapsulation key.</span>
+    <span id="SeedSize">SeedSize</span> = 64
+
+    <span class="comment">// CiphertextSize768 is the size of a ciphertext produced by ML-KEM-768.</span>
+    <span id="CiphertextSize768">CiphertextSize768</span> = 1088
+
+    <span class="comment">// EncapsulationKeySize768 is the size of an ML-KEM-768 encapsulation key.</span>
+    <span id="EncapsulationKeySize768">EncapsulationKeySize768</span> = 1184
+
+    <span class="comment">// CiphertextSize1024 is the size of a ciphertext produced by ML-KEM-1024.</span>
+    <span id="CiphertextSize1024">CiphertextSize1024</span> = 1568
+
+    <span class="comment">// EncapsulationKeySize1024 is the size of an ML-KEM-1024 encapsulation key.</span>
+    <span id="EncapsulationKeySize1024">EncapsulationKeySize1024</span> = 1568
+)</pre>
+			
+		
+		
+		
+		
+			
+			
+			<h2 id="DecapsulationKey1024">type <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=3954:4023#L107">DecapsulationKey1024</a>
+				<a class="permalink" href="index.html#DecapsulationKey1024">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<p>DecapsulationKey1024 is the secret key used to decapsulate a shared key
+from a ciphertext. It includes various precomputed values.
+
+			<pre>type DecapsulationKey1024 struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="GenerateKey1024">func <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=4183:4236#L113">GenerateKey1024</a>
+					<a class="permalink" href="index.html#GenerateKey1024">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func GenerateKey1024() (*<a href="index.html#DecapsulationKey1024">DecapsulationKey1024</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>GenerateKey1024 generates a new decapsulation key, drawing random bytes from
+the default crypto/rand source. The decapsulation key must be kept secret.
+
+				
+				
+			
+				
+				<h3 id="NewDecapsulationKey1024">func <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=4493:4565#L124">NewDecapsulationKey1024</a>
+					<a class="permalink" href="index.html#NewDecapsulationKey1024">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func NewDecapsulationKey1024(seed []<a href="../../builtin/index.html#byte">byte</a>) (*<a href="index.html#DecapsulationKey1024">DecapsulationKey1024</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>NewDecapsulationKey1024 expands a decapsulation key from a 64-byte seed in the
+&quot;d || z&quot; form. The seed must be uniformly random.
+
+				
+				
+			
+
+			
+				
+				<h3 id="DecapsulationKey1024.Bytes">func (*DecapsulationKey1024) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=4827:4873#L136">Bytes</a>
+					<a class="permalink" href="index.html#DecapsulationKey1024.Bytes">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (dk *<a href="index.html#DecapsulationKey1024">DecapsulationKey1024</a>) Bytes() []<a href="../../builtin/index.html#byte">byte</a></pre>
+				<p>Bytes returns the decapsulation key as a 64-byte seed in the &quot;d || z&quot; form.
+<p>The decapsulation key must be kept secret.
+
+				
+				
+				
+			
+				
+				<h3 id="DecapsulationKey1024.Decapsulate">func (*DecapsulationKey1024) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=5090:5182#L144">Decapsulate</a>
+					<a class="permalink" href="index.html#DecapsulationKey1024.Decapsulate">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (dk *<a href="index.html#DecapsulationKey1024">DecapsulationKey1024</a>) Decapsulate(ciphertext []<a href="../../builtin/index.html#byte">byte</a>) (sharedKey []<a href="../../builtin/index.html#byte">byte</a>, err <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>Decapsulate generates a shared key from a ciphertext and a decapsulation
+key. If the ciphertext is not valid, Decapsulate returns an error.
+<p>The shared key must be kept secret.
+
+				
+				
+				
+			
+				
+				<h3 id="DecapsulationKey1024.EncapsulationKey">func (*DecapsulationKey1024) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=5321:5393#L150">EncapsulationKey</a>
+					<a class="permalink" href="index.html#DecapsulationKey1024.EncapsulationKey">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (dk *<a href="index.html#DecapsulationKey1024">DecapsulationKey1024</a>) EncapsulationKey() *<a href="index.html#EncapsulationKey1024">EncapsulationKey1024</a></pre>
+				<p>EncapsulationKey returns the public encapsulation key necessary to produce
+ciphertexts.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="DecapsulationKey768">type <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=1304:1371#L28">DecapsulationKey768</a>
+				<a class="permalink" href="index.html#DecapsulationKey768">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<p>DecapsulationKey768 is the secret key used to decapsulate a shared key
+from a ciphertext. It includes various precomputed values.
+
+			<pre>type DecapsulationKey768 struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="GenerateKey768">func <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=1530:1581#L34">GenerateKey768</a>
+					<a class="permalink" href="index.html#GenerateKey768">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func GenerateKey768() (*<a href="index.html#DecapsulationKey768">DecapsulationKey768</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>GenerateKey768 generates a new decapsulation key, drawing random bytes from
+the default crypto/rand source. The decapsulation key must be kept secret.
+
+				
+				
+			
+				
+				<h3 id="NewDecapsulationKey768">func <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=1835:1905#L45">NewDecapsulationKey768</a>
+					<a class="permalink" href="index.html#NewDecapsulationKey768">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func NewDecapsulationKey768(seed []<a href="../../builtin/index.html#byte">byte</a>) (*<a href="index.html#DecapsulationKey768">DecapsulationKey768</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>NewDecapsulationKey768 expands a decapsulation key from a 64-byte seed in the
+&quot;d || z&quot; form. The seed must be uniformly random.
+
+				
+				
+			
+
+			
+				
+				<h3 id="DecapsulationKey768.Bytes">func (*DecapsulationKey768) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=2165:2210#L57">Bytes</a>
+					<a class="permalink" href="index.html#DecapsulationKey768.Bytes">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (dk *<a href="index.html#DecapsulationKey768">DecapsulationKey768</a>) Bytes() []<a href="../../builtin/index.html#byte">byte</a></pre>
+				<p>Bytes returns the decapsulation key as a 64-byte seed in the &quot;d || z&quot; form.
+<p>The decapsulation key must be kept secret.
+
+				
+				
+				
+			
+				
+				<h3 id="DecapsulationKey768.Decapsulate">func (*DecapsulationKey768) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=2427:2518#L65">Decapsulate</a>
+					<a class="permalink" href="index.html#DecapsulationKey768.Decapsulate">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (dk *<a href="index.html#DecapsulationKey768">DecapsulationKey768</a>) Decapsulate(ciphertext []<a href="../../builtin/index.html#byte">byte</a>) (sharedKey []<a href="../../builtin/index.html#byte">byte</a>, err <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>Decapsulate generates a shared key from a ciphertext and a decapsulation
+key. If the ciphertext is not valid, Decapsulate returns an error.
+<p>The shared key must be kept secret.
+
+				
+				
+				
+			
+				
+				<h3 id="DecapsulationKey768.EncapsulationKey">func (*DecapsulationKey768) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=2657:2727#L71">EncapsulationKey</a>
+					<a class="permalink" href="index.html#DecapsulationKey768.EncapsulationKey">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (dk *<a href="index.html#DecapsulationKey768">DecapsulationKey768</a>) EncapsulationKey() *<a href="index.html#EncapsulationKey768">EncapsulationKey768</a></pre>
+				<p>EncapsulationKey returns the public encapsulation key necessary to produce
+ciphertexts.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="EncapsulationKey1024">type <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=5594:5663#L156">EncapsulationKey1024</a>
+				<a class="permalink" href="index.html#EncapsulationKey1024">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<p>An EncapsulationKey1024 is the public key used to produce ciphertexts to be
+decapsulated by the corresponding DecapsulationKey1024.
+
+			<pre>type EncapsulationKey1024 struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewEncapsulationKey1024">func <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=5827:5911#L162">NewEncapsulationKey1024</a>
+					<a class="permalink" href="index.html#NewEncapsulationKey1024">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func NewEncapsulationKey1024(encapsulationKey []<a href="../../builtin/index.html#byte">byte</a>) (*<a href="index.html#EncapsulationKey1024">EncapsulationKey1024</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>NewEncapsulationKey1024 parses an encapsulation key from its encoded form. If
+the encapsulation key is not valid, NewEncapsulationKey1024 returns an error.
+
+				
+				
+			
+
+			
+				
+				<h3 id="EncapsulationKey1024.Bytes">func (*EncapsulationKey1024) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=6113:6159#L172">Bytes</a>
+					<a class="permalink" href="index.html#EncapsulationKey1024.Bytes">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (ek *<a href="index.html#EncapsulationKey1024">EncapsulationKey1024</a>) Bytes() []<a href="../../builtin/index.html#byte">byte</a></pre>
+				<p>Bytes returns the encapsulation key as a byte slice.
+
+				
+				
+				
+			
+				
+				<h3 id="EncapsulationKey1024.Encapsulate">func (*EncapsulationKey1024) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=6385:6461#L180">Encapsulate</a>
+					<a class="permalink" href="index.html#EncapsulationKey1024.Encapsulate">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (ek *<a href="index.html#EncapsulationKey1024">EncapsulationKey1024</a>) Encapsulate() (sharedKey, ciphertext []<a href="../../builtin/index.html#byte">byte</a>)</pre>
+				<p>Encapsulate generates a shared key and an associated ciphertext from an
+encapsulation key, drawing random bytes from the default crypto/rand source.
+<p>The shared key must be kept secret.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="EncapsulationKey768">type <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=2925:2992#L77">EncapsulationKey768</a>
+				<a class="permalink" href="index.html#EncapsulationKey768">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<p>An EncapsulationKey768 is the public key used to produce ciphertexts to be
+decapsulated by the corresponding DecapsulationKey768.
+
+			<pre>type EncapsulationKey768 struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewEncapsulationKey768">func <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=3154:3236#L83">NewEncapsulationKey768</a>
+					<a class="permalink" href="index.html#NewEncapsulationKey768">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func NewEncapsulationKey768(encapsulationKey []<a href="../../builtin/index.html#byte">byte</a>) (*<a href="index.html#EncapsulationKey768">EncapsulationKey768</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>NewEncapsulationKey768 parses an encapsulation key from its encoded form. If
+the encapsulation key is not valid, NewEncapsulationKey768 returns an error.
+
+				
+				
+			
+
+			
+				
+				<h3 id="EncapsulationKey768.Bytes">func (*EncapsulationKey768) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=3436:3481#L93">Bytes</a>
+					<a class="permalink" href="index.html#EncapsulationKey768.Bytes">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (ek *<a href="index.html#EncapsulationKey768">EncapsulationKey768</a>) Bytes() []<a href="../../builtin/index.html#byte">byte</a></pre>
+				<p>Bytes returns the encapsulation key as a byte slice.
+
+				
+				
+				
+			
+				
+				<h3 id="EncapsulationKey768.Encapsulate">func (*EncapsulationKey768) <a href="http://localhost:8081/src/crypto/mlkem/mlkem.go?s=3707:3782#L101">Encapsulate</a>
+					<a class="permalink" href="index.html#EncapsulationKey768.Encapsulate">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (ek *<a href="index.html#EncapsulationKey768">EncapsulationKey768</a>) Encapsulate() (sharedKey, ciphertext []<a href="../../builtin/index.html#byte">byte</a>)</pre>
+				<p>Encapsulate generates a shared key and an associated ciphertext from an
+encapsulation key, drawing random bytes from the default crypto/rand source.
+<p>The shared key must be kept secret.
+
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.24.3.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://localhost:8081/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>

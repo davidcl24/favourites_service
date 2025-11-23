@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>models - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../../../../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../../../../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.24.3";</script>
+<script src="../../../../../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="../../../../../index.html">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="../../../../../index.html">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://localhost:8081/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package models
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/davidcl24/favourites_service/app/models"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>This package represents the entity in the database and the CRUD operations.
+
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+			
+				
+				<dd><a href="index.html#DB">type DB</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewDB">func NewDB(conn *sql.DB) *DB</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DB.AddFavourite">func (db *DB) AddFavourite(favourite *Favourite) (*Favourite, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DB.ClearUserFavourites">func (db *DB) ClearUserFavourites(userId int) ([]*Favourite, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DB.DeleteFavourite">func (db *DB) DeleteFavourite(id int) (*Favourite, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DB.GetAllUserFavourites">func (db *DB) GetAllUserFavourites(userId int) ([]*Favourite, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DB.GetFavouriteByID">func (db *DB) GetFavouriteByID(id int) (*Favourite, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DB.GetMovieFavouriteFromUser">func (db *DB) GetMovieFavouriteFromUser(userId int, movieId int) (*Favourite, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DB.GetShowFavouriteFromUser">func (db *DB) GetShowFavouriteFromUser(userId int, showId int) (*Favourite, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Favourite">type Favourite</a></dd>
+				
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/db_connection.go">db_connection.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/favourite.go">favourite.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+		
+		
+			
+			
+			<h2 id="DB">type <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/db_connection.go?s=214:246#L1">DB</a>
+				<a class="permalink" href="index.html#DB">&#xb6;</a>
+				
+				
+			</h2>
+			<p>A wrapper for the SQL connection to handle it in an easier way.
+
+			<pre>type DB struct {
+<span id="DB.Conn"></span>    Conn *<a href="../../../../../database/sql/index.html">sql</a>.<a href="../../../../../database/sql/index.html#DB">DB</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewDB">func <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/db_connection.go?s=292:320#L6">NewDB</a>
+					<a class="permalink" href="index.html#NewDB">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewDB(conn *<a href="../../../../../database/sql/index.html">sql</a>.<a href="../../../../../database/sql/index.html#DB">DB</a>) *<a href="index.html#DB">DB</a></pre>
+				<p>Creates a new instance for the DB struct
+
+				
+				
+			
+
+			
+				
+				<h3 id="DB.AddFavourite">func (*DB) <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/favourite.go?s=2279:2347#L91">AddFavourite</a>
+					<a class="permalink" href="index.html#DB.AddFavourite">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (db *<a href="index.html#DB">DB</a>) AddFavourite(favourite *<a href="index.html#Favourite">Favourite</a>) (*<a href="index.html#Favourite">Favourite</a>, <a href="../../../../../builtin/index.html#error">error</a>)</pre>
+				<p>Creates a new favourite for a user
+
+				
+				
+				
+			
+				
+				<h3 id="DB.ClearUserFavourites">func (*DB) <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/favourite.go?s=3035:3102#L129">ClearUserFavourites</a>
+					<a class="permalink" href="index.html#DB.ClearUserFavourites">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (db *<a href="index.html#DB">DB</a>) ClearUserFavourites(userId <a href="../../../../../builtin/index.html#int">int</a>) ([]*<a href="index.html#Favourite">Favourite</a>, <a href="../../../../../builtin/index.html#error">error</a>)</pre>
+				<p>Deletes all user favourites from a particular user
+
+				
+				
+				
+			
+				
+				<h3 id="DB.DeleteFavourite">func (*DB) <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/favourite.go?s=2680:2737#L110">DeleteFavourite</a>
+					<a class="permalink" href="index.html#DB.DeleteFavourite">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (db *<a href="index.html#DB">DB</a>) DeleteFavourite(id <a href="../../../../../builtin/index.html#int">int</a>) (*<a href="index.html#Favourite">Favourite</a>, <a href="../../../../../builtin/index.html#error">error</a>)</pre>
+				<p>Deletes a particular favourite element
+
+				
+				
+				
+			
+				
+				<h3 id="DB.GetAllUserFavourites">func (*DB) <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/favourite.go?s=292:360#L7">GetAllUserFavourites</a>
+					<a class="permalink" href="index.html#DB.GetAllUserFavourites">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (db *<a href="index.html#DB">DB</a>) GetAllUserFavourites(userId <a href="../../../../../builtin/index.html#int">int</a>) ([]*<a href="index.html#Favourite">Favourite</a>, <a href="../../../../../builtin/index.html#error">error</a>)</pre>
+				<p>Returns all of the favourites a user has added
+
+				
+				
+				
+			
+				
+				<h3 id="DB.GetFavouriteByID">func (*DB) <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/favourite.go?s=1848:1906#L71">GetFavouriteByID</a>
+					<a class="permalink" href="index.html#DB.GetFavouriteByID">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (db *<a href="index.html#DB">DB</a>) GetFavouriteByID(id <a href="../../../../../builtin/index.html#int">int</a>) (*<a href="index.html#Favourite">Favourite</a>, <a href="../../../../../builtin/index.html#error">error</a>)</pre>
+				<p>Returns the specific favourite element
+
+				
+				
+				
+			
+				
+				<h3 id="DB.GetMovieFavouriteFromUser">func (*DB) <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/favourite.go?s=852:936#L33">GetMovieFavouriteFromUser</a>
+					<a class="permalink" href="index.html#DB.GetMovieFavouriteFromUser">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (db *<a href="index.html#DB">DB</a>) GetMovieFavouriteFromUser(userId <a href="../../../../../builtin/index.html#int">int</a>, movieId <a href="../../../../../builtin/index.html#int">int</a>) (*<a href="index.html#Favourite">Favourite</a>, <a href="../../../../../builtin/index.html#error">error</a>)</pre>
+				<p>Returns an specific favourite movie from a user
+
+				
+				
+				
+			
+				
+				<h3 id="DB.GetShowFavouriteFromUser">func (*DB) <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/favourite.go?s=1356:1438#L52">GetShowFavouriteFromUser</a>
+					<a class="permalink" href="index.html#DB.GetShowFavouriteFromUser">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (db *<a href="index.html#DB">DB</a>) GetShowFavouriteFromUser(userId <a href="../../../../../builtin/index.html#int">int</a>, showId <a href="../../../../../builtin/index.html#int">int</a>) (*<a href="index.html#Favourite">Favourite</a>, <a href="../../../../../builtin/index.html#error">error</a>)</pre>
+				<p>Returns an specific favourite show from a user
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Favourite">type <a href="http://localhost:8081/src/github.com/davidcl24/favourites_service/app/models/favourite.go?s=95:240#L1">Favourite</a>
+				<a class="permalink" href="index.html#Favourite">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Directly represents the entity in the database
+
+			<pre>type Favourite struct {
+<span id="Favourite.ID"></span>    ID      <a href="../../../../../builtin/index.html#int">int</a>  `json:&#34;id&#34;`
+<span id="Favourite.UserID"></span>    UserID  <a href="../../../../../builtin/index.html#int">int</a>  `json:&#34;user_id&#34;`
+<span id="Favourite.MovieID"></span>    MovieID *<a href="../../../../../builtin/index.html#int">int</a> `json:&#34;movie_id&#34;`
+<span id="Favourite.ShowID"></span>    ShowID  *<a href="../../../../../builtin/index.html#int">int</a> `json:&#34;show_id&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.24.3.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://localhost:8081/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>

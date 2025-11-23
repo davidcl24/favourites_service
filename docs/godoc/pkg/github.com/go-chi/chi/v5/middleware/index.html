@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>middleware - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../../../../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../../../../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.24.3";</script>
+<script src="../../../../../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="../../../../../index.html">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="../../../../../index.html">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://localhost:8081/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package middleware
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/go-chi/chi/v5/middleware"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+				<dd><a href="index.html#pkg-constants">Constants</a></dd>
+			
+			
+				<dd><a href="index.html#pkg-variables">Variables</a></dd>
+			
+			
+				
+				<dd><a href="index.html#AllowContentEncoding">func AllowContentEncoding(contentEncoding ...string) func(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#AllowContentType">func AllowContentType(contentTypes ...string) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#BasicAuth">func BasicAuth(realm string, creds map[string]string) func(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#CleanPath">func CleanPath(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#Compress">func Compress(level int, types ...string) func(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#ContentCharset">func ContentCharset(charsets ...string) func(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#GetHead">func GetHead(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#GetReqID">func GetReqID(ctx context.Context) string</a></dd>
+			
+				
+				<dd><a href="index.html#Heartbeat">func Heartbeat(endpoint string) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#Logger">func Logger(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#Maybe">func Maybe(mw func(http.Handler) http.Handler, maybeFn func(r *http.Request) bool) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#New">func New(h http.Handler) func(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#NextRequestID">func NextRequestID() uint64</a></dd>
+			
+				
+				<dd><a href="index.html#NoCache">func NoCache(h http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#PageRoute">func PageRoute(path string, handler http.Handler) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#PathRewrite">func PathRewrite(old, new string) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#PrintPrettyStack">func PrintPrettyStack(rvr interface{})</a></dd>
+			
+				
+				<dd><a href="index.html#Profiler">func Profiler() http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#RealIP">func RealIP(h http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#Recoverer">func Recoverer(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#RedirectSlashes">func RedirectSlashes(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#RequestID">func RequestID(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#RequestLogger">func RequestLogger(f LogFormatter) func(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#RequestSize">func RequestSize(bytes int64) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#SetHeader">func SetHeader(key, value string) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#StripPrefix">func StripPrefix(prefix string) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#StripSlashes">func StripSlashes(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#Sunset">func Sunset(sunsetAt time.Time, links ...string) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#SupressNotFound">func SupressNotFound(router *chi.Mux) func(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#Throttle">func Throttle(limit int) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#ThrottleBacklog">func ThrottleBacklog(limit, backlogLimit int, backlogTimeout time.Duration) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#ThrottleWithOpts">func ThrottleWithOpts(opts ThrottleOpts) func(http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#Timeout">func Timeout(timeout time.Duration) func(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#URLFormat">func URLFormat(next http.Handler) http.Handler</a></dd>
+			
+				
+				<dd><a href="index.html#WithLogEntry">func WithLogEntry(r *http.Request, entry LogEntry) *http.Request</a></dd>
+			
+				
+				<dd><a href="index.html#WithValue">func WithValue(key, val interface{}) func(next http.Handler) http.Handler</a></dd>
+			
+			
+				
+				<dd><a href="index.html#Compressor">type Compressor</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewCompressor">func NewCompressor(level int, types ...string) *Compressor</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Compressor.Handler">func (c *Compressor) Handler(next http.Handler) http.Handler</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Compressor.SetEncoder">func (c *Compressor) SetEncoder(encoding string, fn EncoderFunc)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#DefaultLogFormatter">type DefaultLogFormatter</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#DefaultLogFormatter.NewLogEntry">func (l *DefaultLogFormatter) NewLogEntry(r *http.Request) LogEntry</a></dd>
+				
+			
+				
+				<dd><a href="index.html#EncoderFunc">type EncoderFunc</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#HeaderRoute">type HeaderRoute</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#HeaderRoute.IsMatch">func (r HeaderRoute) IsMatch(value string) bool</a></dd>
+				
+			
+				
+				<dd><a href="index.html#HeaderRouter">type HeaderRouter</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#RouteHeaders">func RouteHeaders() HeaderRouter</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#HeaderRouter.Handler">func (hr HeaderRouter) Handler(next http.Handler) http.Handler</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#HeaderRouter.Route">func (hr HeaderRouter) Route(header, match string, middlewareHandler func(next http.Handler) http.Handler) HeaderRouter</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#HeaderRouter.RouteAny">func (hr HeaderRouter) RouteAny(header string, match []string, middlewareHandler func(next http.Handler) http.Handler) HeaderRouter</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#HeaderRouter.RouteDefault">func (hr HeaderRouter) RouteDefault(handler func(next http.Handler) http.Handler) HeaderRouter</a></dd>
+				
+			
+				
+				<dd><a href="index.html#LogEntry">type LogEntry</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#GetLogEntry">func GetLogEntry(r *http.Request) LogEntry</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#LogFormatter">type LogFormatter</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#LoggerInterface">type LoggerInterface</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#Pattern">type Pattern</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewPattern">func NewPattern(value string) Pattern</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Pattern.Match">func (p Pattern) Match(v string) bool</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ThrottleOpts">type ThrottleOpts</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#WrapResponseWriter">type WrapResponseWriter</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewWrapResponseWriter">func NewWrapResponseWriter(w http.ResponseWriter, protoMajor int) WrapResponseWriter</a></dd>
+				
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/basic_auth.go">basic_auth.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/clean_path.go">clean_path.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/compress.go">compress.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/content_charset.go">content_charset.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/content_encoding.go">content_encoding.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/content_type.go">content_type.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/get_head.go">get_head.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/heartbeat.go">heartbeat.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go">logger.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/maybe.go">maybe.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/middleware.go">middleware.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/nocache.go">nocache.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/page_route.go">page_route.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/path_rewrite.go">path_rewrite.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/profiler.go">profiler.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/realip.go">realip.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/recoverer.go">recoverer.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/request_id.go">request_id.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/request_size.go">request_size.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go">route_headers.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/strip.go">strip.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/sunset.go">sunset.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/supress_notfound.go">supress_notfound.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/terminal.go">terminal.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/throttle.go">throttle.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/timeout.go">timeout.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/url_format.go">url_format.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/value.go">value.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/wrap_writer.go">wrap_writer.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				<p>RequestIDKey is the key that holds the unique request ID in a request context.
+
+				<pre>const <span id="RequestIDKey">RequestIDKey</span> ctxKeyRequestID = 0</pre>
+			
+		
+		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				
+				<pre>var (
+    <span class="comment">// LogEntryCtxKey is the context.Context key to store the request log entry.</span>
+    <span id="LogEntryCtxKey">LogEntryCtxKey</span> = &amp;contextKey{&#34;LogEntry&#34;}
+
+    <span class="comment">// DefaultLogger is called by the Logger middleware handler to log each request.</span>
+    <span class="comment">// Its made a package-level variable so that it can be reconfigured for custom</span>
+    <span class="comment">// logging configurations.</span>
+    <span id="DefaultLogger">DefaultLogger</span> func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>
+)</pre>
+			
+				
+				<pre>var <span id="IsTTY">IsTTY</span> <a href="../../../../../builtin/index.html#bool">bool</a></pre>
+			
+				<p>RequestIDHeader is the name of the HTTP Header which contains the request id.
+Exported so that it can be changed by developers
+
+				<pre>var <span id="RequestIDHeader">RequestIDHeader</span> = &#34;X-Request-Id&#34;</pre>
+			
+				
+				<pre>var (
+    <span class="comment">// URLFormatCtxKey is the context.Context key to store the URL format data</span>
+    <span class="comment">// for a request.</span>
+    <span id="URLFormatCtxKey">URLFormatCtxKey</span> = &amp;contextKey{&#34;URLFormat&#34;}
+)</pre>
+			
+		
+		
+			
+			
+			<h2 id="AllowContentEncoding">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/content_encoding.go?s=192:281#L1">AllowContentEncoding</a>
+				<a class="permalink" href="index.html#AllowContentEncoding">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func AllowContentEncoding(contentEncoding ...<a href="../../../../../builtin/index.html#string">string</a>) func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>AllowContentEncoding enforces a whitelist of request Content-Encoding otherwise responds
+with a 415 Unsupported Media Type status.
+
+			
+			
+
+		
+			
+			
+			<h2 id="AllowContentType">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/content_type.go?s=511:588#L10">AllowContentType</a>
+				<a class="permalink" href="index.html#AllowContentType">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func AllowContentType(contentTypes ...<a href="../../../../../builtin/index.html#string">string</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>AllowContentType enforces a whitelist of request Content-Types otherwise responds
+with a 415 Unsupported Media Type status.
+
+			
+			
+
+		
+			
+			
+			<h2 id="BasicAuth">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/basic_auth.go?s=159:249#L1">BasicAuth</a>
+				<a class="permalink" href="index.html#BasicAuth">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func BasicAuth(realm <a href="../../../../../builtin/index.html#string">string</a>, creds map[<a href="../../../../../builtin/index.html#string">string</a>]<a href="../../../../../builtin/index.html#string">string</a>) func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>BasicAuth implements a simple middleware handler for adding basic http auth to a route.
+
+			
+			
+
+		
+			
+			
+			<h2 id="CleanPath">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/clean_path.go?s=265:311#L2">CleanPath</a>
+				<a class="permalink" href="index.html#CleanPath">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CleanPath(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>CleanPath middleware will clean out double slash mistakes from a user&apos;s request path.
+For example, if a user requests /users//1 or //users////1 will both be treated as: /users/1
+
+			
+			
+
+		
+			
+			
+			<h2 id="Compress">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/compress.go?s=915:993#L31">Compress</a>
+				<a class="permalink" href="index.html#Compress">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Compress(level <a href="../../../../../builtin/index.html#int">int</a>, types ...<a href="../../../../../builtin/index.html#string">string</a>) func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>Compress is a middleware that compresses response
+body of a given content types to a data format based
+on Accept-Encoding request header. It uses a given
+compression level.
+<p>NOTE: make sure to set the Content-Type header on your response
+otherwise this middleware will not compress the response body. For ex, in
+your handler you should set w.Header().Set(&quot;Content-Type&quot;, http.DetectContentType(yourBody))
+or set it manually.
+<p>Passing a compression level of 5 is sensible value
+
+			
+			
+
+		
+			
+			
+			<h2 id="ContentCharset">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/content_charset.go?s=267:343#L1">ContentCharset</a>
+				<a class="permalink" href="index.html#ContentCharset">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func ContentCharset(charsets ...<a href="../../../../../builtin/index.html#string">string</a>) func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>ContentCharset generates a handler that writes a 415 Unsupported Media Type response if none of the charsets match.
+An empty charset will allow requests with no Content-Type header or no specified charset.
+
+			
+			
+
+		
+			
+			
+			<h2 id="GetHead">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/get_head.go?s=145:189#L1">GetHead</a>
+				<a class="permalink" href="index.html#GetHead">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetHead(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>GetHead automatically route undefined HEAD requests to GET handlers.
+
+			
+			
+
+		
+			
+			
+			<h2 id="GetReqID">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/request_id.go?s=2670:2711#L73">GetReqID</a>
+				<a class="permalink" href="index.html#GetReqID">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetReqID(ctx <a href="../../../../../context/index.html">context</a>.<a href="../../../../../context/index.html#Context">Context</a>) <a href="../../../../../builtin/index.html#string">string</a></pre>
+			<p>GetReqID returns a request ID from the given context if one is present.
+Returns the empty string if a request ID cannot be found.
+
+			
+			
+
+		
+			
+			
+			<h2 id="Heartbeat">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/heartbeat.go?s=306:369#L2">Heartbeat</a>
+				<a class="permalink" href="index.html#Heartbeat">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Heartbeat(endpoint <a href="../../../../../builtin/index.html#string">string</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>Heartbeat endpoint middleware useful to setting up a path like
+`/ping` that load balancers or uptime testing external services
+can make a request before hitting any routes. It&apos;s also convenient
+to place this above ACL middlewares as well.
+
+			
+			
+
+		
+			
+			
+			<h2 id="Logger">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go?s=1248:1291#L29">Logger</a>
+				<a class="permalink" href="index.html#Logger">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Logger(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>Logger is a middleware that logs the start and end of each request, along
+with some useful data about what was requested, what the response status was,
+and how long it took to return. When standard output is a TTY, Logger will
+print in color, otherwise it will print in black and white. Logger prints a
+request ID if one is provided.
+<p>Alternatively, look at <a href="https://github.com/goware/httplog">https://github.com/goware/httplog</a> for a more in-depth
+http logger with structured logging support.
+<p>IMPORTANT NOTE: Logger should go before any other middleware that may change
+the response, such as middleware.Recoverer. Example:
+<pre>r := chi.NewRouter()
+r.Use(middleware.Logger)        // &lt;--&lt;&lt; Logger should come before Recoverer
+r.Use(middleware.Recoverer)
+r.Get(&quot;/&quot;, handler)
+</pre>
+
+			
+			
+
+		
+			
+			
+			<h2 id="Maybe">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/maybe.go?s=299:413#L1">Maybe</a>
+				<a class="permalink" href="index.html#Maybe">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Maybe(mw func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>, maybeFn func(r *<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Request">Request</a>) <a href="../../../../../builtin/index.html#bool">bool</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>Maybe middleware will allow you to change the flow of the middleware stack execution depending on return
+value of maybeFn(request). This is useful for example if you&apos;d like to skip a middleware handler if
+a request does not satisfy the maybeFn logic.
+
+			
+			
+
+		
+			
+			
+			<h2 id="New">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/middleware.go?s=104:165#L1">New</a>
+				<a class="permalink" href="index.html#New">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func New(h <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>New will create a new middleware handler from a http.Handler.
+
+			
+			
+
+		
+			
+			
+			<h2 id="NextRequestID">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/request_id.go?s=2898:2925#L84">NextRequestID</a>
+				<a class="permalink" href="index.html#NextRequestID">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func NextRequestID() <a href="../../../../../builtin/index.html#uint64">uint64</a></pre>
+			<p>NextRequestID generates the next request ID in the sequence.
+
+			
+			
+
+		
+			
+			
+			<h2 id="NoCache">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/nocache.go?s=1035:1076#L30">NoCache</a>
+				<a class="permalink" href="index.html#NoCache">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func NoCache(h <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>NoCache is a simple piece of middleware that sets a number of HTTP headers to prevent
+a router (or subrouter) from being cached by an upstream proxy and/or client.
+<p>As per <a href="http://wiki.nginx.org/HttpProxyModule">http://wiki.nginx.org/HttpProxyModule</a> - NoCache sets:
+<pre>Expires: Thu, 01 Jan 1970 00:00:00 UTC
+Cache-Control: no-cache, private, max-age=0
+X-Accel-Expires: 0
+Pragma: no-cache (for HTTP/1.0 proxies/clients)
+</pre>
+
+			
+			
+
+		
+			
+			
+			<h2 id="PageRoute">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/page_route.go?s=172:253#L1">PageRoute</a>
+				<a class="permalink" href="index.html#PageRoute">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func PageRoute(path <a href="../../../../../builtin/index.html#string">string</a>, handler <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>PageRoute is a simple middleware which allows you to route a static GET request
+at the middleware stack level.
+
+			
+			
+
+		
+			
+			
+			<h2 id="PathRewrite">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/path_rewrite.go?s=143:208#L1">PathRewrite</a>
+				<a class="permalink" href="index.html#PathRewrite">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func PathRewrite(old, new <a href="../../../../../builtin/index.html#string">string</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>PathRewrite is a simple middleware which allows you to rewrite the request URL path.
+
+			
+			
+
+		
+			
+			
+			<h2 id="PrintPrettyStack">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/recoverer.go?s=1290:1328#L44">PrintPrettyStack</a>
+				<a class="permalink" href="index.html#PrintPrettyStack">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func PrintPrettyStack(rvr interface{})</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Profiler">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/profiler.go?s=340:368#L10">Profiler</a>
+				<a class="permalink" href="index.html#Profiler">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Profiler() <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>Profiler is a convenient subrouter used for mounting net/http/pprof. ie.
+<pre>func MyService() http.Handler {
+	r := chi.NewRouter()
+	// ..middlewares
+	r.Mount(&quot;/debug&quot;, middleware.Profiler())
+	// ..routes
+	return r
+}
+</pre>
+
+			
+			
+
+		
+			
+			
+			<h2 id="RealIP">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/realip.go?s=1260:1300#L21">RealIP</a>
+				<a class="permalink" href="index.html#RealIP">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func RealIP(h <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>RealIP is a middleware that sets a http.Request&apos;s RemoteAddr to the results
+of parsing either the True-Client-IP, X-Real-IP or the X-Forwarded-For headers
+(in that order).
+<p>This middleware should be inserted fairly early in the middleware stack to
+ensure that subsequent layers (e.g., request loggers) which examine the
+RemoteAddr will see the intended value.
+<p>You should only use this middleware if you can trust the headers passed to
+you (in particular, the three headers this middleware uses), for example
+because you have placed a reverse proxy like HAProxy or nginx in front of
+chi. If your reverse proxies are configured to pass along arbitrary header
+values from the client, or if you use this middleware without a reverse
+proxy, malicious clients will be able to make you very sad (or, depending on
+how you&apos;re using RemoteAddr, vulnerable to an attack of some sort).
+
+			
+			
+
+		
+			
+			
+			<h2 id="Recoverer">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/recoverer.go?s=530:576#L12">Recoverer</a>
+				<a class="permalink" href="index.html#Recoverer">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Recoverer(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>Recoverer is a middleware that recovers from panics, logs the panic (and a
+backtrace), and returns a HTTP 500 (Internal Server Error) status if
+possible. Recoverer prints a request ID if one is provided.
+<p>Alternatively, look at <a href="https://github.com/go-chi/httplog">https://github.com/go-chi/httplog</a> middleware pkgs.
+
+			
+			
+
+		
+			
+			
+			<h2 id="RedirectSlashes">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/strip.go?s=1060:1112#L30">RedirectSlashes</a>
+				<a class="permalink" href="index.html#RedirectSlashes">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func RedirectSlashes(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>RedirectSlashes is a middleware that will match request paths with a trailing
+slash and redirect to the same path, less the trailing slash.
+<p>NOTE: RedirectSlashes middleware is *incompatible* with http.FileServer,
+see <a href="https://github.com/go-chi/chi/issues/343">https://github.com/go-chi/chi/issues/343</a>
+
+			
+			
+
+		
+			
+			
+			<h2 id="RequestID">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/request_id.go?s=2116:2162#L57">RequestID</a>
+				<a class="permalink" href="index.html#RequestID">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func RequestID(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>RequestID is a middleware that injects a request ID into the context of each
+request. A request ID is a string of the form &quot;host.example.com/random-0001&quot;,
+where &quot;random&quot; is a base62 random string that uniquely identifies this go
+process, and where the last number is an atomically incremented request
+counter.
+
+			
+			
+
+		
+			
+			
+			<h2 id="RequestLogger">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go?s=1396:1467#L34">RequestLogger</a>
+				<a class="permalink" href="index.html#RequestLogger">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func RequestLogger(f <a href="index.html#LogFormatter">LogFormatter</a>) func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>RequestLogger returns a logger handler using a custom LogFormatter.
+
+			
+			
+
+		
+			
+			
+			<h2 id="RequestSize">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/request_size.go?s=173:234#L1">RequestSize</a>
+				<a class="permalink" href="index.html#RequestSize">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func RequestSize(bytes <a href="../../../../../builtin/index.html#int64">int64</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>RequestSize is a middleware that will limit request sizes to a specified
+number of bytes. It uses MaxBytesReader to do so.
+
+			
+			
+
+		
+			
+			
+			<h2 id="SetHeader">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/content_type.go?s=128:193#L1">SetHeader</a>
+				<a class="permalink" href="index.html#SetHeader">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func SetHeader(key, value <a href="../../../../../builtin/index.html#string">string</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>SetHeader is a convenience handler to set a response header key/value
+
+			
+			
+
+		
+			
+			
+			<h2 id="StripPrefix">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/strip.go?s=1836:1899#L56">StripPrefix</a>
+				<a class="permalink" href="index.html#StripPrefix">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func StripPrefix(prefix <a href="../../../../../builtin/index.html#string">string</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>StripPrefix is a middleware that will strip the provided prefix from the
+request path before handing the request over to the next handler.
+
+			
+			
+
+		
+			
+			
+			<h2 id="StripSlashes">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/strip.go?s=284:333#L3">StripSlashes</a>
+				<a class="permalink" href="index.html#StripSlashes">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func StripSlashes(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>StripSlashes is a middleware that will match request paths with a trailing
+slash, strip it from the path and continue routing through the mux, if a route
+matches, then it will serve the handler.
+
+			
+			
+
+		
+			
+			
+			<h2 id="Sunset">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/sunset.go?s=226:306#L1">Sunset</a>
+				<a class="permalink" href="index.html#Sunset">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Sunset(sunsetAt <a href="../../../../../time/index.html">time</a>.<a href="../../../../../time/index.html#Time">Time</a>, links ...<a href="../../../../../builtin/index.html#string">string</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>Sunset set Deprecation/Sunset header to response
+This can be used to enable Sunset in a route or a route group
+For more: <a href="https://www.rfc-editor.org/rfc/rfc8594.html">https://www.rfc-editor.org/rfc/rfc8594.html</a>
+
+			
+			
+
+		
+			
+			
+			<h2 id="SupressNotFound">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/supress_notfound.go?s=446:520#L5">SupressNotFound</a>
+				<a class="permalink" href="index.html#SupressNotFound">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func SupressNotFound(router *chi.<a href="index.html#Mux">Mux</a>) func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>SupressNotFound will quickly respond with a 404 if the route is not found
+and will not continue to the next middleware handler.
+<p>This is handy to put at the top of your middleware stack to avoid unnecessary
+processing of requests that are not going to match any routes anyway. For
+example its super annoying to see a bunch of 404&apos;s in your logs from bots.
+
+			
+			
+
+		
+			
+			
+			<h2 id="Throttle">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/throttle.go?s=848:904#L22">Throttle</a>
+				<a class="permalink" href="index.html#Throttle">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Throttle(limit <a href="../../../../../builtin/index.html#int">int</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>Throttle is a middleware that limits number of currently processed requests
+at a time across all users. Note: Throttle is not a rate-limiter per user,
+instead it just puts a ceiling on the number of current in-flight requests
+being processed from the point from where the Throttle middleware is mounted.
+
+			
+			
+
+		
+			
+			
+			<h2 id="ThrottleBacklog">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/throttle.go?s=1176:1283#L29">ThrottleBacklog</a>
+				<a class="permalink" href="index.html#ThrottleBacklog">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func ThrottleBacklog(limit, backlogLimit <a href="../../../../../builtin/index.html#int">int</a>, backlogTimeout <a href="../../../../../time/index.html">time</a>.<a href="../../../../../time/index.html#Duration">Duration</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>ThrottleBacklog is a middleware that limits number of currently processed
+requests at a time and provides a backlog for holding a finite number of
+pending requests.
+
+			
+			
+
+		
+			
+			
+			<h2 id="ThrottleWithOpts">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/throttle.go?s=1516:1588#L34">ThrottleWithOpts</a>
+				<a class="permalink" href="index.html#ThrottleWithOpts">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func ThrottleWithOpts(opts <a href="index.html#ThrottleOpts">ThrottleOpts</a>) func(<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>ThrottleWithOpts is a middleware that limits number of currently processed requests using passed ThrottleOpts.
+
+			
+			
+
+		
+			
+			
+			<h2 id="Timeout">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/timeout.go?s=758:830#L22">Timeout</a>
+				<a class="permalink" href="index.html#Timeout">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Timeout(timeout <a href="../../../../../time/index.html">time</a>.<a href="../../../../../time/index.html#Duration">Duration</a>) func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>Timeout is a middleware that cancels ctx after a given timeout and return
+a 504 Gateway Timeout error to the client.
+<p>It&apos;s required that you select the ctx.Done() channel to check for the signal
+if the context has reached its deadline and return, otherwise the timeout
+signal will be just ignored.
+<p>ie. a route/handler may look like:
+<pre>r.Get(&quot;/long&quot;, func(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	processTime := time.Duration(rand.Intn(4)+1) * time.Second
+
+	select {
+	case &lt;-ctx.Done():
+		return
+
+	case &lt;-time.After(processTime):
+		// The above channel simulates some hard work.
+	}
+
+	w.Write([]byte(&quot;done&quot;))
+})
+</pre>
+
+			
+			
+
+		
+			
+			
+			<h2 id="URLFormat">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/url_format.go?s=1155:1201#L36">URLFormat</a>
+				<a class="permalink" href="index.html#URLFormat">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func URLFormat(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>URLFormat is a middleware that parses the url extension from a request path and stores it
+on the context as a string under the key `middleware.URLFormatCtxKey`. The middleware will
+trim the suffix from the routing path and continue routing.
+<p>Routers should not include a url parameter for the suffix when using this middleware.
+<p>Sample usage for url paths `/articles/1`, `/articles/1.json` and `/articles/1.xml`:
+<pre>func routes() http.Handler {
+	r := chi.NewRouter()
+	r.Use(middleware.URLFormat)
+
+	r.Get(&quot;/articles/{id}&quot;, ListArticles)
+
+	return r
+}
+
+func ListArticles(w http.ResponseWriter, r *http.Request) {
+	urlFormat, _ := r.Context().Value(middleware.URLFormatCtxKey).(string)
+
+	switch urlFormat {
+	case &quot;json&quot;:
+		render.JSON(w, r, articles)
+	case &quot;xml:&quot;
+		render.XML(w, r, articles)
+	default:
+		render.JSON(w, r, articles)
+	}
+}
+</pre>
+
+			
+			
+
+		
+			
+			
+			<h2 id="WithLogEntry">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go?s=2574:2638#L71">WithLogEntry</a>
+				<a class="permalink" href="index.html#WithLogEntry">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func WithLogEntry(r *<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Request">Request</a>, entry <a href="index.html#LogEntry">LogEntry</a>) *<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Request">Request</a></pre>
+			<p>WithLogEntry sets the in-context LogEntry for a request.
+
+			
+			
+
+		
+			
+			
+			<h2 id="WithValue">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/value.go?s=132:205#L1">WithValue</a>
+				<a class="permalink" href="index.html#WithValue">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func WithValue(key, val interface{}) func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+			<p>WithValue is a middleware that sets a given key/value in a context chain.
+
+			
+			
+
+		
+		
+			
+			
+			<h2 id="Compressor">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/compress.go?s=1131:1598#L37">Compressor</a>
+				<a class="permalink" href="index.html#Compressor">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Compressor represents a set of encoding configurations.
+
+			<pre>type Compressor struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewCompressor">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/compress.go?s=1821:1879#L54">NewCompressor</a>
+					<a class="permalink" href="index.html#NewCompressor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewCompressor(level <a href="../../../../../builtin/index.html#int">int</a>, types ...<a href="../../../../../builtin/index.html#string">string</a>) *<a href="index.html#Compressor">Compressor</a></pre>
+				<p>NewCompressor creates a new Compressor that will handle encoding responses.
+<p>The level should be one of the ones defined in the flate package.
+The types are the content types that are allowed to be compressed.
+
+				
+				
+			
+
+			
+				
+				<h3 id="Compressor.Handler">func (*Compressor) <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/compress.go?s=6280:6340#L180">Handler</a>
+					<a class="permalink" href="index.html#Compressor.Handler">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Compressor">Compressor</a>) Handler(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+				<p>Handler returns a new middleware that will compress the response based on the
+current Compressor.
+
+				
+				
+				
+			
+				
+				<h3 id="Compressor.SetEncoder">func (*Compressor) <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/compress.go?s=5028:5092#L138">SetEncoder</a>
+					<a class="permalink" href="index.html#Compressor.SetEncoder">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Compressor">Compressor</a>) SetEncoder(encoding <a href="../../../../../builtin/index.html#string">string</a>, fn <a href="index.html#EncoderFunc">EncoderFunc</a>)</pre>
+				<p>SetEncoder can be used to set the implementation of a compression algorithm.
+<p>The encoding should be a standardised identifier. See:
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding</a>
+<p>For example, add the Brotli algorithm:
+<pre>import brotli_enc &quot;gopkg.in/kothar/brotli-go.v0/enc&quot;
+
+compressor := middleware.NewCompressor(5, &quot;text/html&quot;)
+compressor.SetEncoder(&quot;br&quot;, func(w io.Writer, level int) io.Writer {
+	params := brotli_enc.NewBrotliParams()
+	params.SetQuality(level)
+	return brotli_enc.NewBrotliWriter(params, w)
+})
+</pre>
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="DefaultLogFormatter">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go?s=2938:3012#L82">DefaultLogFormatter</a>
+				<a class="permalink" href="index.html#DefaultLogFormatter">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DefaultLogFormatter is a simple logger that implements a LogFormatter.
+
+			<pre>type DefaultLogFormatter struct {
+<span id="DefaultLogFormatter.Logger"></span>    Logger  <a href="index.html#LoggerInterface">LoggerInterface</a>
+<span id="DefaultLogFormatter.NoColor"></span>    NoColor <a href="../../../../../builtin/index.html#bool">bool</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="DefaultLogFormatter.NewLogEntry">func (*DefaultLogFormatter) <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go?s=3069:3136#L88">NewLogEntry</a>
+					<a class="permalink" href="index.html#DefaultLogFormatter.NewLogEntry">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#DefaultLogFormatter">DefaultLogFormatter</a>) NewLogEntry(r *<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Request">Request</a>) <a href="index.html#LogEntry">LogEntry</a></pre>
+				<p>NewLogEntry creates a new LogEntry for the request.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="EncoderFunc">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/compress.go?s=8117:8172#L246">EncoderFunc</a>
+				<a class="permalink" href="index.html#EncoderFunc">&#xb6;</a>
+				
+				
+			</h2>
+			<p>An EncoderFunc is a function that wraps the provided io.Writer with a
+streaming compression algorithm and returns it.
+<p>In case of failure, the function should return nil.
+
+			<pre>type EncoderFunc func(w <a href="../../../../../io/index.html">io</a>.<a href="../../../../../io/index.html#Writer">Writer</a>, level <a href="../../../../../builtin/index.html#int">int</a>) <a href="../../../../../io/index.html">io</a>.<a href="../../../../../io/index.html#Writer">Writer</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HeaderRoute">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=3413:3531#L99">HeaderRoute</a>
+				<a class="permalink" href="index.html#HeaderRoute">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HeaderRoute struct {
+<span id="HeaderRoute.Middleware"></span>    Middleware func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>
+<span id="HeaderRoute.MatchOne"></span>    MatchOne   <a href="index.html#Pattern">Pattern</a>
+<span id="HeaderRoute.MatchAny"></span>    MatchAny   []<a href="index.html#Pattern">Pattern</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="HeaderRoute.IsMatch">func (HeaderRoute) <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=3533:3580#L105">IsMatch</a>
+					<a class="permalink" href="index.html#HeaderRoute.IsMatch">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (r <a href="index.html#HeaderRoute">HeaderRoute</a>) IsMatch(value <a href="../../../../../builtin/index.html#string">string</a>) <a href="../../../../../builtin/index.html#bool">bool</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="HeaderRouter">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=1636:1678#L36">HeaderRouter</a>
+				<a class="permalink" href="index.html#HeaderRouter">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HeaderRouter map[<a href="../../../../../builtin/index.html#string">string</a>][]<a href="index.html#HeaderRoute">HeaderRoute</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="RouteHeaders">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=1575:1607#L32">RouteHeaders</a>
+					<a class="permalink" href="index.html#RouteHeaders">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func RouteHeaders() <a href="index.html#HeaderRouter">HeaderRouter</a></pre>
+				<p>RouteHeaders is a neat little header-based router that allows you to direct
+the flow of a request through a middleware stack based on a request header.
+<p>For example, lets say you&apos;d like to setup multiple routers depending on the
+request Host header, you could then do something as so:
+<pre>r := chi.NewRouter()
+rSubdomain := chi.NewRouter()
+r.Use(middleware.RouteHeaders().
+	Route(&quot;Host&quot;, &quot;example.com&quot;, middleware.New(r)).
+	Route(&quot;Host&quot;, &quot;*.example.com&quot;, middleware.New(rSubdomain)).
+	Handler)
+r.Get(&quot;/&quot;, h)
+rSubdomain.Get(&quot;/&quot;, h2)
+</pre>
+<p>Another example, imagine you want to setup multiple CORS handlers, where for
+your origin servers you allow authorized requests, but for third-party public
+requests, authorization is disabled.
+<pre>r := chi.NewRouter()
+r.Use(middleware.RouteHeaders().
+	Route(&quot;Origin&quot;, &quot;https://app.skyweaver.net&quot;, cors.Handler(cors.Options{
+		AllowedOrigins:   []string{&quot;https://api.skyweaver.net&quot;},
+		AllowedMethods:   []string{&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;, &quot;OPTIONS&quot;},
+		AllowedHeaders:   []string{&quot;Accept&quot;, &quot;Authorization&quot;, &quot;Content-Type&quot;},
+		AllowCredentials: true, // &lt;----------&lt;&lt;&lt; allow credentials
+	})).
+	Route(&quot;Origin&quot;, &quot;*&quot;, cors.Handler(cors.Options{
+		AllowedOrigins:   []string{&quot;*&quot;},
+		AllowedMethods:   []string{&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;, &quot;OPTIONS&quot;},
+		AllowedHeaders:   []string{&quot;Accept&quot;, &quot;Content-Type&quot;},
+		AllowCredentials: false, // &lt;----------&lt;&lt;&lt; do not allow credentials
+	})).
+	Handler)
+</pre>
+
+				
+				
+			
+
+			
+				
+				<h3 id="HeaderRouter.Handler">func (HeaderRouter) <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=2626:2688#L67">Handler</a>
+					<a class="permalink" href="index.html#HeaderRouter.Handler">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (hr <a href="index.html#HeaderRouter">HeaderRouter</a>) Handler(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HeaderRouter.Route">func (HeaderRouter) <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=1680:1799#L38">Route</a>
+					<a class="permalink" href="index.html#HeaderRouter.Route">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (hr <a href="index.html#HeaderRouter">HeaderRouter</a>) Route(header, match <a href="../../../../../builtin/index.html#string">string</a>, middlewareHandler func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="index.html#HeaderRouter">HeaderRouter</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HeaderRouter.RouteAny">func (HeaderRouter) <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=2022:2153#L48">RouteAny</a>
+					<a class="permalink" href="index.html#HeaderRouter.RouteAny">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (hr <a href="index.html#HeaderRouter">HeaderRouter</a>) RouteAny(header <a href="../../../../../builtin/index.html#string">string</a>, match []<a href="../../../../../builtin/index.html#string">string</a>, middlewareHandler func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="index.html#HeaderRouter">HeaderRouter</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HeaderRouter.RouteDefault">func (HeaderRouter) <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=2467:2561#L62">RouteDefault</a>
+					<a class="permalink" href="index.html#HeaderRouter.RouteDefault">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (hr <a href="index.html#HeaderRouter">HeaderRouter</a>) RouteDefault(handler func(next <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Handler">Handler</a>) <a href="index.html#HeaderRouter">HeaderRouter</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="LogEntry">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go?s=2179:2330#L59">LogEntry</a>
+				<a class="permalink" href="index.html#LogEntry">&#xb6;</a>
+				
+				
+			</h2>
+			<p>LogEntry records the final log when a request completes.
+See defaultLogEntry for an example implementation.
+
+			<pre>type LogEntry interface {
+    Write(status, bytes <a href="../../../../../builtin/index.html#int">int</a>, header <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Header">Header</a>, elapsed <a href="../../../../../time/index.html">time</a>.<a href="../../../../../time/index.html#Duration">Duration</a>, extra interface{})
+    Panic(v interface{}, stack []<a href="../../../../../builtin/index.html#byte">byte</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="GetLogEntry">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go?s=2394:2436#L65">GetLogEntry</a>
+					<a class="permalink" href="index.html#GetLogEntry">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func GetLogEntry(r *<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Request">Request</a>) <a href="index.html#LogEntry">LogEntry</a></pre>
+				<p>GetLogEntry returns the in-context LogEntry for a request.
+
+				
+				
+			
+
+			
+		
+			
+			
+			<h2 id="LogFormatter">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go?s=1993:2063#L53">LogFormatter</a>
+				<a class="permalink" href="index.html#LogFormatter">&#xb6;</a>
+				
+				
+			</h2>
+			<p>LogFormatter initiates the beginning of a new LogEntry per request.
+See DefaultLogFormatter for an example implementation.
+
+			<pre>type LogFormatter interface {
+    NewLogEntry(r *<a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#Request">Request</a>) <a href="index.html#LogEntry">LogEntry</a>
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="LoggerInterface">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/logger.go?s=2803:2862#L77">LoggerInterface</a>
+				<a class="permalink" href="index.html#LoggerInterface">&#xb6;</a>
+				
+				
+			</h2>
+			<p>LoggerInterface accepts printing to stdlib logger or compatible logger.
+
+			<pre>type LoggerInterface interface {
+    Print(v ...interface{})
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Pattern">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=3761:3833#L118">Pattern</a>
+				<a class="permalink" href="index.html#Pattern">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type Pattern struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewPattern">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=3835:3872#L124">NewPattern</a>
+					<a class="permalink" href="index.html#NewPattern">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewPattern(value <a href="../../../../../builtin/index.html#string">string</a>) <a href="index.html#Pattern">Pattern</a></pre>
+				
+				
+				
+			
+
+			
+				
+				<h3 id="Pattern.Match">func (Pattern) <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/route_headers.go?s=4054:4091#L136">Match</a>
+					<a class="permalink" href="index.html#Pattern.Match">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (p <a href="index.html#Pattern">Pattern</a>) Match(v <a href="../../../../../builtin/index.html#string">string</a>) <a href="../../../../../builtin/index.html#bool">bool</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ThrottleOpts">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/throttle.go?s=363:530#L10">ThrottleOpts</a>
+				<a class="permalink" href="index.html#ThrottleOpts">&#xb6;</a>
+				
+				
+			</h2>
+			<p>ThrottleOpts represents a set of throttling options.
+
+			<pre>type ThrottleOpts struct {
+<span id="ThrottleOpts.RetryAfterFn"></span>    RetryAfterFn   func(ctxDone <a href="../../../../../builtin/index.html#bool">bool</a>) <a href="../../../../../time/index.html">time</a>.<a href="../../../../../time/index.html#Duration">Duration</a>
+<span id="ThrottleOpts.Limit"></span>    Limit          <a href="../../../../../builtin/index.html#int">int</a>
+<span id="ThrottleOpts.BacklogLimit"></span>    BacklogLimit   <a href="../../../../../builtin/index.html#int">int</a>
+<span id="ThrottleOpts.BacklogTimeout"></span>    BacklogTimeout <a href="../../../../../time/index.html">time</a>.<a href="../../../../../time/index.html#Duration">Duration</a>
+<span id="ThrottleOpts.StatusCode"></span>    StatusCode     <a href="../../../../../builtin/index.html#int">int</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="WrapResponseWriter">type <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/wrap_writer.go?s=1017:2010#L39">WrapResponseWriter</a>
+				<a class="permalink" href="index.html#WrapResponseWriter">&#xb6;</a>
+				
+				
+			</h2>
+			<p>WrapResponseWriter is a proxy around an http.ResponseWriter that allows you to hook
+into various parts of the response process.
+
+			<pre>type WrapResponseWriter interface {
+    <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#ResponseWriter">ResponseWriter</a>
+    <span class="comment">// Status returns the HTTP status of the request, or 0 if one has not</span>
+    <span class="comment">// yet been sent.</span>
+    Status() <a href="../../../../../builtin/index.html#int">int</a>
+    <span class="comment">// BytesWritten returns the total number of bytes sent to the client.</span>
+    BytesWritten() <a href="../../../../../builtin/index.html#int">int</a>
+    <span class="comment">// Tee causes the response body to be written to the given io.Writer in</span>
+    <span class="comment">// addition to proxying the writes through. Only one io.Writer can be</span>
+    <span class="comment">// tee&#39;d to at once: setting a second one will overwrite the first.</span>
+    <span class="comment">// Writes will be sent to the proxy before being written to this</span>
+    <span class="comment">// io.Writer. It is illegal for the tee&#39;d writer to be modified</span>
+    <span class="comment">// concurrently with writes.</span>
+    Tee(<a href="../../../../../io/index.html">io</a>.<a href="../../../../../io/index.html#Writer">Writer</a>)
+    <span class="comment">// Unwrap returns the original proxied target.</span>
+    Unwrap() <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#ResponseWriter">ResponseWriter</a>
+    <span class="comment">// Discard causes all writes to the original ResponseWriter be discarded,</span>
+    <span class="comment">// instead writing only to the tee&#39;d writer if it&#39;s set.</span>
+    <span class="comment">// The caller is responsible for calling WriteHeader and Write on the</span>
+    <span class="comment">// original ResponseWriter once the processing is done.</span>
+    Discard()
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewWrapResponseWriter">func <a href="http://localhost:8081/src/github.com/go-chi/chi/v5/middleware/wrap_writer.go?s=350:434#L6">NewWrapResponseWriter</a>
+					<a class="permalink" href="index.html#NewWrapResponseWriter">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewWrapResponseWriter(w <a href="../../../../../net/http/index.html">http</a>.<a href="../../../../../net/http/index.html#ResponseWriter">ResponseWriter</a>, protoMajor <a href="../../../../../builtin/index.html#int">int</a>) <a href="index.html#WrapResponseWriter">WrapResponseWriter</a></pre>
+				<p>NewWrapResponseWriter wraps an http.ResponseWriter, returning a proxy that allows you to
+hook into various parts of the response process.
+
+				
+				
+			
+
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.24.3.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://localhost:8081/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>

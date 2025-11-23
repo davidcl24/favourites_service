@@ -5,6 +5,7 @@ import (
 	"net"
 )
 
+// Directly represents the entity in the database
 type Favourite struct {
 	ID      int  `json:"id"`
 	UserID  int  `json:"user_id"`
@@ -12,6 +13,7 @@ type Favourite struct {
 	ShowID  *int `json:"show_id"`
 }
 
+// Returns all of the favourites a user has added
 func (db *DB) GetAllUserFavourites(userId int) ([]*Favourite, error) {
 	query := `
 		SELECT id, user_id, movie_id, show_id
@@ -37,6 +39,7 @@ func (db *DB) GetAllUserFavourites(userId int) ([]*Favourite, error) {
 	return favourites, nil
 }
 
+// Returns an specific favourite movie from a user
 func (db *DB) GetMovieFavouriteFromUser(userId int, movieId int) (*Favourite, error) {
 	query := `
 		SELECT id, user_id, movie_id, show_id
@@ -55,6 +58,7 @@ func (db *DB) GetMovieFavouriteFromUser(userId int, movieId int) (*Favourite, er
 	return fav, nil
 }
 
+// Returns an specific favourite show from a user
 func (db *DB) GetShowFavouriteFromUser(userId int, showId int) (*Favourite, error) {
 	query := `
 		SELECT id, user_id, movie_id, show_id
@@ -73,6 +77,7 @@ func (db *DB) GetShowFavouriteFromUser(userId int, showId int) (*Favourite, erro
 	return fav, nil
 }
 
+// Returns the specific favourite element
 func (db *DB) GetFavouriteByID(id int) (*Favourite, error) {
 	query := `
 		SELECT id, user_id, movie_id, show_id
@@ -92,6 +97,7 @@ func (db *DB) GetFavouriteByID(id int) (*Favourite, error) {
 	return fav, nil
 }
 
+// Creates a new favourite for a user
 func (db *DB) AddFavourite(favourite *Favourite) (*Favourite, error) {
 	query := `
 		INSERT INTO favourites (user_id, movie_id, show_id)
@@ -110,6 +116,7 @@ func (db *DB) AddFavourite(favourite *Favourite) (*Favourite, error) {
 	return favourite, nil
 }
 
+// Deletes a particular favourite element
 func (db *DB) DeleteFavourite(id int) (*Favourite, error) {
 	fav, err := db.GetFavouriteByID(id)
 
@@ -128,6 +135,7 @@ func (db *DB) DeleteFavourite(id int) (*Favourite, error) {
 	return fav, nil
 }
 
+// Deletes all user favourites from a particular user
 func (db *DB) ClearUserFavourites(userId int) ([]*Favourite, error) {
 	favourites, err := db.GetAllUserFavourites(userId)
 

@@ -1,0 +1,2774 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>pq - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.24.3";</script>
+<script src="../../../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="../../../index.html">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="../../../index.html">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://localhost:8081/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package pq
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/lib/pq"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+				<dd><a href="index.html#pkg-examples" class="examplesLink">Examples</a></dd>
+			
+			
+				<dd><a href="index.html#pkg-subdirectories">Subdirectories</a></dd>
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>Package pq is a pure Go Postgres driver for the database/sql package.
+<p>In most cases clients will use the database/sql package instead of
+using this package directly. For example:
+<pre>import (
+	&quot;database/sql&quot;
+
+	_ &quot;github.com/lib/pq&quot;
+)
+
+func main() {
+	connStr := &quot;user=pqgotest dbname=pqgotest sslmode=verify-full&quot;
+	db, err := sql.Open(&quot;postgres&quot;, connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	age := 21
+	rows, err := db.Query(&quot;SELECT name FROM users WHERE age = $1&quot;, age)
+	…
+}
+</pre>
+<p>You can also connect to a database using a URL. For example:
+<pre>connStr := &quot;postgres://pqgotest:password@localhost/pqgotest?sslmode=verify-full&quot;
+db, err := sql.Open(&quot;postgres&quot;, connStr)
+</pre>
+<h3 id="hdr-Connection_String_Parameters">Connection String Parameters</h3>
+<p>Similarly to libpq, when establishing a connection using pq you are expected to
+supply a connection string containing zero or more parameters.
+A subset of the connection parameters supported by libpq are also supported by pq.
+Additionally, pq also lets you specify run-time parameters (such as search_path or work_mem)
+directly in the connection string.  This is different from libpq, which does not allow
+run-time parameters in the connection string, instead requiring you to supply
+them in the options parameter.
+<p>For compatibility with libpq, the following special connection parameters are
+supported:
+<ul>
+<li>dbname - The name of the database to connect to
+<li>user - The user to sign in as
+<li>password - The user&apos;s password
+<li>host - The host to connect to. Values that start with / are for unix
+domain sockets. (default is localhost)
+<li>port - The port to bind to. (default is 5432)
+<li>sslmode - Whether or not to use SSL (default is require, this is not
+the default for libpq)
+<li>fallback_application_name - An application_name to fall back to if one isn&apos;t provided.
+<li>connect_timeout - Maximum wait for connection, in seconds. Zero or
+not specified means wait indefinitely.
+<li>sslcert - Cert file location. The file must contain PEM encoded data.
+<li>sslkey - Key file location. The file must contain PEM encoded data.
+<li>sslrootcert - The location of the root certificate file. The file
+must contain PEM encoded data.
+</ul>
+<p>Valid values for sslmode are:
+<ul>
+<li>disable - No SSL
+<li>require - Always SSL (skip verification)
+<li>verify-ca - Always SSL (verify that the certificate presented by the
+server was signed by a trusted CA)
+<li>verify-full - Always SSL (verify that the certification presented by
+the server was signed by a trusted CA and the server host name
+matches the one in the certificate)
+</ul>
+<p>See <a href="http://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING">http://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING</a>
+for more information about connection string parameters.
+<p>Use single quotes for values that contain whitespace:
+<pre>&quot;user=pqgotest password=&apos;with spaces&apos;&quot;
+</pre>
+<p>A backslash will escape the next character in values:
+<pre>&quot;user=space\ man password=&apos;it\&apos;s valid&apos;&quot;
+</pre>
+<p>Note that the connection parameter client_encoding (which sets the
+text encoding for the connection) may be set but must be &quot;UTF8&quot;,
+matching with the same rules as Postgres. It is an error to provide
+any other value.
+<p>In addition to the parameters listed above, any run-time parameter that can be
+set at backend start time can be set in the connection string.  For more
+information, see
+<a href="http://www.postgresql.org/docs/current/static/runtime-config.html">http://www.postgresql.org/docs/current/static/runtime-config.html</a>.
+<p>Most environment variables as specified at <a href="http://www.postgresql.org/docs/current/static/libpq-envars.html">http://www.postgresql.org/docs/current/static/libpq-envars.html</a>
+supported by libpq are also supported by pq.  If any of the environment
+variables not supported by pq are set, pq will panic during connection
+establishment.  Environment variables have a lower precedence than explicitly
+provided connection parameters.
+<p>The pgpass mechanism as described in <a href="http://www.postgresql.org/docs/current/static/libpq-pgpass.html">http://www.postgresql.org/docs/current/static/libpq-pgpass.html</a>
+is supported, but on Windows PGPASSFILE must be specified explicitly.
+<h3 id="hdr-Queries">Queries</h3>
+<p>database/sql does not dictate any specific format for parameter
+markers in query strings, and pq uses the Postgres-native ordinal markers,
+as shown above. The same marker can be reused for the same parameter:
+<pre>rows, err := db.Query(`SELECT name FROM users WHERE favorite_fruit = $1
+	OR age BETWEEN $2 AND $2 + 3`, &quot;orange&quot;, 64)
+</pre>
+<p>pq does not support the LastInsertId() method of the Result type in database/sql.
+To return the identifier of an INSERT (or UPDATE or DELETE), use the Postgres
+RETURNING clause with a standard Query or QueryRow call:
+<pre>var userid int
+err := db.QueryRow(`INSERT INTO users(name, favorite_fruit, age)
+	VALUES(&apos;beatrice&apos;, &apos;starfruit&apos;, 93) RETURNING id`).Scan(&amp;userid)
+</pre>
+<p>For more details on RETURNING, see the Postgres documentation:
+<pre>http://www.postgresql.org/docs/current/static/sql-insert.html
+http://www.postgresql.org/docs/current/static/sql-update.html
+http://www.postgresql.org/docs/current/static/sql-delete.html
+</pre>
+<p>For additional instructions on querying see the documentation for the database/sql package.
+<h3 id="hdr-Data_Types">Data Types</h3>
+<p>Parameters pass through driver.DefaultParameterConverter before they are handled
+by this package. When the binary_parameters connection option is enabled,
+[]byte values are sent directly to the backend as data in binary format.
+<p>This package returns the following types for values from the PostgreSQL backend:
+<ul>
+<li>integer types smallint, integer, and bigint are returned as int64
+<li>floating-point types real and double precision are returned as float64
+<li>character types char, varchar, and text are returned as string
+<li>temporal types date, time, timetz, timestamp, and timestamptz are
+returned as time.Time
+<li>the boolean type is returned as bool
+<li>the bytea type is returned as []byte
+</ul>
+<p>All other types are returned directly from the backend as []byte values in text format.
+<h3 id="hdr-Errors">Errors</h3>
+<p>pq may return errors of type *pq.Error which can be interrogated for error details:
+<pre>if err, ok := err.(*pq.Error); ok {
+    fmt.Println(&quot;pq error:&quot;, err.Code.Name())
+}
+</pre>
+<p>See the pq.Error type for details.
+<h3 id="hdr-Bulk_imports">Bulk imports</h3>
+<p>You can perform bulk imports by preparing a statement returned by pq.CopyIn (or
+pq.CopyInSchema) in an explicit transaction (sql.Tx). The returned statement
+handle can then be repeatedly &quot;executed&quot; to copy data into the target table.
+After all data has been processed you should call Exec() once with no arguments
+to flush all buffered data. Any call to Exec() might return an error which
+should be handled appropriately, but because of the internal buffering an error
+returned by Exec() might not be related to the data passed in the call that
+failed.
+<p>CopyIn uses COPY FROM internally. It is not possible to COPY outside of an
+explicit transaction in pq.
+<p>Usage example:
+<pre>txn, err := db.Begin()
+if err != nil {
+	log.Fatal(err)
+}
+
+stmt, err := txn.Prepare(pq.CopyIn(&quot;users&quot;, &quot;name&quot;, &quot;age&quot;))
+if err != nil {
+	log.Fatal(err)
+}
+
+for _, user := range users {
+	_, err = stmt.Exec(user.Name, int64(user.Age))
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+_, err = stmt.Exec()
+if err != nil {
+	log.Fatal(err)
+}
+
+err = stmt.Close()
+if err != nil {
+	log.Fatal(err)
+}
+
+err = txn.Commit()
+if err != nil {
+	log.Fatal(err)
+}
+</pre>
+<h3 id="hdr-Notifications">Notifications</h3>
+<p>PostgreSQL supports a simple publish/subscribe model over database
+connections.  See <a href="http://www.postgresql.org/docs/current/static/sql-notify.html">http://www.postgresql.org/docs/current/static/sql-notify.html</a>
+for more information about the general mechanism.
+<p>To start listening for notifications, you first have to open a new connection
+to the database by calling NewListener.  This connection can not be used for
+anything other than LISTEN / NOTIFY.  Calling Listen will open a &quot;notification
+channel&quot;; once a notification channel is open, a notification generated on that
+channel will effect a send on the Listener.Notify channel.  A notification
+channel will remain open until Unlisten is called, though connection loss might
+result in some notifications being lost.  To solve this problem, Listener sends
+a nil pointer over the Notify channel any time the connection is re-established
+following a connection loss.  The application can get information about the
+state of the underlying connection by setting an event callback in the call to
+NewListener.
+<p>A single Listener can safely be used from concurrent goroutines, which means
+that there is often no need to create more than one Listener in your
+application.  However, a Listener is always connected to a single database, so
+you will need to create a new Listener instance for every database you want to
+receive notifications in.
+<p>The channel name in both Listen and Unlisten is case sensitive, and can contain
+any characters legal in an identifier (see
+<a href="http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS">http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS</a>
+for more information).  Note that the channel name will be truncated to 63
+bytes by the PostgreSQL server.
+<p>You can find a complete, working example of Listener usage at
+<a href="https://godoc.org/github.com/lib/pq/example/listen">https://godoc.org/github.com/lib/pq/example/listen</a>.
+<h3 id="hdr-Kerberos_Support">Kerberos Support</h3>
+<p>If you need support for Kerberos authentication, add the following to your main
+package:
+<pre>import &quot;github.com/lib/pq/auth/kerberos&quot;
+
+func init() {
+	pq.RegisterGSSProvider(func() (pq.Gss, error) { return kerberos.NewGSS() })
+}
+</pre>
+<p>This package is in a separate module so that users who don&apos;t need Kerberos
+don&apos;t have to download unnecessary dependencies.
+<p>When imported, additional connection string parameters are supported:
+<ul>
+<li>krbsrvname - GSS (Kerberos) service name when constructing the
+SPN (default is `postgres`). This will be combined with the host
+to form the full SPN: `krbsrvname/host`.
+<li>krbspn - GSS (Kerberos) SPN. This takes priority over
+`krbsrvname` if present.
+</ul>
+
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+				<dd><a href="index.html#pkg-constants">Constants</a></dd>
+			
+			
+				<dd><a href="index.html#pkg-variables">Variables</a></dd>
+			
+			
+				
+				<dd><a href="index.html#Array">func Array(a interface{}) interface {driver.Valuer sql.Scanner}</a></dd>
+			
+				
+				<dd><a href="index.html#BufferQuoteIdentifier">func BufferQuoteIdentifier(name string, buffer *bytes.Buffer)</a></dd>
+			
+				
+				<dd><a href="index.html#ConnectorNoticeHandler">func ConnectorNoticeHandler(c driver.Connector) func(*Error)</a></dd>
+			
+				
+				<dd><a href="index.html#ConnectorNotificationHandler">func ConnectorNotificationHandler(c driver.Connector) func(*Notification)</a></dd>
+			
+				
+				<dd><a href="index.html#CopyIn">func CopyIn(table string, columns ...string) string</a></dd>
+			
+				
+				<dd><a href="index.html#CopyInSchema">func CopyInSchema(schema, table string, columns ...string) string</a></dd>
+			
+				
+				<dd><a href="index.html#DialOpen">func DialOpen(d Dialer, dsn string) (_ driver.Conn, err error)</a></dd>
+			
+				
+				<dd><a href="index.html#EnableInfinityTs">func EnableInfinityTs(negative time.Time, positive time.Time)</a></dd>
+			
+				
+				<dd><a href="index.html#FormatTimestamp">func FormatTimestamp(t time.Time) []byte</a></dd>
+			
+				
+				<dd><a href="index.html#NoticeHandler">func NoticeHandler(c driver.Conn) func(*Error)</a></dd>
+			
+				
+				<dd><a href="index.html#Open">func Open(dsn string) (_ driver.Conn, err error)</a></dd>
+			
+				
+				<dd><a href="index.html#ParseTimestamp">func ParseTimestamp(currentLocation *time.Location, str string) (time.Time, error)</a></dd>
+			
+				
+				<dd><a href="index.html#ParseURL">func ParseURL(url string) (string, error)</a></dd>
+			
+				
+				<dd><a href="index.html#QuoteIdentifier">func QuoteIdentifier(name string) string</a></dd>
+			
+				
+				<dd><a href="index.html#QuoteLiteral">func QuoteLiteral(literal string) string</a></dd>
+			
+				
+				<dd><a href="index.html#RegisterGSSProvider">func RegisterGSSProvider(newGssArg NewGSSFunc)</a></dd>
+			
+				
+				<dd><a href="index.html#SetNoticeHandler">func SetNoticeHandler(c driver.Conn, handler func(*Error))</a></dd>
+			
+				
+				<dd><a href="index.html#SetNotificationHandler">func SetNotificationHandler(c driver.Conn, handler func(*Notification))</a></dd>
+			
+			
+				
+				<dd><a href="index.html#ArrayDelimiter">type ArrayDelimiter</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#BoolArray">type BoolArray</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#BoolArray.Scan">func (a *BoolArray) Scan(src interface{}) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#BoolArray.Value">func (a BoolArray) Value() (driver.Value, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ByteaArray">type ByteaArray</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ByteaArray.Scan">func (a *ByteaArray) Scan(src interface{}) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ByteaArray.Value">func (a ByteaArray) Value() (driver.Value, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Connector">type Connector</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewConnector">func NewConnector(dsn string) (*Connector, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Connector.Connect">func (c *Connector) Connect(ctx context.Context) (driver.Conn, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Connector.Dialer">func (c *Connector) Dialer(dialer Dialer)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Connector.Driver">func (c *Connector) Driver() driver.Driver</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Dialer">type Dialer</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#DialerContext">type DialerContext</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#Driver">type Driver</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Driver.Open">func (d Driver) Open(name string) (driver.Conn, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Error">type Error</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Error.Error">func (err *Error) Error() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Error.Fatal">func (err *Error) Fatal() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Error.Get">func (err *Error) Get(k byte) (v string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Error.SQLState">func (err *Error) SQLState() string</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ErrorClass">type ErrorClass</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ErrorClass.Name">func (ec ErrorClass) Name() string</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ErrorCode">type ErrorCode</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ErrorCode.Class">func (ec ErrorCode) Class() ErrorClass</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ErrorCode.Name">func (ec ErrorCode) Name() string</a></dd>
+				
+			
+				
+				<dd><a href="index.html#EventCallbackType">type EventCallbackType</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#Float32Array">type Float32Array</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Float32Array.Scan">func (a *Float32Array) Scan(src interface{}) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Float32Array.Value">func (a Float32Array) Value() (driver.Value, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Float64Array">type Float64Array</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Float64Array.Scan">func (a *Float64Array) Scan(src interface{}) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Float64Array.Value">func (a Float64Array) Value() (driver.Value, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#GSS">type GSS</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#GenericArray">type GenericArray</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#GenericArray.Scan">func (a GenericArray) Scan(src interface{}) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#GenericArray.Value">func (a GenericArray) Value() (driver.Value, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Int32Array">type Int32Array</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Int32Array.Scan">func (a *Int32Array) Scan(src interface{}) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Int32Array.Value">func (a Int32Array) Value() (driver.Value, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Int64Array">type Int64Array</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Int64Array.Scan">func (a *Int64Array) Scan(src interface{}) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Int64Array.Value">func (a Int64Array) Value() (driver.Value, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Listener">type Listener</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewDialListener">func NewDialListener(d Dialer, name string, minReconnectInterval time.Duration, maxReconnectInterval time.Duration, eventCallback EventCallbackType) *Listener</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewListener">func NewListener(name string, minReconnectInterval time.Duration, maxReconnectInterval time.Duration, eventCallback EventCallbackType) *Listener</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Listener.Close">func (l *Listener) Close() error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Listener.Listen">func (l *Listener) Listen(channel string) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Listener.NotificationChannel">func (l *Listener) NotificationChannel() &lt;-chan *Notification</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Listener.Ping">func (l *Listener) Ping() error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Listener.Unlisten">func (l *Listener) Unlisten(channel string) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Listener.UnlistenAll">func (l *Listener) UnlistenAll() error</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ListenerConn">type ListenerConn</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewListenerConn">func NewListenerConn(name string, notificationChan chan&lt;- *Notification) (*ListenerConn, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ListenerConn.Close">func (l *ListenerConn) Close() error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ListenerConn.Err">func (l *ListenerConn) Err() error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ListenerConn.ExecSimpleQuery">func (l *ListenerConn) ExecSimpleQuery(q string) (executed bool, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ListenerConn.Listen">func (l *ListenerConn) Listen(channel string) (bool, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ListenerConn.Ping">func (l *ListenerConn) Ping() error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ListenerConn.Unlisten">func (l *ListenerConn) Unlisten(channel string) (bool, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ListenerConn.UnlistenAll">func (l *ListenerConn) UnlistenAll() (bool, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ListenerEventType">type ListenerEventType</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#NewGSSFunc">type NewGSSFunc</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#NoticeHandlerConnector">type NoticeHandlerConnector</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ConnectorWithNoticeHandler">func ConnectorWithNoticeHandler(c driver.Connector, handler func(*Error)) *NoticeHandlerConnector</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NoticeHandlerConnector.Connect">func (n *NoticeHandlerConnector) Connect(ctx context.Context) (driver.Conn, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Notification">type Notification</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#NotificationHandlerConnector">type NotificationHandlerConnector</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ConnectorWithNotificationHandler">func ConnectorWithNotificationHandler(c driver.Connector, handler func(*Notification)) *NotificationHandlerConnector</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NotificationHandlerConnector.Connect">func (n *NotificationHandlerConnector) Connect(ctx context.Context) (driver.Conn, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#NullTime">type NullTime</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NullTime.Scan">func (nt *NullTime) Scan(value interface{}) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NullTime.Value">func (nt NullTime) Value() (driver.Value, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#PGError">type PGError</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#StringArray">type StringArray</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#StringArray.Scan">func (a *StringArray) Scan(src interface{}) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#StringArray.Value">func (a StringArray) Value() (driver.Value, error)</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+		<div id="pkg-examples">
+			<h3>Examples</h3>
+			<div class="js-expandAll expandAll collapsed">(Expand All)</div>
+			<dl>
+			
+			<dd><a class="exampleLink" href="index.html#example_ConnectorWithNoticeHandler">ConnectorWithNoticeHandler</a></dd>
+			
+			<dd><a class="exampleLink" href="index.html#example_NewConnector">NewConnector</a></dd>
+			
+			</dl>
+		</div>
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/array.go">array.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/buf.go">buf.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/conn.go">conn.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/conn_go115.go">conn_go115.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/conn_go18.go">conn_go18.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/connector.go">connector.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/copy.go">copy.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/doc.go">doc.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/encode.go">encode.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/error.go">error.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/krb.go">krb.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/notice.go">notice.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/notify.go">notify.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/rows.go">rows.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/ssl.go">ssl.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/ssl_permissions.go">ssl_permissions.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/url.go">url.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/user_posix.go">user_posix.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/uuid.go">uuid.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				<p>Error severities
+
+				<pre>const (
+    <span id="Efatal">Efatal</span>   = &#34;FATAL&#34;
+    <span id="Epanic">Epanic</span>   = &#34;PANIC&#34;
+    <span id="Ewarning">Ewarning</span> = &#34;WARNING&#34;
+    <span id="Enotice">Enotice</span>  = &#34;NOTICE&#34;
+    <span id="Edebug">Edebug</span>   = &#34;DEBUG&#34;
+    <span id="Einfo">Einfo</span>    = &#34;INFO&#34;
+    <span id="Elog">Elog</span>     = &#34;LOG&#34;
+)</pre>
+			
+		
+		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				<p>Common error types
+
+				<pre>var (
+    <span id="ErrNotSupported">ErrNotSupported</span>              = <a href="../../../errors/index.html">errors</a>.<a href="../../../errors/index.html#New">New</a>(&#34;pq: Unsupported command&#34;)
+    <span id="ErrInFailedTransaction">ErrInFailedTransaction</span>       = <a href="../../../errors/index.html">errors</a>.<a href="../../../errors/index.html#New">New</a>(&#34;pq: Could not complete operation in a failed transaction&#34;)
+    <span id="ErrSSLNotSupported">ErrSSLNotSupported</span>           = <a href="../../../errors/index.html">errors</a>.<a href="../../../errors/index.html#New">New</a>(&#34;pq: SSL is not enabled on the server&#34;)
+    <span id="ErrSSLKeyUnknownOwnership">ErrSSLKeyUnknownOwnership</span>    = <a href="../../../errors/index.html">errors</a>.<a href="../../../errors/index.html#New">New</a>(&#34;pq: Could not get owner information for private key, may not be properly protected&#34;)
+    <span id="ErrSSLKeyHasWorldPermissions">ErrSSLKeyHasWorldPermissions</span> = <a href="../../../errors/index.html">errors</a>.<a href="../../../errors/index.html#New">New</a>(&#34;pq: Private key has world access. Permissions should be u=rw,g=r (0640) if owned by root, or u=rw (0600), or less&#34;)
+
+    <span id="ErrCouldNotDetectUsername">ErrCouldNotDetectUsername</span> = <a href="../../../errors/index.html">errors</a>.<a href="../../../errors/index.html#New">New</a>(&#34;pq: Could not detect default username. Please provide one explicitly&#34;)
+)</pre>
+			
+				<p>ErrChannelAlreadyOpen is returned from Listen when a channel is already
+open.
+
+				<pre>var <span id="ErrChannelAlreadyOpen">ErrChannelAlreadyOpen</span> = <a href="../../../errors/index.html">errors</a>.<a href="../../../errors/index.html#New">New</a>(&#34;pq: channel is already open&#34;)</pre>
+			
+				<p>ErrChannelNotOpen is returned from Unlisten when a channel is not open.
+
+				<pre>var <span id="ErrChannelNotOpen">ErrChannelNotOpen</span> = <a href="../../../errors/index.html">errors</a>.<a href="../../../errors/index.html#New">New</a>(&#34;pq: channel is not open&#34;)</pre>
+			
+		
+		
+			
+			
+			<h2 id="Array">func <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=738:805#L19">Array</a>
+				<a class="permalink" href="index.html#Array">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Array(a interface{}) interface {
+    <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Valuer">Valuer</a>
+    <a href="../../../database/sql/index.html">sql</a>.<a href="../../../database/sql/index.html#Scanner">Scanner</a>
+}</pre>
+			<p>Array returns the optimal driver.Valuer and sql.Scanner for an array or
+slice of any dimension.
+<p>For example:
+<pre>db.Query(`SELECT * FROM t WHERE id = ANY($1)`, pq.Array([]int{235, 401}))
+
+var x []sql.NullInt64
+db.QueryRow(`SELECT ARRAY[235, 401]`).Scan(pq.Array(&amp;x))
+</pre>
+<p>Scanning multi-dimensional arrays is not supported.  Arrays where the lower
+bound is not one (such as `[0:0]={1}&apos;) are not supported.
+
+			
+			
+
+		
+			
+			
+			<h2 id="BufferQuoteIdentifier">func <a href="http://localhost:8081/src/github.com/lib/pq/conn.go?s=39005:39066#L1656">BufferQuoteIdentifier</a>
+				<a class="permalink" href="index.html#BufferQuoteIdentifier">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func BufferQuoteIdentifier(name <a href="../../../builtin/index.html#string">string</a>, buffer *<a href="../../../bytes/index.html">bytes</a>.<a href="../../../bytes/index.html#Buffer">Buffer</a>)</pre>
+			<p>BufferQuoteIdentifier satisfies the same purpose as QuoteIdentifier, but backed by a
+byte buffer.
+
+			
+			
+
+		
+			
+			
+			<h2 id="ConnectorNoticeHandler">func <a href="http://localhost:8081/src/github.com/lib/pq/notice.go?s=1557:1617#L39">ConnectorNoticeHandler</a>
+				<a class="permalink" href="index.html#ConnectorNoticeHandler">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func ConnectorNoticeHandler(c <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Connector">Connector</a>) func(*<a href="index.html#Error">Error</a>)</pre>
+			<p>ConnectorNoticeHandler returns the currently set notice handler, if any. If
+the given connector is not a result of ConnectorWithNoticeHandler, nil is
+returned.
+
+			
+			
+
+		
+			
+			
+			<h2 id="ConnectorNotificationHandler">func <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=1858:1931#L54">ConnectorNotificationHandler</a>
+				<a class="permalink" href="index.html#ConnectorNotificationHandler">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func ConnectorNotificationHandler(c <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Connector">Connector</a>) func(*<a href="index.html#Notification">Notification</a>)</pre>
+			<p>ConnectorNotificationHandler returns the currently set notification handler, if any. If
+the given connector is not a result of ConnectorWithNotificationHandler, nil is
+returned.
+
+			
+			
+
+		
+			
+			
+			<h2 id="CopyIn">func <a href="http://localhost:8081/src/github.com/lib/pq/copy.go?s=672:723#L13">CopyIn</a>
+				<a class="permalink" href="index.html#CopyIn">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CopyIn(table <a href="../../../builtin/index.html#string">string</a>, columns ...<a href="../../../builtin/index.html#string">string</a>) <a href="../../../builtin/index.html#string">string</a></pre>
+			<p>CopyIn creates a COPY FROM statement which can be prepared with
+Tx.Prepare().  The target table should be visible in search_path.
+
+			
+			
+
+		
+			
+			
+			<h2 id="CopyInSchema">func <a href="http://localhost:8081/src/github.com/lib/pq/copy.go?s=1287:1352#L35">CopyInSchema</a>
+				<a class="permalink" href="index.html#CopyInSchema">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CopyInSchema(schema, table <a href="../../../builtin/index.html#string">string</a>, columns ...<a href="../../../builtin/index.html#string">string</a>) <a href="../../../builtin/index.html#string">string</a></pre>
+			<p>CopyInSchema creates a COPY FROM statement which can be prepared with
+Tx.Prepare().
+
+			
+			
+
+		
+			
+			
+			<h2 id="DialOpen">func <a href="http://localhost:8081/src/github.com/lib/pq/conn.go?s=8386:8448#L324">DialOpen</a>
+				<a class="permalink" href="index.html#DialOpen">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func DialOpen(d <a href="index.html#Dialer">Dialer</a>, dsn <a href="../../../builtin/index.html#string">string</a>) (_ <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Conn">Conn</a>, err <a href="../../../builtin/index.html#error">error</a>)</pre>
+			<p>DialOpen opens a new connection to the database using a dialer.
+
+			
+			
+
+		
+			
+			
+			<h2 id="EnableInfinityTs">func <a href="http://localhost:8081/src/github.com/lib/pq/encode.go?s=8677:8738#L325">EnableInfinityTs</a>
+				<a class="permalink" href="index.html#EnableInfinityTs">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func EnableInfinityTs(negative <a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Time">Time</a>, positive <a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Time">Time</a>)</pre>
+			<p>EnableInfinityTs controls the handling of Postgres&apos; &quot;-infinity&quot; and
+&quot;infinity&quot; &quot;timestamp&quot;s.
+<p>If EnableInfinityTs is not called, &quot;-infinity&quot; and &quot;infinity&quot; will return
+[]byte(&quot;-infinity&quot;) and []byte(&quot;infinity&quot;) respectively, and potentially
+cause error &quot;sql: Scan error on column index 0: unsupported driver -&gt; Scan
+pair: []uint8 -&gt; *time.Time&quot;, when scanning into a time.Time value.
+<p>Once EnableInfinityTs has been called, all connections created using this
+driver will decode Postgres&apos; &quot;-infinity&quot; and &quot;infinity&quot; for &quot;timestamp&quot;,
+&quot;timestamp with time zone&quot; and &quot;date&quot; types to the predefined minimum and
+maximum times, respectively.  When encoding time.Time values, any time which
+equals or precedes the predefined minimum time will be encoded to
+&quot;-infinity&quot;.  Any values at or past the maximum time will similarly be
+encoded to &quot;infinity&quot;.
+<p>If EnableInfinityTs is called with negative &gt;= positive, it will panic.
+Calling EnableInfinityTs after a connection has been established results in
+undefined behavior.  If EnableInfinityTs is called more than once, it will
+panic.
+
+			
+			
+
+		
+			
+			
+			<h2 id="FormatTimestamp">func <a href="http://localhost:8081/src/github.com/lib/pq/encode.go?s=13623:13663#L497">FormatTimestamp</a>
+				<a class="permalink" href="index.html#FormatTimestamp">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func FormatTimestamp(t <a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Time">Time</a>) []<a href="../../../builtin/index.html#byte">byte</a></pre>
+			<p>FormatTimestamp formats t into Postgres&apos; text format for timestamps.
+
+			
+			
+
+		
+			
+			
+			<h2 id="NoticeHandler">func <a href="http://localhost:8081/src/github.com/lib/pq/notice.go?s=326:372#L4">NoticeHandler</a>
+				<a class="permalink" href="index.html#NoticeHandler">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func NoticeHandler(c <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Conn">Conn</a>) func(*<a href="index.html#Error">Error</a>)</pre>
+			<p>NoticeHandler returns the notice handler on the given connection, if any. A
+runtime panic occurs if c is not a pq connection. This is rarely used
+directly, use ConnectorNoticeHandler and ConnectorWithNoticeHandler instead.
+
+			
+			
+
+		
+			
+			
+			<h2 id="Open">func <a href="http://localhost:8081/src/github.com/lib/pq/conn.go?s=8226:8274#L319">Open</a>
+				<a class="permalink" href="index.html#Open">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Open(dsn <a href="../../../builtin/index.html#string">string</a>) (_ <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Conn">Conn</a>, err <a href="../../../builtin/index.html#error">error</a>)</pre>
+			<p>Open opens a new connection to the database. dsn is a connection string.
+Most users should only use it through database/sql package from the standard
+library.
+
+			
+			
+
+		
+			
+			
+			<h2 id="ParseTimestamp">func <a href="http://localhost:8081/src/github.com/lib/pq/encode.go?s=10004:10086#L372">ParseTimestamp</a>
+				<a class="permalink" href="index.html#ParseTimestamp">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func ParseTimestamp(currentLocation *<a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Location">Location</a>, str <a href="../../../builtin/index.html#string">string</a>) (<a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Time">Time</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+			<p>ParseTimestamp parses Postgres&apos; text format. It returns a time.Time in
+currentLocation iff that time&apos;s offset agrees with the offset sent from the
+Postgres server. Otherwise, ParseTimestamp returns a time.Time with the
+fixed offset offset provided by the Postgres server.
+
+			
+			
+
+		
+			
+			
+			<h2 id="ParseURL">func <a href="http://localhost:8081/src/github.com/lib/pq/url.go?s=744:785#L22">ParseURL</a>
+				<a class="permalink" href="index.html#ParseURL">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func ParseURL(url <a href="../../../builtin/index.html#string">string</a>) (<a href="../../../builtin/index.html#string">string</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+			<p>ParseURL no longer needs to be used by clients of this library since supplying a URL as a
+connection string to sql.Open() is now supported:
+<pre>sql.Open(&quot;postgres&quot;, &quot;postgres://bob:secret@1.2.3.4:5432/mydb?sslmode=verify-full&quot;)
+</pre>
+<p>It remains exported here for backwards-compatibility.
+<p>ParseURL converts a url to a connection string for driver.Open.
+Example:
+<pre>&quot;postgres://bob:secret@1.2.3.4:5432/mydb?sslmode=verify-full&quot;
+</pre>
+<p>converts to:
+<pre>&quot;user=bob password=secret host=1.2.3.4 port=5432 dbname=mydb sslmode=verify-full&quot;
+</pre>
+<p>A minimal example:
+<pre>&quot;postgres://&quot;
+</pre>
+<p>This will be blank, causing driver.Open to use all of the defaults
+
+			
+			
+
+		
+			
+			
+			<h2 id="QuoteIdentifier">func <a href="http://localhost:8081/src/github.com/lib/pq/conn.go?s=38725:38765#L1646">QuoteIdentifier</a>
+				<a class="permalink" href="index.html#QuoteIdentifier">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func QuoteIdentifier(name <a href="../../../builtin/index.html#string">string</a>) <a href="../../../builtin/index.html#string">string</a></pre>
+			<p>QuoteIdentifier quotes an &quot;identifier&quot; (e.g. a table or a column name) to be
+used as part of an SQL statement.  For example:
+<pre>tblname := &quot;my_table&quot;
+data := &quot;my_data&quot;
+quoted := pq.QuoteIdentifier(tblname)
+err := db.Exec(fmt.Sprintf(&quot;INSERT INTO %s VALUES ($1)&quot;, quoted), data)
+</pre>
+<p>Any double quotes in name will be escaped.  The quoted identifier will be
+case sensitive when used in a query.  If the input string contains a zero
+byte, the result will be truncated immediately before it.
+
+			
+			
+
+		
+			
+			
+			<h2 id="QuoteLiteral">func <a href="http://localhost:8081/src/github.com/lib/pq/conn.go?s=39814:39854#L1676">QuoteLiteral</a>
+				<a class="permalink" href="index.html#QuoteLiteral">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func QuoteLiteral(literal <a href="../../../builtin/index.html#string">string</a>) <a href="../../../builtin/index.html#string">string</a></pre>
+			<p>QuoteLiteral quotes a &apos;literal&apos; (e.g. a parameter, often used to pass literal
+to DDL and other statements that do not accept parameters) to be used as part
+of an SQL statement.  For example:
+<pre>exp_date := pq.QuoteLiteral(&quot;2023-01-05 15:00:00Z&quot;)
+err := db.Exec(fmt.Sprintf(&quot;CREATE ROLE my_user VALID UNTIL %s&quot;, exp_date))
+</pre>
+<p>Any single quotes in name will be escaped. Any backslashes (i.e. &quot;\&quot;) will be
+replaced by two backslashes (i.e. &quot;\\&quot;) and the C-style escape identifier
+that PostgreSQL provides (&apos;E&apos;) will be prepended to the string.
+
+			
+			
+
+		
+			
+			
+			<h2 id="RegisterGSSProvider">func <a href="http://localhost:8081/src/github.com/lib/pq/krb.go?s=490:536#L8">RegisterGSSProvider</a>
+				<a class="permalink" href="index.html#RegisterGSSProvider">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func RegisterGSSProvider(newGssArg <a href="index.html#NewGSSFunc">NewGSSFunc</a>)</pre>
+			<p>RegisterGSSProvider registers a GSS authentication provider. For example, if
+you need to use Kerberos to authenticate with your server, add this to your
+main package:
+<pre>import &quot;github.com/lib/pq/auth/kerberos&quot;
+
+func init() {
+	pq.RegisterGSSProvider(func() (pq.GSS, error) { return kerberos.NewGSS() })
+}
+</pre>
+
+			
+			
+
+		
+			
+			
+			<h2 id="SetNoticeHandler">func <a href="http://localhost:8081/src/github.com/lib/pq/notice.go?s=821:879#L15">SetNoticeHandler</a>
+				<a class="permalink" href="index.html#SetNoticeHandler">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func SetNoticeHandler(c <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Conn">Conn</a>, handler func(*<a href="index.html#Error">Error</a>))</pre>
+			<p>SetNoticeHandler sets the given notice handler on the given connection. A
+runtime panic occurs if c is not a pq connection. A nil handler may be used
+to unset it. This is rarely used directly, use ConnectorNoticeHandler and
+ConnectorWithNoticeHandler instead.
+<p>Note: Notice handlers are executed synchronously by pq meaning commands
+won&apos;t continue to be processed until the handler returns.
+
+			
+			
+
+		
+			
+			
+			<h2 id="SetNotificationHandler">func <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=1030:1101#L30">SetNotificationHandler</a>
+				<a class="permalink" href="index.html#SetNotificationHandler">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func SetNotificationHandler(c <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Conn">Conn</a>, handler func(*<a href="index.html#Notification">Notification</a>))</pre>
+			<p>SetNotificationHandler sets the given notification handler on the given
+connection. A runtime panic occurs if c is not a pq connection. A nil handler
+may be used to unset it.
+<p>Note: Notification handlers are executed synchronously by pq meaning commands
+won&apos;t continue to be processed until the handler returns.
+
+			
+			
+
+		
+		
+			
+			
+			<h2 id="ArrayDelimiter">type <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=1607:1744#L60">ArrayDelimiter</a>
+				<a class="permalink" href="index.html#ArrayDelimiter">&#xb6;</a>
+				
+				
+			</h2>
+			<p>ArrayDelimiter may be optionally implemented by driver.Valuer or sql.Scanner
+to override the array delimiter used by GenericArray.
+
+			<pre>type ArrayDelimiter interface {
+    <span class="comment">// ArrayDelimiter returns the delimiter character(s) for this element&#39;s type.</span>
+    ArrayDelimiter() <a href="../../../builtin/index.html#string">string</a>
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="BoolArray">type <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=1826:1847#L66">BoolArray</a>
+				<a class="permalink" href="index.html#BoolArray">&#xb6;</a>
+				
+				
+			</h2>
+			<p>BoolArray represents a one-dimensional array of the PostgreSQL boolean type.
+
+			<pre>type BoolArray []<a href="../../../builtin/index.html#bool">bool</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="BoolArray.Scan">func (*BoolArray) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=1895:1942#L69">Scan</a>
+					<a class="permalink" href="index.html#BoolArray.Scan">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a *<a href="index.html#BoolArray">BoolArray</a>) Scan(src interface{}) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Scan implements the sql.Scanner interface.
+
+				
+				
+				
+			
+				
+				<h3 id="BoolArray.Value">func (BoolArray) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=2820:2868#L111">Value</a>
+					<a class="permalink" href="index.html#BoolArray.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a <a href="index.html#BoolArray">BoolArray</a>) Value() (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Value">Value</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Value implements the driver.Valuer interface.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ByteaArray">type <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=3334:3358#L140">ByteaArray</a>
+				<a class="permalink" href="index.html#ByteaArray">&#xb6;</a>
+				
+				
+			</h2>
+			<p>ByteaArray represents a one-dimensional array of the PostgreSQL bytea type.
+
+			<pre>type ByteaArray [][]<a href="../../../builtin/index.html#byte">byte</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="ByteaArray.Scan">func (*ByteaArray) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=3406:3454#L143">Scan</a>
+					<a class="permalink" href="index.html#ByteaArray.Scan">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a *<a href="index.html#ByteaArray">ByteaArray</a>) Scan(src interface{}) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Scan implements the sql.Scanner interface.
+
+				
+				
+				
+			
+				
+				<h3 id="ByteaArray.Value">func (ByteaArray) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=4245:4294#L179">Value</a>
+					<a class="permalink" href="index.html#ByteaArray.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a <a href="index.html#ByteaArray">ByteaArray</a>) Value() (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Value">Value</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Value implements the driver.Valuer interface. It uses the &quot;hex&quot; format which
+is only supported on PostgreSQL 9.0 or newer.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Connector">type <a href="http://localhost:8081/src/github.com/lib/pq/connector.go?s=453:508#L9">Connector</a>
+				<a class="permalink" href="index.html#Connector">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Connector represents a fixed configuration for the pq driver with a given
+name. Connector satisfies the database/sql/driver Connector interface and
+can be used to create any number of DB Conn&apos;s via the database/sql OpenDB
+function.
+<p>See <a href="https://golang.org/pkg/database/sql/driver/#Connector">https://golang.org/pkg/database/sql/driver/#Connector</a>.
+See <a href="https://golang.org/pkg/database/sql/#OpenDB">https://golang.org/pkg/database/sql/#OpenDB</a>.
+
+			<pre>type Connector struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewConnector">func <a href="http://localhost:8081/src/github.com/lib/pq/connector.go?s=1353:1402#L37">NewConnector</a>
+					<a class="permalink" href="index.html#NewConnector">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewConnector(dsn <a href="../../../builtin/index.html#string">string</a>) (*<a href="index.html#Connector">Connector</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>NewConnector returns a connector for the pq driver in a fixed configuration
+with the given dsn. The returned connector can be used to create any number
+of equivalent Conn&apos;s. The returned connector is intended to be used with
+database/sql.OpenDB.
+<p>See <a href="https://golang.org/pkg/database/sql/driver/#Connector">https://golang.org/pkg/database/sql/driver/#Connector</a>.
+See <a href="https://golang.org/pkg/database/sql/#OpenDB">https://golang.org/pkg/database/sql/#OpenDB</a>.
+
+				<div id="example_NewConnector" class="toggle">
+	<div class="collapsed">
+		<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+	</div>
+	<div class="expanded">
+		<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+		
+		
+		
+			<p>Code:</p>
+			<pre class="code">
+name := &#34;&#34;
+connector, err := pq.NewConnector(name)
+if err != nil {
+    fmt.Println(err)
+    return
+}
+db := sql.OpenDB(connector)
+defer db.Close()
+
+<span class="comment">// Use the DB</span>
+txn, err := db.Begin()
+if err != nil {
+    fmt.Println(err)
+    return
+}
+txn.Rollback()
+</pre>
+			
+		
+	</div>
+</div>
+
+				
+			
+
+			
+				
+				<h3 id="Connector.Connect">func (*Connector) <a href="http://localhost:8081/src/github.com/lib/pq/connector.go?s=631:700#L16">Connect</a>
+					<a class="permalink" href="index.html#Connector.Connect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Connector">Connector</a>) Connect(ctx <a href="../../../context/index.html">context</a>.<a href="../../../context/index.html#Context">Context</a>) (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Conn">Conn</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Connect returns a connection to the database using the fixed configuration
+of this Connector. Context is not used.
+
+				
+				
+				
+			
+				
+				<h3 id="Connector.Dialer">func (*Connector) <a href="http://localhost:8081/src/github.com/lib/pq/connector.go?s=787:828#L21">Dialer</a>
+					<a class="permalink" href="index.html#Connector.Dialer">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Connector">Connector</a>) Dialer(dialer <a href="index.html#Dialer">Dialer</a>)</pre>
+				<p>Dialer allows change the dialer used to open connections.
+
+				
+				
+				
+			
+				
+				<h3 id="Connector.Driver">func (*Connector) <a href="http://localhost:8081/src/github.com/lib/pq/connector.go?s=912:954#L26">Driver</a>
+					<a class="permalink" href="index.html#Connector.Driver">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Connector">Connector</a>) Driver() <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Driver">Driver</a></pre>
+				<p>Driver returns the underlying driver of this Connector.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Dialer">type <a href="http://localhost:8081/src/github.com/lib/pq/conn.go?s=2611:2764#L89">Dialer</a>
+				<a class="permalink" href="index.html#Dialer">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Dialer is the dialer interface. It can be used to obtain more control over
+how pq creates network connections.
+
+			<pre>type Dialer interface {
+    Dial(network, address <a href="../../../builtin/index.html#string">string</a>) (<a href="../../../net/index.html">net</a>.<a href="../../../net/index.html#Conn">Conn</a>, <a href="../../../builtin/index.html#error">error</a>)
+    DialTimeout(network, address <a href="../../../builtin/index.html#string">string</a>, timeout <a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Duration">Duration</a>) (<a href="../../../net/index.html">net</a>.<a href="../../../net/index.html#Conn">Conn</a>, <a href="../../../builtin/index.html#error">error</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DialerContext">type <a href="http://localhost:8081/src/github.com/lib/pq/conn.go?s=2822:2931#L95">DialerContext</a>
+				<a class="permalink" href="index.html#DialerContext">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DialerContext is the context-aware dialer interface.
+
+			<pre>type DialerContext interface {
+    DialContext(ctx <a href="../../../context/index.html">context</a>.<a href="../../../context/index.html#Context">Context</a>, network, address <a href="../../../builtin/index.html#string">string</a>) (<a href="../../../net/index.html">net</a>.<a href="../../../net/index.html#Conn">Conn</a>, <a href="../../../builtin/index.html#error">error</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Driver">type <a href="http://localhost:8081/src/github.com/lib/pq/conn.go?s=1399:1419#L41">Driver</a>
+				<a class="permalink" href="index.html#Driver">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Driver is the Postgres database driver.
+
+			<pre>type Driver struct{}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Driver.Open">func (Driver) <a href="http://localhost:8081/src/github.com/lib/pq/conn.go?s=1590:1644#L46">Open</a>
+					<a class="permalink" href="index.html#Driver.Open">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (d <a href="index.html#Driver">Driver</a>) Open(name <a href="../../../builtin/index.html#string">string</a>) (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Conn">Conn</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Open opens a new connection to the database. name is a connection string.
+Most users should only use it through database/sql package from the standard
+library.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Error">type <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=418:867#L15">Error</a>
+				<a class="permalink" href="index.html#Error">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Error represents an error communicating with the server.
+<p>See <a href="http://www.postgresql.org/docs/current/static/protocol-error-fields.html">http://www.postgresql.org/docs/current/static/protocol-error-fields.html</a> for details of the fields
+
+			<pre>type Error struct {
+<span id="Error.Severity"></span>    Severity         <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Code"></span>    Code             <a href="index.html#ErrorCode">ErrorCode</a>
+<span id="Error.Message"></span>    Message          <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Detail"></span>    Detail           <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Hint"></span>    Hint             <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Position"></span>    Position         <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.InternalPosition"></span>    InternalPosition <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.InternalQuery"></span>    InternalQuery    <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Where"></span>    Where            <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Schema"></span>    Schema           <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Table"></span>    Table            <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Column"></span>    Column           <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.DataTypeName"></span>    DataTypeName     <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Constraint"></span>    Constraint       <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.File"></span>    File             <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Line"></span>    Line             <a href="../../../builtin/index.html#string">string</a>
+<span id="Error.Routine"></span>    Routine          <a href="../../../builtin/index.html#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Error.Error">func (*Error) <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=14254:14286#L442">Error</a>
+					<a class="permalink" href="index.html#Error.Error">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (err *<a href="index.html#Error">Error</a>) Error() <a href="../../../builtin/index.html#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Error.Fatal">func (*Error) <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=13332:13362#L391">Fatal</a>
+					<a class="permalink" href="index.html#Error.Fatal">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (err *<a href="index.html#Error">Error</a>) Fatal() <a href="../../../builtin/index.html#bool">bool</a></pre>
+				<p>Fatal returns true if the Error Severity is fatal.
+
+				
+				
+				
+			
+				
+				<h3 id="Error.Get">func (*Error) <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=13624:13664#L402">Get</a>
+					<a class="permalink" href="index.html#Error.Get">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (err *<a href="index.html#Error">Error</a>) Get(k <a href="../../../builtin/index.html#byte">byte</a>) (v <a href="../../../builtin/index.html#string">string</a>)</pre>
+				<p>Get implements the legacy PGError interface. New code should use the fields
+of the Error struct directly.
+
+				
+				
+				
+			
+				
+				<h3 id="Error.SQLState">func (*Error) <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=13446:13481#L396">SQLState</a>
+					<a class="permalink" href="index.html#Error.SQLState">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (err *<a href="index.html#Error">Error</a>) SQLState() <a href="../../../builtin/index.html#string">string</a></pre>
+				<p>SQLState returns the SQLState of the error.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ErrorClass">type <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=1248:1270#L48">ErrorClass</a>
+				<a class="permalink" href="index.html#ErrorClass">&#xb6;</a>
+				
+				
+			</h2>
+			<p>ErrorClass is only the class part of an error code.
+
+			<pre>type ErrorClass <a href="../../../builtin/index.html#string">string</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="ErrorClass.Name">func (ErrorClass) <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=1456:1490#L53">Name</a>
+					<a class="permalink" href="index.html#ErrorClass.Name">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (ec <a href="index.html#ErrorClass">ErrorClass</a>) Name() <a href="../../../builtin/index.html#string">string</a></pre>
+				<p>Name returns the condition name of an error class.  It is equivalent to the
+condition name of the &quot;standard&quot; error code (i.e. the one having the last
+three characters &quot;000&quot;).
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ErrorCode">type <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=914:935#L36">ErrorCode</a>
+				<a class="permalink" href="index.html#ErrorCode">&#xb6;</a>
+				
+				
+			</h2>
+			<p>ErrorCode is a five-character error code.
+
+			<pre>type ErrorCode <a href="../../../builtin/index.html#string">string</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="ErrorCode.Class">func (ErrorCode) <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=1676:1714#L61">Class</a>
+					<a class="permalink" href="index.html#ErrorCode.Class">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (ec <a href="index.html#ErrorCode">ErrorCode</a>) Class() <a href="index.html#ErrorClass">ErrorClass</a></pre>
+				<p>Class returns the error class, e.g. &quot;28&quot;.
+<p>See <a href="http://www.postgresql.org/docs/9.3/static/errcodes-appendix.html">http://www.postgresql.org/docs/9.3/static/errcodes-appendix.html</a> for
+details.
+
+				
+				
+				
+			
+				
+				<h3 id="ErrorCode.Name">func (ErrorCode) <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=1127:1160#L43">Name</a>
+					<a class="permalink" href="index.html#ErrorCode.Name">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (ec <a href="index.html#ErrorCode">ErrorCode</a>) Name() <a href="../../../builtin/index.html#string">string</a></pre>
+				<p>Name returns a more human friendly rendering of the error code, namely the
+&quot;condition name&quot;.
+<p>See <a href="http://www.postgresql.org/docs/9.3/static/errcodes-appendix.html">http://www.postgresql.org/docs/9.3/static/errcodes-appendix.html</a> for
+details.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="EventCallbackType">type <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=14173:14236#L446">EventCallbackType</a>
+				<a class="permalink" href="index.html#EventCallbackType">&#xb6;</a>
+				
+				
+			</h2>
+			<p>EventCallbackType is the event callback type. See also ListenerEventType
+constants&apos; documentation.
+
+			<pre>type EventCallbackType func(event <a href="index.html#ListenerEventType">ListenerEventType</a>, err <a href="../../../builtin/index.html#error">error</a>)</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Float32Array">type <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=6320:6347#L274">Float32Array</a>
+				<a class="permalink" href="index.html#Float32Array">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Float32Array represents a one-dimensional array of the PostgreSQL double
+precision type.
+
+			<pre>type Float32Array []<a href="../../../builtin/index.html#float32">float32</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Float32Array.Scan">func (*Float32Array) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=6395:6445#L277">Scan</a>
+					<a class="permalink" href="index.html#Float32Array.Scan">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a *<a href="index.html#Float32Array">Float32Array</a>) Scan(src interface{}) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Scan implements the sql.Scanner interface.
+
+				
+				
+				
+			
+				
+				<h3 id="Float32Array.Value">func (Float32Array) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=7207:7258#L313">Value</a>
+					<a class="permalink" href="index.html#Float32Array.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a <a href="index.html#Float32Array">Float32Array</a>) Value() (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Value">Value</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Value implements the driver.Valuer interface.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Float64Array">type <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=4899:4926#L212">Float64Array</a>
+				<a class="permalink" href="index.html#Float64Array">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Float64Array represents a one-dimensional array of the PostgreSQL double
+precision type.
+
+			<pre>type Float64Array []<a href="../../../builtin/index.html#float64">float64</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Float64Array.Scan">func (*Float64Array) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=4974:5024#L215">Scan</a>
+					<a class="permalink" href="index.html#Float64Array.Scan">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a *<a href="index.html#Float64Array">Float64Array</a>) Scan(src interface{}) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Scan implements the sql.Scanner interface.
+
+				
+				
+				
+			
+				
+				<h3 id="Float64Array.Value">func (Float64Array) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=5751:5802#L249">Value</a>
+					<a class="permalink" href="index.html#Float64Array.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a <a href="index.html#Float64Array">Float64Array</a>) Value() (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Value">Value</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Value implements the driver.Valuer interface.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="GSS">type <a href="http://localhost:8081/src/github.com/lib/pq/krb.go?s=618:814#L13">GSS</a>
+				<a class="permalink" href="index.html#GSS">&#xb6;</a>
+				
+				
+			</h2>
+			<p>GSS provides GSSAPI authentication (e.g., Kerberos).
+
+			<pre>type GSS interface {
+    GetInitToken(host <a href="../../../builtin/index.html#string">string</a>, service <a href="../../../builtin/index.html#string">string</a>) ([]<a href="../../../builtin/index.html#byte">byte</a>, <a href="../../../builtin/index.html#error">error</a>)
+    GetInitTokenFromSpn(spn <a href="../../../builtin/index.html#string">string</a>) ([]<a href="../../../builtin/index.html#byte">byte</a>, <a href="../../../builtin/index.html#error">error</a>)
+    Continue(inToken []<a href="../../../builtin/index.html#byte">byte</a>) (done <a href="../../../builtin/index.html#bool">bool</a>, outToken []<a href="../../../builtin/index.html#byte">byte</a>, err <a href="../../../builtin/index.html#error">error</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="GenericArray">type <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=7814:7855#L338">GenericArray</a>
+				<a class="permalink" href="index.html#GenericArray">&#xb6;</a>
+				
+				
+			</h2>
+			<p>GenericArray implements the driver.Valuer and sql.Scanner interfaces for
+an array or slice of any dimension.
+
+			<pre>type GenericArray struct{ A interface{} }
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="GenericArray.Scan">func (GenericArray) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=8863:8912#L376">Scan</a>
+					<a class="permalink" href="index.html#GenericArray.Scan">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a <a href="index.html#GenericArray">GenericArray</a>) Scan(src interface{}) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Scan implements the sql.Scanner interface.
+
+				
+				
+				
+			
+				
+				<h3 id="GenericArray.Value">func (GenericArray) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=11013:11064#L462">Value</a>
+					<a class="permalink" href="index.html#GenericArray.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a <a href="index.html#GenericArray">GenericArray</a>) Value() (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Value">Value</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Value implements the driver.Valuer interface.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Int32Array">type <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=13018:13041#L553">Int32Array</a>
+				<a class="permalink" href="index.html#Int32Array">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Int32Array represents a one-dimensional array of the PostgreSQL integer types.
+
+			<pre>type Int32Array []<a href="../../../builtin/index.html#int32">int32</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Int32Array.Scan">func (*Int32Array) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=13089:13137#L556">Scan</a>
+					<a class="permalink" href="index.html#Int32Array.Scan">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a *<a href="index.html#Int32Array">Int32Array</a>) Scan(src interface{}) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Scan implements the sql.Scanner interface.
+
+				
+				
+				
+			
+				
+				<h3 id="Int32Array.Value">func (Int32Array) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=13877:13926#L592">Value</a>
+					<a class="permalink" href="index.html#Int32Array.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a <a href="index.html#Int32Array">Int32Array</a>) Value() (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Value">Value</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Value implements the driver.Valuer interface.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Int64Array">type <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=11646:11669#L492">Int64Array</a>
+				<a class="permalink" href="index.html#Int64Array">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Int64Array represents a one-dimensional array of the PostgreSQL integer types.
+
+			<pre>type Int64Array []<a href="../../../builtin/index.html#int64">int64</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Int64Array.Scan">func (*Int64Array) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=11717:11765#L495">Scan</a>
+					<a class="permalink" href="index.html#Int64Array.Scan">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a *<a href="index.html#Int64Array">Int64Array</a>) Scan(src interface{}) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Scan implements the sql.Scanner interface.
+
+				
+				
+				
+			
+				
+				<h3 id="Int64Array.Value">func (Int64Array) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=12486:12535#L529">Value</a>
+					<a class="permalink" href="index.html#Int64Array.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a <a href="index.html#Int64Array">Int64Array</a>) Value() (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Value">Value</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Value implements the driver.Valuer interface.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Listener">type <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=14470:15047#L453">Listener</a>
+				<a class="permalink" href="index.html#Listener">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Listener provides an interface for listening to notifications from a
+PostgreSQL database.  For general usage information, see section
+&quot;Notifications&quot;.
+<p>Listener can safely be used from concurrently running goroutines.
+
+			<pre>type Listener struct {
+    <span class="comment">// Channel for receiving notifications from the database.  In some cases a</span>
+    <span class="comment">// nil value will be sent.  See section &#34;Notifications&#34; above.</span>
+<span id="Listener.Notify"></span>    Notify chan *<a href="index.html#Notification">Notification</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewDialListener">func <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=16329:16491#L496">NewDialListener</a>
+					<a class="permalink" href="index.html#NewDialListener">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewDialListener(d <a href="index.html#Dialer">Dialer</a>,
+    name <a href="../../../builtin/index.html#string">string</a>,
+    minReconnectInterval <a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Duration">Duration</a>,
+    maxReconnectInterval <a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Duration">Duration</a>,
+    eventCallback <a href="index.html#EventCallbackType">EventCallbackType</a>) *<a href="index.html#Listener">Listener</a></pre>
+				<p>NewDialListener is like NewListener but it takes a Dialer.
+
+				
+				
+			
+				
+				<h3 id="NewListener">func <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=16008:16155#L488">NewListener</a>
+					<a class="permalink" href="index.html#NewListener">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewListener(name <a href="../../../builtin/index.html#string">string</a>,
+    minReconnectInterval <a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Duration">Duration</a>,
+    maxReconnectInterval <a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Duration">Duration</a>,
+    eventCallback <a href="index.html#EventCallbackType">EventCallbackType</a>) *<a href="index.html#Listener">Listener</a></pre>
+				<p>NewListener creates a new database connection dedicated to LISTEN / NOTIFY.
+<p>name should be set to a connection string to be used to establish the
+database connection (see section &quot;Connection String Parameters&quot; above).
+<p>minReconnectInterval controls the duration to wait before trying to
+re-establish the database connection after connection loss.  After each
+consecutive failure this interval is doubled, until maxReconnectInterval is
+reached.  Successfully completing the connection establishment procedure
+resets the interval back to minReconnectInterval.
+<p>The last parameter eventCallback can be set to a function which will be
+called by the Listener when the state of the underlying database connection
+changes.  This callback will be called by the goroutine which dispatches the
+notifications over the Notify channel, so you should try to avoid doing
+potentially time-consuming operations from the callback.
+
+				
+				
+			
+
+			
+				
+				<h3 id="Listener.Close">func (*Listener) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=24010:24042#L766">Close</a>
+					<a class="permalink" href="index.html#Listener.Close">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#Listener">Listener</a>) Close() <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Close disconnects the Listener from the database and shuts it down.
+Subsequent calls to its methods will return an error.  Close returns an
+error if the connection has already been closed.
+
+				
+				
+				
+			
+				
+				<h3 id="Listener.Listen">func (*Listener) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=17953:18000#L542">Listen</a>
+					<a class="permalink" href="index.html#Listener.Listen">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#Listener">Listener</a>) Listen(channel <a href="../../../builtin/index.html#string">string</a>) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Listen starts listening for notifications on a channel.  Calls to this
+function will block until an acknowledgement has been received from the
+server.  Note that Listener automatically re-establishes the connection
+after connection loss, so this function may block indefinitely if the
+connection can not be re-established.
+<p>Listen will only fail in three conditions:
+<ol>
+<li>The channel is already open.  The returned error will be
+ErrChannelAlreadyOpen.
+<li>The query was executed on the remote server, but PostgreSQL returned an
+error message in response to the query.  The returned error will be a
+pq.Error containing the information the server supplied.
+<li>Close is called on the Listener before the request could be completed.
+</ol>
+<p>The channel name is case-sensitive.
+
+				
+				
+				
+			
+				
+				<h3 id="Listener.NotificationChannel">func (*Listener) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=17042:17103#L523">NotificationChannel</a>
+					<a class="permalink" href="index.html#Listener.NotificationChannel">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#Listener">Listener</a>) NotificationChannel() &lt;-chan *<a href="index.html#Notification">Notification</a></pre>
+				<p>NotificationChannel returns the notification channel for this listener.
+This is the same channel as Notify, and will not be recreated during the
+life time of the Listener.
+
+				
+				
+				
+			
+				
+				<h3 id="Listener.Ping">func (*Listener) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=21215:21246#L651">Ping</a>
+					<a class="permalink" href="index.html#Listener.Ping">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#Listener">Listener</a>) Ping() <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Ping the remote server to make sure it&apos;s alive.  Non-nil return value means
+that there is no active connection.
+
+				
+				
+				
+			
+				
+				<h3 id="Listener.Unlisten">func (*Listener) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=19571:19620#L592">Unlisten</a>
+					<a class="permalink" href="index.html#Listener.Unlisten">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#Listener">Listener</a>) Unlisten(channel <a href="../../../builtin/index.html#string">string</a>) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Unlisten removes a channel from the Listener&apos;s channel list.  Returns
+ErrChannelNotOpen if the Listener is not listening on the specified channel.
+Returns immediately with no error if there is no connection.  Note that you
+might still get notifications for this channel even after Unlisten has
+returned.
+<p>The channel name is case-sensitive.
+
+				
+				
+				
+			
+				
+				<h3 id="Listener.UnlistenAll">func (*Listener) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=20566:20604#L626">UnlistenAll</a>
+					<a class="permalink" href="index.html#Listener.UnlistenAll">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#Listener">Listener</a>) UnlistenAll() <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>UnlistenAll removes all channels from the Listener&apos;s channel list.  Returns
+immediately with no error if there is no connection.  Note that you might
+still get notifications for any of the deleted channels even after
+UnlistenAll has returned.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ListenerConn">type <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=3275:3555#L94">ListenerConn</a>
+				<a class="permalink" href="index.html#ListenerConn">&#xb6;</a>
+				
+				
+			</h2>
+			<p>ListenerConn is a low-level interface for waiting for notifications.  You
+should use Listener instead.
+
+			<pre>type ListenerConn struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewListenerConn">func <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=3629:3724#L111">NewListenerConn</a>
+					<a class="permalink" href="index.html#NewListenerConn">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewListenerConn(name <a href="../../../builtin/index.html#string">string</a>, notificationChan chan&lt;- *<a href="index.html#Notification">Notification</a>) (*<a href="index.html#ListenerConn">ListenerConn</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>NewListenerConn creates a new ListenerConn. Use NewListener instead.
+
+				
+				
+			
+
+			
+				
+				<h3 id="ListenerConn.Close">func (*ListenerConn) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=12015:12051#L388">Close</a>
+					<a class="permalink" href="index.html#ListenerConn.Close">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#ListenerConn">ListenerConn</a>) Close() <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Close closes the connection.
+
+				
+				
+				
+			
+				
+				<h3 id="ListenerConn.Err">func (*ListenerConn) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=12509:12543#L403">Err</a>
+					<a class="permalink" href="index.html#ListenerConn.Err">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#ListenerConn">ListenerConn</a>) Err() <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Err returns the reason the connection was closed. It is not safe to call
+this function until l.Notify has been closed.
+
+				
+				
+				
+			
+				
+				<h3 id="ListenerConn.ExecSimpleQuery">func (*ListenerConn) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=10732:10807#L332">ExecSimpleQuery</a>
+					<a class="permalink" href="index.html#ListenerConn.ExecSimpleQuery">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#ListenerConn">ListenerConn</a>) ExecSimpleQuery(q <a href="../../../builtin/index.html#string">string</a>) (executed <a href="../../../builtin/index.html#bool">bool</a>, err <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>ExecSimpleQuery executes a &quot;simple query&quot; (i.e. one with no bindable
+parameters) on the connection. The possible return values are:
+<ol>
+<li>&quot;executed&quot; is true; the query was executed to completion on the
+database server.  If the query failed, err will be set to the error
+returned by the database, otherwise err will be nil.
+<li>If &quot;executed&quot; is false, the query could not be executed on the remote
+server.  err will be non-nil.
+</ol>
+<p>After a call to ExecSimpleQuery has returned an executed=false value, the
+connection has either been closed or will be closed shortly thereafter, and
+all subsequently executed queries will return an error.
+
+				
+				
+				
+			
+				
+				<h3 id="ListenerConn.Listen">func (*ListenerConn) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=8518:8577#L269">Listen</a>
+					<a class="permalink" href="index.html#ListenerConn.Listen">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#ListenerConn">ListenerConn</a>) Listen(channel <a href="../../../builtin/index.html#string">string</a>) (<a href="../../../builtin/index.html#bool">bool</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Listen sends a LISTEN query to the server. See ExecSimpleQuery.
+
+				
+				
+				
+			
+				
+				<h3 id="ListenerConn.Ping">func (*ListenerConn) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=9153:9188#L285">Ping</a>
+					<a class="permalink" href="index.html#ListenerConn.Ping">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#ListenerConn">ListenerConn</a>) Ping() <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Ping the remote server to make sure it&apos;s alive.  Non-nil error means the
+connection has failed and should be abandoned.
+
+				
+				
+				
+			
+				
+				<h3 id="ListenerConn.Unlisten">func (*ListenerConn) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=8719:8780#L274">Unlisten</a>
+					<a class="permalink" href="index.html#ListenerConn.Unlisten">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#ListenerConn">ListenerConn</a>) Unlisten(channel <a href="../../../builtin/index.html#string">string</a>) (<a href="../../../builtin/index.html#bool">bool</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Unlisten sends an UNLISTEN query to the server. See ExecSimpleQuery.
+
+				
+				
+				
+			
+				
+				<h3 id="ListenerConn.UnlistenAll">func (*ListenerConn) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=8931:8981#L279">UnlistenAll</a>
+					<a class="permalink" href="index.html#ListenerConn.UnlistenAll">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="index.html#ListenerConn">ListenerConn</a>) UnlistenAll() (<a href="../../../builtin/index.html#bool">bool</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>UnlistenAll sends an `UNLISTEN *` query to the server. See ExecSimpleQuery.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ListenerEventType">type <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=12988:13014#L417">ListenerEventType</a>
+				<a class="permalink" href="index.html#ListenerEventType">&#xb6;</a>
+				
+				
+			</h2>
+			<p>ListenerEventType is an enumeration of listener event types.
+
+			<pre>type ListenerEventType <a href="../../../builtin/index.html#int">int</a></pre>
+
+			
+				
+				<pre>const (
+    <span class="comment">// ListenerEventConnected is emitted only when the database connection</span>
+    <span class="comment">// has been initially initialized. The err argument of the callback</span>
+    <span class="comment">// will always be nil.</span>
+    <span id="ListenerEventConnected">ListenerEventConnected</span> <a href="index.html#ListenerEventType">ListenerEventType</a> = <a href="../../../builtin/index.html#iota">iota</a>
+
+    <span class="comment">// ListenerEventDisconnected is emitted after a database connection has</span>
+    <span class="comment">// been lost, either because of an error or because Close has been</span>
+    <span class="comment">// called. The err argument will be set to the reason the database</span>
+    <span class="comment">// connection was lost.</span>
+    <span id="ListenerEventDisconnected">ListenerEventDisconnected</span>
+
+    <span class="comment">// ListenerEventReconnected is emitted after a database connection has</span>
+    <span class="comment">// been re-established after connection loss. The err argument of the</span>
+    <span class="comment">// callback will always be nil. After this event has been emitted, a</span>
+    <span class="comment">// nil pq.Notification is sent on the Listener.Notify channel.</span>
+    <span id="ListenerEventReconnected">ListenerEventReconnected</span>
+
+    <span class="comment">// ListenerEventConnectionAttemptFailed is emitted after a connection</span>
+    <span class="comment">// to the database was attempted, but failed. The err argument will be</span>
+    <span class="comment">// set to an error describing why the connection attempt did not</span>
+    <span class="comment">// succeed.</span>
+    <span id="ListenerEventConnectionAttemptFailed">ListenerEventConnectionAttemptFailed</span>
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="NewGSSFunc">type <a href="http://localhost:8081/src/github.com/lib/pq/krb.go?s=102:137#L1">NewGSSFunc</a>
+				<a class="permalink" href="index.html#NewGSSFunc">&#xb6;</a>
+				
+				
+			</h2>
+			<p>NewGSSFunc creates a GSS authentication provider, for use with
+RegisterGSSProvider.
+
+			<pre>type NewGSSFunc func() (<a href="index.html#GSS">GSS</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="NoticeHandlerConnector">type <a href="http://localhost:8081/src/github.com/lib/pq/notice.go?s=1008:1092#L21">NoticeHandlerConnector</a>
+				<a class="permalink" href="index.html#NoticeHandlerConnector">&#xb6;</a>
+				
+				
+			</h2>
+			<p>NoticeHandlerConnector wraps a regular connector and sets a notice handler
+on it.
+
+			<pre>type NoticeHandlerConnector struct {
+    <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Connector">Connector</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="ConnectorWithNoticeHandler">func <a href="http://localhost:8081/src/github.com/lib/pq/notice.go?s=2295:2392#L56">ConnectorWithNoticeHandler</a>
+					<a class="permalink" href="index.html#ConnectorWithNoticeHandler">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func ConnectorWithNoticeHandler(c <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Connector">Connector</a>, handler func(*<a href="index.html#Error">Error</a>)) *<a href="index.html#NoticeHandlerConnector">NoticeHandlerConnector</a></pre>
+				<p>ConnectorWithNoticeHandler creates or sets the given handler for the given
+connector. If the given connector is a result of calling this function
+previously, it is simply set on the given connector and returned. Otherwise,
+this returns a new connector wrapping the given one and setting the notice
+handler. A nil notice handler may be used to unset it.
+<p>The returned connector is intended to be used with database/sql.OpenDB.
+<p>Note: Notice handlers are executed synchronously by pq meaning commands
+won&apos;t continue to be processed until the handler returns.
+
+				<div id="example_ConnectorWithNoticeHandler" class="toggle">
+	<div class="collapsed">
+		<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+	</div>
+	<div class="expanded">
+		<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+		
+		
+		
+			<p>Code:</p>
+			<pre class="code">name := &#34;&#34;
+<span class="comment">// Base connector to wrap</span>
+base, err := pq.NewConnector(name)
+if err != nil {
+    log.Fatal(err)
+}
+<span class="comment">// Wrap the connector to simply print out the message</span>
+connector := pq.ConnectorWithNoticeHandler(base, func(notice *pq.Error) {
+    fmt.Println(&#34;Notice sent: &#34; + notice.Message)
+})
+db := sql.OpenDB(connector)
+defer db.Close()
+<span class="comment">// Raise a notice</span>
+sql := &#34;DO language plpgsql $$ BEGIN RAISE NOTICE &#39;test notice&#39;; END $$&#34;
+if _, err := db.Exec(sql); err != nil {
+    log.Fatal(err)
+}
+<span class="comment"></pre>
+			
+			<p>Output:</p>
+			<pre class="output">Notice sent: test notice
+</pre>
+			
+		
+	</div>
+</div>
+
+				
+			
+
+			
+				
+				<h3 id="NoticeHandlerConnector.Connect">func (*NoticeHandlerConnector) <a href="http://localhost:8081/src/github.com/lib/pq/notice.go?s=1190:1272#L28">Connect</a>
+					<a class="permalink" href="index.html#NoticeHandlerConnector.Connect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (n *<a href="index.html#NoticeHandlerConnector">NoticeHandlerConnector</a>) Connect(ctx <a href="../../../context/index.html">context</a>.<a href="../../../context/index.html#Context">Context</a>) (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Conn">Conn</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Connect calls the underlying connector&apos;s connect method and then sets the
+notice handler.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Notification">type <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=308:536#L7">Notification</a>
+				<a class="permalink" href="index.html#Notification">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Notification represents a single notification from the database.
+
+			<pre>type Notification struct {
+    <span class="comment">// Process ID (PID) of the notifying postgres backend.</span>
+<span id="Notification.BePid"></span>    BePid <a href="../../../builtin/index.html#int">int</a>
+    <span class="comment">// Name of the channel the notification was sent on.</span>
+<span id="Notification.Channel"></span>    Channel <a href="../../../builtin/index.html#string">string</a>
+    <span class="comment">// Payload, or the empty string if unspecified.</span>
+<span id="Notification.Extra"></span>    Extra <a href="../../../builtin/index.html#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="NotificationHandlerConnector">type <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=1248:1351#L36">NotificationHandlerConnector</a>
+				<a class="permalink" href="index.html#NotificationHandlerConnector">&#xb6;</a>
+				
+				
+			</h2>
+			<p>NotificationHandlerConnector wraps a regular connector and sets a notification handler
+on it.
+
+			<pre>type NotificationHandlerConnector struct {
+    <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Connector">Connector</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="ConnectorWithNotificationHandler">func <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=2645:2761#L71">ConnectorWithNotificationHandler</a>
+					<a class="permalink" href="index.html#ConnectorWithNotificationHandler">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func ConnectorWithNotificationHandler(c <a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Connector">Connector</a>, handler func(*<a href="index.html#Notification">Notification</a>)) *<a href="index.html#NotificationHandlerConnector">NotificationHandlerConnector</a></pre>
+				<p>ConnectorWithNotificationHandler creates or sets the given handler for the given
+connector. If the given connector is a result of calling this function
+previously, it is simply set on the given connector and returned. Otherwise,
+this returns a new connector wrapping the given one and setting the notification
+handler. A nil notification handler may be used to unset it.
+<p>The returned connector is intended to be used with database/sql.OpenDB.
+<p>Note: Notification handlers are executed synchronously by pq meaning commands
+won&apos;t continue to be processed until the handler returns.
+
+				
+				
+			
+
+			
+				
+				<h3 id="NotificationHandlerConnector.Connect">func (*NotificationHandlerConnector) <a href="http://localhost:8081/src/github.com/lib/pq/notify.go?s=1455:1543#L43">Connect</a>
+					<a class="permalink" href="index.html#NotificationHandlerConnector.Connect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (n *<a href="index.html#NotificationHandlerConnector">NotificationHandlerConnector</a>) Connect(ctx <a href="../../../context/index.html">context</a>.<a href="../../../context/index.html#Context">Context</a>) (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Conn">Conn</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Connect calls the underlying connector&apos;s connect method and then sets the
+notification handler.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="NullTime">type <a href="http://localhost:8081/src/github.com/lib/pq/encode.go?s=16356:16446#L605">NullTime</a>
+				<a class="permalink" href="index.html#NullTime">&#xb6;</a>
+				
+				
+			</h2>
+			<p>NullTime represents a time.Time that may be null. NullTime implements the
+sql.Scanner interface so it can be used as a scan destination, similar to
+sql.NullString.
+
+			<pre>type NullTime struct {
+<span id="NullTime.Time"></span>    Time  <a href="../../../time/index.html">time</a>.<a href="../../../time/index.html#Time">Time</a>
+<span id="NullTime.Valid"></span>    Valid <a href="../../../builtin/index.html#bool">bool</a> <span class="comment">// Valid is true if Time is not NULL</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="NullTime.Scan">func (*NullTime) <a href="http://localhost:8081/src/github.com/lib/pq/encode.go?s=16490:16539#L611">Scan</a>
+					<a class="permalink" href="index.html#NullTime.Scan">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (nt *<a href="index.html#NullTime">NullTime</a>) Scan(value interface{}) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Scan implements the Scanner interface.
+
+				
+				
+				
+			
+				
+				<h3 id="NullTime.Value">func (NullTime) <a href="http://localhost:8081/src/github.com/lib/pq/encode.go?s=16645:16693#L617">Value</a>
+					<a class="permalink" href="index.html#NullTime.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (nt <a href="index.html#NullTime">NullTime</a>) Value() (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Value">Value</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Value implements the driver Valuer interface.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="PGError">type <a href="http://localhost:8081/src/github.com/lib/pq/error.go?s=14464:14544#L448">PGError</a>
+				<a class="permalink" href="index.html#PGError">&#xb6;</a>
+				
+				
+			</h2>
+			<p>PGError is an interface used by previous versions of pq. It is provided
+only to support legacy code. New code should use the Error type.
+
+			<pre>type PGError interface {
+    Error() <a href="../../../builtin/index.html#string">string</a>
+    Fatal() <a href="../../../builtin/index.html#bool">bool</a>
+    Get(k <a href="../../../builtin/index.html#byte">byte</a>) (v <a href="../../../builtin/index.html#string">string</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="StringArray">type <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=14426:14451#L616">StringArray</a>
+				<a class="permalink" href="index.html#StringArray">&#xb6;</a>
+				
+				
+			</h2>
+			<p>StringArray represents a one-dimensional array of the PostgreSQL character types.
+
+			<pre>type StringArray []<a href="../../../builtin/index.html#string">string</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="StringArray.Scan">func (*StringArray) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=14499:14548#L619">Scan</a>
+					<a class="permalink" href="index.html#StringArray.Scan">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a *<a href="index.html#StringArray">StringArray</a>) Scan(src interface{}) <a href="../../../builtin/index.html#error">error</a></pre>
+				<p>Scan implements the sql.Scanner interface.
+
+				
+				
+				
+			
+				
+				<h3 id="StringArray.Value">func (StringArray) <a href="http://localhost:8081/src/github.com/lib/pq/array.go?s=15261:15311#L653">Value</a>
+					<a class="permalink" href="index.html#StringArray.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a <a href="index.html#StringArray">StringArray</a>) Value() (<a href="../../../database/sql/driver/index.html">driver</a>.<a href="../../../database/sql/driver/index.html#Value">Value</a>, <a href="../../../builtin/index.html#error">error</a>)</pre>
+				<p>Value implements the driver.Valuer interface.
+
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+	
+	
+		<h2 id="pkg-subdirectories">Subdirectories</h2>
+	
+	<div class="pkg-dir">
+		<table>
+			<tr>
+				<th class="pkg-name">Name</th>
+				<th class="pkg-synopsis">Synopsis</th>
+			</tr>
+
+			
+			<tr>
+				<td colspan="2"><a href="http://localhost:8081/pkg/github.com/lib/">..</a></td>
+			</tr>
+			
+
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="example/index.html">example</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="example/listen/index.html">listen</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Package listen is a self-contained Go program which uses the LISTEN / NOTIFY mechanism to avoid polling the database while waiting for more work to arrive.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="hstore/index.html">hstore</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="oid/index.html">oid</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Package oid contains OID constants as defined by the Postgres server.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="scram/index.html">scram</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Package scram implements a SCRAM-{SHA-1,etc} client per RFC5802.
+					</td>
+				</tr>
+			
+		</table>
+	</div>
+
+
+
+<div id="footer">
+Build version go1.24.3.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://localhost:8081/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>

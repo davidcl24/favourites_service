@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>sha3 - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.24.3";</script>
+<script src="../../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="../../index.html">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="../../index.html">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://localhost:8081/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package sha3
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "crypto/sha3"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>Package sha3 implements the SHA-3 hash algorithms and the SHAKE extendable
+output functions defined in FIPS 202.
+
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+				
+				<dd><a href="index.html#Sum224">func Sum224(data []byte) [28]byte</a></dd>
+			
+				
+				<dd><a href="index.html#Sum256">func Sum256(data []byte) [32]byte</a></dd>
+			
+				
+				<dd><a href="index.html#Sum384">func Sum384(data []byte) [48]byte</a></dd>
+			
+				
+				<dd><a href="index.html#Sum512">func Sum512(data []byte) [64]byte</a></dd>
+			
+				
+				<dd><a href="index.html#SumSHAKE128">func SumSHAKE128(data []byte, length int) []byte</a></dd>
+			
+				
+				<dd><a href="index.html#SumSHAKE256">func SumSHAKE256(data []byte, length int) []byte</a></dd>
+			
+			
+				
+				<dd><a href="index.html#SHA3">type SHA3</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#New224">func New224() *SHA3</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#New256">func New256() *SHA3</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#New384">func New384() *SHA3</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#New512">func New512() *SHA3</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHA3.AppendBinary">func (s *SHA3) AppendBinary(p []byte) ([]byte, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHA3.BlockSize">func (s *SHA3) BlockSize() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHA3.MarshalBinary">func (s *SHA3) MarshalBinary() ([]byte, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHA3.Reset">func (s *SHA3) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHA3.Size">func (s *SHA3) Size() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHA3.Sum">func (s *SHA3) Sum(b []byte) []byte</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHA3.UnmarshalBinary">func (s *SHA3) UnmarshalBinary(data []byte) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHA3.Write">func (s *SHA3) Write(p []byte) (n int, err error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#SHAKE">type SHAKE</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewCSHAKE128">func NewCSHAKE128(N, S []byte) *SHAKE</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewCSHAKE256">func NewCSHAKE256(N, S []byte) *SHAKE</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewSHAKE128">func NewSHAKE128() *SHAKE</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewSHAKE256">func NewSHAKE256() *SHAKE</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHAKE.AppendBinary">func (s *SHAKE) AppendBinary(p []byte) ([]byte, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHAKE.BlockSize">func (s *SHAKE) BlockSize() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHAKE.MarshalBinary">func (s *SHAKE) MarshalBinary() ([]byte, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHAKE.Read">func (s *SHAKE) Read(p []byte) (n int, err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHAKE.Reset">func (s *SHAKE) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHAKE.UnmarshalBinary">func (s *SHAKE) UnmarshalBinary(data []byte) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SHAKE.Write">func (s *SHAKE) Write(p []byte) (n int, err error)</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:8081/src/crypto/sha3/sha3.go">sha3.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+		
+			
+			
+			<h2 id="Sum224">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=733:766#L14">Sum224</a>
+				<a class="permalink" href="index.html#Sum224">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<pre>func Sum224(data []<a href="../../builtin/index.html#byte">byte</a>) [28]<a href="../../builtin/index.html#byte">byte</a></pre>
+			<p>Sum224 returns the SHA3-224 hash of data.
+
+			
+			
+
+		
+			
+			
+			<h2 id="Sum256">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=898:931#L23">Sum256</a>
+				<a class="permalink" href="index.html#Sum256">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<pre>func Sum256(data []<a href="../../builtin/index.html#byte">byte</a>) [32]<a href="../../builtin/index.html#byte">byte</a></pre>
+			<p>Sum256 returns the SHA3-256 hash of data.
+
+			
+			
+
+		
+			
+			
+			<h2 id="Sum384">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=1063:1096#L32">Sum384</a>
+				<a class="permalink" href="index.html#Sum384">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<pre>func Sum384(data []<a href="../../builtin/index.html#byte">byte</a>) [48]<a href="../../builtin/index.html#byte">byte</a></pre>
+			<p>Sum384 returns the SHA3-384 hash of data.
+
+			
+			
+
+		
+			
+			
+			<h2 id="Sum512">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=1228:1261#L41">Sum512</a>
+				<a class="permalink" href="index.html#Sum512">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<pre>func Sum512(data []<a href="../../builtin/index.html#byte">byte</a>) [64]<a href="../../builtin/index.html#byte">byte</a></pre>
+			<p>Sum512 returns the SHA3-512 hash of data.
+
+			
+			
+
+		
+			
+			
+			<h2 id="SumSHAKE128">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=1474:1522#L51">SumSHAKE128</a>
+				<a class="permalink" href="index.html#SumSHAKE128">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<pre>func SumSHAKE128(data []<a href="../../builtin/index.html#byte">byte</a>, length <a href="../../builtin/index.html#int">int</a>) []<a href="../../builtin/index.html#byte">byte</a></pre>
+			<p>SumSHAKE128 applies the SHAKE128 extendable output function to data and
+returns an output of the given length in bytes.
+
+			
+			
+
+		
+			
+			
+			<h2 id="SumSHAKE256">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=2008:2056#L71">SumSHAKE256</a>
+				<a class="permalink" href="index.html#SumSHAKE256">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<pre>func SumSHAKE256(data []<a href="../../builtin/index.html#byte">byte</a>, length <a href="../../builtin/index.html#int">int</a>) []<a href="../../builtin/index.html#byte">byte</a></pre>
+			<p>SumSHAKE256 applies the SHAKE256 extendable output function to data and
+returns an output of the given length in bytes.
+
+			
+			
+
+		
+		
+			
+			
+			<h2 id="SHA3">type <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=2483:2518#L90">SHA3</a>
+				<a class="permalink" href="index.html#SHA3">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<p>SHA3 is an instance of a SHA-3 hash. It implements <a href="http://localhost:8081/hash#Hash">hash.Hash</a>.
+
+			<pre>type SHA3 struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="New224">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=2709:2728#L100">New224</a>
+					<a class="permalink" href="index.html#New224">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func New224() *<a href="index.html#SHA3">SHA3</a></pre>
+				<p>New224 creates a new SHA3-224 hash.
+
+				
+				
+			
+				
+				<h3 id="New256">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=2803:2822#L105">New256</a>
+					<a class="permalink" href="index.html#New256">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func New256() *<a href="index.html#SHA3">SHA3</a></pre>
+				<p>New256 creates a new SHA3-256 hash.
+
+				
+				
+			
+				
+				<h3 id="New384">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=2897:2916#L110">New384</a>
+					<a class="permalink" href="index.html#New384">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func New384() *<a href="index.html#SHA3">SHA3</a></pre>
+				<p>New384 creates a new SHA3-384 hash.
+
+				
+				
+			
+				
+				<h3 id="New512">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=2991:3010#L115">New512</a>
+					<a class="permalink" href="index.html#New512">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func New512() *<a href="index.html#SHA3">SHA3</a></pre>
+				<p>New512 creates a new SHA3-512 hash.
+
+				
+				
+			
+
+			
+				
+				<h3 id="SHA3.AppendBinary">func (*SHA3) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=3782:3835#L150">AppendBinary</a>
+					<a class="permalink" href="index.html#SHA3.AppendBinary">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHA3">SHA3</a>) AppendBinary(p []<a href="../../builtin/index.html#byte">byte</a>) ([]<a href="../../builtin/index.html#byte">byte</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>AppendBinary implements <a href="http://localhost:8081/encoding#BinaryAppender">encoding.BinaryAppender</a>.
+
+				
+				
+				
+			
+				
+				<h3 id="SHA3.BlockSize">func (*SHA3) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=3532:3562#L140">BlockSize</a>
+					<a class="permalink" href="index.html#SHA3.BlockSize">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHA3">SHA3</a>) BlockSize() <a href="../../builtin/index.html#int">int</a></pre>
+				<p>BlockSize returns the hash&apos;s rate.
+
+				
+				
+				
+			
+				
+				<h3 id="SHA3.MarshalBinary">func (*SHA3) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=3648:3694#L145">MarshalBinary</a>
+					<a class="permalink" href="index.html#SHA3.MarshalBinary">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHA3">SHA3</a>) MarshalBinary() ([]<a href="../../builtin/index.html#byte">byte</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>MarshalBinary implements <a href="http://localhost:8081/encoding#BinaryMarshaler">encoding.BinaryMarshaler</a>.
+
+				
+				
+				
+			
+				
+				<h3 id="SHA3.Reset">func (*SHA3) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=3349:3371#L130">Reset</a>
+					<a class="permalink" href="index.html#SHA3.Reset">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHA3">SHA3</a>) Reset()</pre>
+				<p>Reset resets the hash to its initial state.
+
+				
+				
+				
+			
+				
+				<h3 id="SHA3.Size">func (*SHA3) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=3444:3469#L135">Size</a>
+					<a class="permalink" href="index.html#SHA3.Size">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHA3">SHA3</a>) Size() <a href="../../builtin/index.html#int">int</a></pre>
+				<p>Size returns the number of bytes Sum will produce.
+
+				
+				
+				
+			
+				
+				<h3 id="SHA3.Sum">func (*SHA3) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=3242:3277#L125">Sum</a>
+					<a class="permalink" href="index.html#SHA3.Sum">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHA3">SHA3</a>) Sum(b []<a href="../../builtin/index.html#byte">byte</a>) []<a href="../../builtin/index.html#byte">byte</a></pre>
+				<p>Sum appends the current hash to b and returns the resulting slice.
+
+				
+				
+				
+			
+				
+				<h3 id="SHA3.UnmarshalBinary">func (*SHA3) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=3929:3978#L155">UnmarshalBinary</a>
+					<a class="permalink" href="index.html#SHA3.UnmarshalBinary">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHA3">SHA3</a>) UnmarshalBinary(data []<a href="../../builtin/index.html#byte">byte</a>) <a href="../../builtin/index.html#error">error</a></pre>
+				<p>UnmarshalBinary implements <a href="http://localhost:8081/encoding#BinaryUnmarshaler">encoding.BinaryUnmarshaler</a>.
+
+				
+				
+				
+			
+				
+				<h3 id="SHA3.Write">func (*SHA3) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=3096:3145#L120">Write</a>
+					<a class="permalink" href="index.html#SHA3.Write">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHA3">SHA3</a>) Write(p []<a href="../../builtin/index.html#byte">byte</a>) (n <a href="../../builtin/index.html#int">int</a>, err <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>Write absorbs more data into the hash&apos;s state.
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="SHAKE">type <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=4081:4116#L160">SHAKE</a>
+				<a class="permalink" href="index.html#SHAKE">&#xb6;</a>
+				
+				<span title="Added in Go 1.24">1.24</span>
+			</h2>
+			<p>SHAKE is an instance of a SHAKE extendable output function.
+
+			<pre>type SHAKE struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewCSHAKE128">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=4613:4650#L179">NewCSHAKE128</a>
+					<a class="permalink" href="index.html#NewCSHAKE128">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func NewCSHAKE128(N, S []<a href="../../builtin/index.html#byte">byte</a>) *<a href="index.html#SHAKE">SHAKE</a></pre>
+				<p>NewCSHAKE128 creates a new cSHAKE128 XOF.
+<p>N is used to define functions based on cSHAKE, it can be empty when plain
+cSHAKE is desired. S is a customization byte string used for domain
+separation. When N and S are both empty, this is equivalent to NewSHAKE128.
+
+				
+				
+			
+				
+				<h3 id="NewCSHAKE256">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=4972:5009#L188">NewCSHAKE256</a>
+					<a class="permalink" href="index.html#NewCSHAKE256">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func NewCSHAKE256(N, S []<a href="../../builtin/index.html#byte">byte</a>) *<a href="index.html#SHAKE">SHAKE</a></pre>
+				<p>NewCSHAKE256 creates a new cSHAKE256 XOF.
+<p>N is used to define functions based on cSHAKE, it can be empty when plain
+cSHAKE is desired. S is a customization byte string used for domain
+separation. When N and S are both empty, this is equivalent to NewSHAKE256.
+
+				
+				
+			
+				
+				<h3 id="NewSHAKE128">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=4161:4186#L165">NewSHAKE128</a>
+					<a class="permalink" href="index.html#NewSHAKE128">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func NewSHAKE128() *<a href="index.html#SHAKE">SHAKE</a></pre>
+				<p>NewSHAKE128 creates a new SHAKE128 XOF.
+
+				
+				
+			
+				
+				<h3 id="NewSHAKE256">func <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=4271:4296#L170">NewSHAKE256</a>
+					<a class="permalink" href="index.html#NewSHAKE256">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func NewSHAKE256() *<a href="index.html#SHAKE">SHAKE</a></pre>
+				<p>NewSHAKE256 creates a new SHAKE256 XOF.
+
+				
+				
+			
+
+			
+				
+				<h3 id="SHAKE.AppendBinary">func (*SHAKE) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=5792:5846#L222">AppendBinary</a>
+					<a class="permalink" href="index.html#SHAKE.AppendBinary">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHAKE">SHAKE</a>) AppendBinary(p []<a href="../../builtin/index.html#byte">byte</a>) ([]<a href="../../builtin/index.html#byte">byte</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>AppendBinary implements <a href="http://localhost:8081/encoding#BinaryAppender">encoding.BinaryAppender</a>.
+
+				
+				
+				
+			
+				
+				<h3 id="SHAKE.BlockSize">func (*SHAKE) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=5540:5571#L212">BlockSize</a>
+					<a class="permalink" href="index.html#SHAKE.BlockSize">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHAKE">SHAKE</a>) BlockSize() <a href="../../builtin/index.html#int">int</a></pre>
+				<p>BlockSize returns the rate of the XOF.
+
+				
+				
+				
+			
+				
+				<h3 id="SHAKE.MarshalBinary">func (*SHAKE) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=5657:5704#L217">MarshalBinary</a>
+					<a class="permalink" href="index.html#SHAKE.MarshalBinary">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHAKE">SHAKE</a>) MarshalBinary() ([]<a href="../../builtin/index.html#byte">byte</a>, <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>MarshalBinary implements <a href="http://localhost:8081/encoding#BinaryMarshaler">encoding.BinaryMarshaler</a>.
+
+				
+				
+				
+			
+				
+				<h3 id="SHAKE.Read">func (*SHAKE) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=5335:5384#L202">Read</a>
+					<a class="permalink" href="index.html#SHAKE.Read">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHAKE">SHAKE</a>) Read(p []<a href="../../builtin/index.html#byte">byte</a>) (n <a href="../../builtin/index.html#int">int</a>, err <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>Read squeezes more output from the XOF.
+<p>Any call to Write after a call to Read will panic.
+
+				
+				
+				
+			
+				
+				<h3 id="SHAKE.Reset">func (*SHAKE) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=5456:5479#L207">Reset</a>
+					<a class="permalink" href="index.html#SHAKE.Reset">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHAKE">SHAKE</a>) Reset()</pre>
+				<p>Reset resets the XOF to its initial state.
+
+				
+				
+				
+			
+				
+				<h3 id="SHAKE.UnmarshalBinary">func (*SHAKE) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=5940:5990#L227">UnmarshalBinary</a>
+					<a class="permalink" href="index.html#SHAKE.UnmarshalBinary">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHAKE">SHAKE</a>) UnmarshalBinary(data []<a href="../../builtin/index.html#byte">byte</a>) <a href="../../builtin/index.html#error">error</a></pre>
+				<p>UnmarshalBinary implements <a href="http://localhost:8081/encoding#BinaryUnmarshaler">encoding.BinaryUnmarshaler</a>.
+
+				
+				
+				
+			
+				
+				<h3 id="SHAKE.Write">func (*SHAKE) <a href="http://localhost:8081/src/crypto/sha3/sha3.go?s=5158:5208#L195">Write</a>
+					<a class="permalink" href="index.html#SHAKE.Write">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func (s *<a href="index.html#SHAKE">SHAKE</a>) Write(p []<a href="../../builtin/index.html#byte">byte</a>) (n <a href="../../builtin/index.html#int">int</a>, err <a href="../../builtin/index.html#error">error</a>)</pre>
+				<p>Write absorbs more data into the XOF&apos;s state.
+<p>It panics if any output has already been read.
+
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.24.3.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://localhost:8081/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>

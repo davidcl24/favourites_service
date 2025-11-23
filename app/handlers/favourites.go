@@ -1,3 +1,4 @@
+// It handles HTTP requests and makes a call to the desired CRUD operation
 package handlers
 
 import (
@@ -13,6 +14,7 @@ type FavouriteHandler struct {
 	DB *models.DB
 }
 
+// Handles the specific GET HTTP request and returns a list of all favourites from the desired user in a JSON list.
 func (f *FavouriteHandler) ListUserFavourites(w http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(chi.URLParam(r, "user_id"))
 
@@ -28,6 +30,7 @@ func (f *FavouriteHandler) ListUserFavourites(w http.ResponseWriter, r *http.Req
 	}
 }
 
+// Handles the specific GET HTTP request and returns a favourite movie from the desired user in a JSON.
 func (f *FavouriteHandler) GetUserMovieFavourite(w http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(chi.URLParam(r, "user_id"))
 	movieId, _ := strconv.Atoi(chi.URLParam(r, "movie_id"))
@@ -50,6 +53,7 @@ func (f *FavouriteHandler) GetUserMovieFavourite(w http.ResponseWriter, r *http.
 	}
 }
 
+// Handles the specific GET HTTP request and returns a favourite show from the desired user in a JSON.
 func (f *FavouriteHandler) GetUserShowFavourite(w http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(chi.URLParam(r, "user_id"))
 	showId, _ := strconv.Atoi(chi.URLParam(r, "show_id"))
@@ -72,6 +76,7 @@ func (f *FavouriteHandler) GetUserShowFavourite(w http.ResponseWriter, r *http.R
 	}
 }
 
+// Handles the specific GET HTTP request and returns a particular favourite element in a JSON.
 func (f *FavouriteHandler) GetFavourite(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
 
@@ -93,6 +98,7 @@ func (f *FavouriteHandler) GetFavourite(w http.ResponseWriter, r *http.Request) 
 	}
 }
 
+// Handles the specific POST HTTP request to create a new favourite element and returns it in JSON format if successful.
 func (f *FavouriteHandler) CreateFavourite(w http.ResponseWriter, r *http.Request) {
 	var favourite models.Favourite
 
@@ -115,6 +121,8 @@ func (f *FavouriteHandler) CreateFavourite(w http.ResponseWriter, r *http.Reques
 	}
 }
 
+// Handles the specific DELETE HTTP request to remove a specific favourite element
+// and returns the desired HTTP status code if successful.
 func (f *FavouriteHandler) DeleteFavourite(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
 	fav, err := f.DB.DeleteFavourite(id)
@@ -130,6 +138,8 @@ func (f *FavouriteHandler) DeleteFavourite(w http.ResponseWriter, r *http.Reques
 	w.WriteHeader(http.StatusNoContent)
 }
 
+// Handles the specific DELETE HTTP request to remove all favourite elements from a specific user
+// and returns the desired HTTP status code if successful.
 func (f *FavouriteHandler) ClearUserFavourites(w http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(chi.URLParam(r, "user_id"))
 	historyElements, err := f.DB.ClearUserFavourites(userId)

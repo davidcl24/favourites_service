@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>weak - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.24.3";</script>
+<script src="../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="../index.html">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="../index.html">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://localhost:8081/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package weak
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "weak"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>Package weak provides ways to safely reference memory weakly,
+that is, without preventing its reclamation.
+
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+			
+				
+				<dd><a href="index.html#Pointer">type Pointer</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Make">func Make[T any](ptr *T) Pointer[T]</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Pointer.Value">func (p Pointer[T]) Value() *T</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:8081/src/weak/doc.go">doc.go</a>
+			
+				<a href="http://localhost:8081/src/weak/pointer.go">pointer.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+		
+		
+			
+			
+			<h2 id="Pointer">type <a href="http://localhost:8081/src/weak/pointer.go?s=2764:2944#L48">Pointer</a>
+				<a class="permalink" href="index.html#Pointer">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Pointer is a weak pointer to a value of type T.
+<p>Just like regular pointers, Pointer may reference any part of an
+object, such as a field of a struct or an element of an array.
+Objects that are only pointed to by weak pointers are not considered
+reachable, and once the object becomes unreachable, <a href="index.html#Pointer.Value">Pointer.Value</a>
+may return nil.
+<p>The primary use-cases for weak pointers are for implementing caches,
+canonicalization maps (like the unique package), and for tying together
+the lifetimes of separate values (for example, through a map with weak
+keys).
+<p>Two Pointer values always compare equal if the pointers from which they were
+created compare equal. This property is retained even after the
+object referenced by the pointer used to create a weak reference is
+reclaimed.
+If multiple weak pointers are made to different offsets within the same object
+(for example, pointers to different fields of the same struct), those pointers
+will not compare equal.
+If a weak pointer is created from an object that becomes unreachable, but is
+then resurrected due to a finalizer, that weak pointer will not compare equal
+with weak pointers created after the resurrection.
+<p>Calling <a href="index.html#Make">Make</a> with a nil pointer returns a weak pointer whose <a href="index.html#Pointer.Value">Pointer.Value</a>
+always returns nil. The zero value of a Pointer behaves as if it were created
+by passing nil to <a href="index.html#Make">Make</a> and compares equal with such pointers.
+<p><a href="index.html#Pointer.Value">Pointer.Value</a> is not guaranteed to eventually return nil.
+<a href="index.html#Pointer.Value">Pointer.Value</a> may return nil as soon as the object becomes
+unreachable.
+Values stored in global variables, or that can be found by tracing
+pointers from a global variable, are reachable. A function argument or
+receiver may become unreachable at the last point where the function
+mentions it. To ensure <a href="index.html#Pointer.Value">Pointer.Value</a> does not return nil,
+pass a pointer to the object to the <a href="http://localhost:8081/runtime#KeepAlive">runtime.KeepAlive</a> function after
+the last point where the object must remain reachable.
+<p>Note that because <a href="index.html#Pointer.Value">Pointer.Value</a> is not guaranteed to eventually return
+nil, even after an object is no longer referenced, the runtime is allowed to
+perform a space-saving optimization that batches objects together in a single
+allocation slot. The weak pointer for an unreferenced object in such an
+allocation may never become nil if it always exists in the same batch as a
+referenced object. Typically, this batching only happens for tiny
+(on the order of 16 bytes or less) and pointer-free objects.
+
+			<pre>type Pointer[T <a href="../builtin/index.html#any">any</a>] struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="Make">func <a href="http://localhost:8081/src/weak/pointer.go?s=3017:3052#L56">Make</a>
+					<a class="permalink" href="index.html#Make">&#xb6;</a>
+					
+					<span title="Added in Go 1.24">1.24</span>
+				</h3>
+				<pre>func Make[T <a href="../builtin/index.html#any">any</a>](ptr *T) <a href="index.html#Pointer">Pointer</a>[T]</pre>
+				<p>Make creates a weak pointer from a pointer to some value of type T.
+
+				
+				
+			
+
+			
+				
+				<h3 id="Pointer.Value">func (Pointer[T]) <a href="http://localhost:8081/src/weak/pointer.go?s=3604:3634#L73">Value</a>
+					<a class="permalink" href="index.html#Pointer.Value">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (p <a href="index.html#Pointer">Pointer</a>[T]) Value() *T</pre>
+				<p>Value returns the original pointer used to create the weak pointer.
+It returns nil if the value pointed to by the original pointer was reclaimed by
+the garbage collector.
+If a weak pointer points to an object with a finalizer, then Value will
+return nil as soon as the object&apos;s finalizer is queued for execution.
+
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.24.3.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://localhost:8081/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>

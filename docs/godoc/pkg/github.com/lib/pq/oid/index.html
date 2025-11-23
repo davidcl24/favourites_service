@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>oid - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../../../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../../../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.24.3";</script>
+<script src="../../../../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="../../../../index.html">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="../../../../index.html">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://localhost:8081/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package oid
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/lib/pq/oid"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>Package oid contains OID constants
+as defined by the Postgres server.
+
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+				<dd><a href="index.html#pkg-variables">Variables</a></dd>
+			
+			
+			
+				
+				<dd><a href="index.html#Oid">type Oid</a></dd>
+				
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/oid/doc.go">doc.go</a>
+			
+				<a href="http://localhost:8081/src/github.com/lib/pq/oid/types.go">types.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				
+				<pre>var <span id="TypeName">TypeName</span> = map[<a href="index.html#Oid">Oid</a>]<a href="../../../../builtin/index.html#string">string</a>{
+    <a href="index.html#T_bool">T_bool</a>:             &#34;BOOL&#34;,
+    <a href="index.html#T_bytea">T_bytea</a>:            &#34;BYTEA&#34;,
+    <a href="index.html#T_char">T_char</a>:             &#34;CHAR&#34;,
+    <a href="index.html#T_name">T_name</a>:             &#34;NAME&#34;,
+    <a href="index.html#T_int8">T_int8</a>:             &#34;INT8&#34;,
+    <a href="index.html#T_int2">T_int2</a>:             &#34;INT2&#34;,
+    <a href="index.html#T_int2vector">T_int2vector</a>:       &#34;INT2VECTOR&#34;,
+    <a href="index.html#T_int4">T_int4</a>:             &#34;INT4&#34;,
+    <a href="index.html#T_regproc">T_regproc</a>:          &#34;REGPROC&#34;,
+    <a href="index.html#T_text">T_text</a>:             &#34;TEXT&#34;,
+    <a href="index.html#T_oid">T_oid</a>:              &#34;OID&#34;,
+    <a href="index.html#T_tid">T_tid</a>:              &#34;TID&#34;,
+    <a href="index.html#T_xid">T_xid</a>:              &#34;XID&#34;,
+    <a href="index.html#T_cid">T_cid</a>:              &#34;CID&#34;,
+    <a href="index.html#T_oidvector">T_oidvector</a>:        &#34;OIDVECTOR&#34;,
+    <a href="index.html#T_pg_ddl_command">T_pg_ddl_command</a>:   &#34;PG_DDL_COMMAND&#34;,
+    <a href="index.html#T_pg_type">T_pg_type</a>:          &#34;PG_TYPE&#34;,
+    <a href="index.html#T_pg_attribute">T_pg_attribute</a>:     &#34;PG_ATTRIBUTE&#34;,
+    <a href="index.html#T_pg_proc">T_pg_proc</a>:          &#34;PG_PROC&#34;,
+    <a href="index.html#T_pg_class">T_pg_class</a>:         &#34;PG_CLASS&#34;,
+    <a href="index.html#T_json">T_json</a>:             &#34;JSON&#34;,
+    <a href="index.html#T_xml">T_xml</a>:              &#34;XML&#34;,
+    <a href="index.html#T__xml">T__xml</a>:             &#34;_XML&#34;,
+    <a href="index.html#T_pg_node_tree">T_pg_node_tree</a>:     &#34;PG_NODE_TREE&#34;,
+    <a href="index.html#T__json">T__json</a>:            &#34;_JSON&#34;,
+    <a href="index.html#T_smgr">T_smgr</a>:             &#34;SMGR&#34;,
+    <a href="index.html#T_index_am_handler">T_index_am_handler</a>: &#34;INDEX_AM_HANDLER&#34;,
+    <a href="index.html#T_point">T_point</a>:            &#34;POINT&#34;,
+    <a href="index.html#T_lseg">T_lseg</a>:             &#34;LSEG&#34;,
+    <a href="index.html#T_path">T_path</a>:             &#34;PATH&#34;,
+    <a href="index.html#T_box">T_box</a>:              &#34;BOX&#34;,
+    <a href="index.html#T_polygon">T_polygon</a>:          &#34;POLYGON&#34;,
+    <a href="index.html#T_line">T_line</a>:             &#34;LINE&#34;,
+    <a href="index.html#T__line">T__line</a>:            &#34;_LINE&#34;,
+    <a href="index.html#T_cidr">T_cidr</a>:             &#34;CIDR&#34;,
+    <a href="index.html#T__cidr">T__cidr</a>:            &#34;_CIDR&#34;,
+    <a href="index.html#T_float4">T_float4</a>:           &#34;FLOAT4&#34;,
+    <a href="index.html#T_float8">T_float8</a>:           &#34;FLOAT8&#34;,
+    <a href="index.html#T_abstime">T_abstime</a>:          &#34;ABSTIME&#34;,
+    <a href="index.html#T_reltime">T_reltime</a>:          &#34;RELTIME&#34;,
+    <a href="index.html#T_tinterval">T_tinterval</a>:        &#34;TINTERVAL&#34;,
+    <a href="index.html#T_unknown">T_unknown</a>:          &#34;UNKNOWN&#34;,
+    <a href="index.html#T_circle">T_circle</a>:           &#34;CIRCLE&#34;,
+    <a href="index.html#T__circle">T__circle</a>:          &#34;_CIRCLE&#34;,
+    <a href="index.html#T_money">T_money</a>:            &#34;MONEY&#34;,
+    <a href="index.html#T__money">T__money</a>:           &#34;_MONEY&#34;,
+    <a href="index.html#T_macaddr">T_macaddr</a>:          &#34;MACADDR&#34;,
+    <a href="index.html#T_inet">T_inet</a>:             &#34;INET&#34;,
+    <a href="index.html#T__bool">T__bool</a>:            &#34;_BOOL&#34;,
+    <a href="index.html#T__bytea">T__bytea</a>:           &#34;_BYTEA&#34;,
+    <a href="index.html#T__char">T__char</a>:            &#34;_CHAR&#34;,
+    <a href="index.html#T__name">T__name</a>:            &#34;_NAME&#34;,
+    <a href="index.html#T__int2">T__int2</a>:            &#34;_INT2&#34;,
+    <a href="index.html#T__int2vector">T__int2vector</a>:      &#34;_INT2VECTOR&#34;,
+    <a href="index.html#T__int4">T__int4</a>:            &#34;_INT4&#34;,
+    <a href="index.html#T__regproc">T__regproc</a>:         &#34;_REGPROC&#34;,
+    <a href="index.html#T__text">T__text</a>:            &#34;_TEXT&#34;,
+    <a href="index.html#T__tid">T__tid</a>:             &#34;_TID&#34;,
+    <a href="index.html#T__xid">T__xid</a>:             &#34;_XID&#34;,
+    <a href="index.html#T__cid">T__cid</a>:             &#34;_CID&#34;,
+    <a href="index.html#T__oidvector">T__oidvector</a>:       &#34;_OIDVECTOR&#34;,
+    <a href="index.html#T__bpchar">T__bpchar</a>:          &#34;_BPCHAR&#34;,
+    <a href="index.html#T__varchar">T__varchar</a>:         &#34;_VARCHAR&#34;,
+    <a href="index.html#T__int8">T__int8</a>:            &#34;_INT8&#34;,
+    <a href="index.html#T__point">T__point</a>:           &#34;_POINT&#34;,
+    <a href="index.html#T__lseg">T__lseg</a>:            &#34;_LSEG&#34;,
+    <a href="index.html#T__path">T__path</a>:            &#34;_PATH&#34;,
+    <a href="index.html#T__box">T__box</a>:             &#34;_BOX&#34;,
+    <a href="index.html#T__float4">T__float4</a>:          &#34;_FLOAT4&#34;,
+    <a href="index.html#T__float8">T__float8</a>:          &#34;_FLOAT8&#34;,
+    <a href="index.html#T__abstime">T__abstime</a>:         &#34;_ABSTIME&#34;,
+    <a href="index.html#T__reltime">T__reltime</a>:         &#34;_RELTIME&#34;,
+    <a href="index.html#T__tinterval">T__tinterval</a>:       &#34;_TINTERVAL&#34;,
+    <a href="index.html#T__polygon">T__polygon</a>:         &#34;_POLYGON&#34;,
+    <a href="index.html#T__oid">T__oid</a>:             &#34;_OID&#34;,
+    <a href="index.html#T_aclitem">T_aclitem</a>:          &#34;ACLITEM&#34;,
+    <a href="index.html#T__aclitem">T__aclitem</a>:         &#34;_ACLITEM&#34;,
+    <a href="index.html#T__macaddr">T__macaddr</a>:         &#34;_MACADDR&#34;,
+    <a href="index.html#T__inet">T__inet</a>:            &#34;_INET&#34;,
+    <a href="index.html#T_bpchar">T_bpchar</a>:           &#34;BPCHAR&#34;,
+    <a href="index.html#T_varchar">T_varchar</a>:          &#34;VARCHAR&#34;,
+    <a href="index.html#T_date">T_date</a>:             &#34;DATE&#34;,
+    <a href="index.html#T_time">T_time</a>:             &#34;TIME&#34;,
+    <a href="index.html#T_timestamp">T_timestamp</a>:        &#34;TIMESTAMP&#34;,
+    <a href="index.html#T__timestamp">T__timestamp</a>:       &#34;_TIMESTAMP&#34;,
+    <a href="index.html#T__date">T__date</a>:            &#34;_DATE&#34;,
+    <a href="index.html#T__time">T__time</a>:            &#34;_TIME&#34;,
+    <a href="index.html#T_timestamptz">T_timestamptz</a>:      &#34;TIMESTAMPTZ&#34;,
+    <a href="index.html#T__timestamptz">T__timestamptz</a>:     &#34;_TIMESTAMPTZ&#34;,
+    <a href="index.html#T_interval">T_interval</a>:         &#34;INTERVAL&#34;,
+    <a href="index.html#T__interval">T__interval</a>:        &#34;_INTERVAL&#34;,
+    <a href="index.html#T__numeric">T__numeric</a>:         &#34;_NUMERIC&#34;,
+    <a href="index.html#T_pg_database">T_pg_database</a>:      &#34;PG_DATABASE&#34;,
+    <a href="index.html#T__cstring">T__cstring</a>:         &#34;_CSTRING&#34;,
+    <a href="index.html#T_timetz">T_timetz</a>:           &#34;TIMETZ&#34;,
+    <a href="index.html#T__timetz">T__timetz</a>:          &#34;_TIMETZ&#34;,
+    <a href="index.html#T_bit">T_bit</a>:              &#34;BIT&#34;,
+    <a href="index.html#T__bit">T__bit</a>:             &#34;_BIT&#34;,
+    <a href="index.html#T_varbit">T_varbit</a>:           &#34;VARBIT&#34;,
+    <a href="index.html#T__varbit">T__varbit</a>:          &#34;_VARBIT&#34;,
+    <a href="index.html#T_numeric">T_numeric</a>:          &#34;NUMERIC&#34;,
+    <a href="index.html#T_refcursor">T_refcursor</a>:        &#34;REFCURSOR&#34;,
+    <a href="index.html#T__refcursor">T__refcursor</a>:       &#34;_REFCURSOR&#34;,
+    <a href="index.html#T_regprocedure">T_regprocedure</a>:     &#34;REGPROCEDURE&#34;,
+    <a href="index.html#T_regoper">T_regoper</a>:          &#34;REGOPER&#34;,
+    <a href="index.html#T_regoperator">T_regoperator</a>:      &#34;REGOPERATOR&#34;,
+    <a href="index.html#T_regclass">T_regclass</a>:         &#34;REGCLASS&#34;,
+    <a href="index.html#T_regtype">T_regtype</a>:          &#34;REGTYPE&#34;,
+    <a href="index.html#T__regprocedure">T__regprocedure</a>:    &#34;_REGPROCEDURE&#34;,
+    <a href="index.html#T__regoper">T__regoper</a>:         &#34;_REGOPER&#34;,
+    <a href="index.html#T__regoperator">T__regoperator</a>:     &#34;_REGOPERATOR&#34;,
+    <a href="index.html#T__regclass">T__regclass</a>:        &#34;_REGCLASS&#34;,
+    <a href="index.html#T__regtype">T__regtype</a>:         &#34;_REGTYPE&#34;,
+    <a href="index.html#T_record">T_record</a>:           &#34;RECORD&#34;,
+    <a href="index.html#T_cstring">T_cstring</a>:          &#34;CSTRING&#34;,
+    <a href="index.html#T_any">T_any</a>:              &#34;ANY&#34;,
+    <a href="index.html#T_anyarray">T_anyarray</a>:         &#34;ANYARRAY&#34;,
+    <a href="index.html#T_void">T_void</a>:             &#34;VOID&#34;,
+    <a href="index.html#T_trigger">T_trigger</a>:          &#34;TRIGGER&#34;,
+    <a href="index.html#T_language_handler">T_language_handler</a>: &#34;LANGUAGE_HANDLER&#34;,
+    <a href="index.html#T_internal">T_internal</a>:         &#34;INTERNAL&#34;,
+    <a href="index.html#T_opaque">T_opaque</a>:           &#34;OPAQUE&#34;,
+    <a href="index.html#T_anyelement">T_anyelement</a>:       &#34;ANYELEMENT&#34;,
+    <a href="index.html#T__record">T__record</a>:          &#34;_RECORD&#34;,
+    <a href="index.html#T_anynonarray">T_anynonarray</a>:      &#34;ANYNONARRAY&#34;,
+    <a href="index.html#T_pg_authid">T_pg_authid</a>:        &#34;PG_AUTHID&#34;,
+    <a href="index.html#T_pg_auth_members">T_pg_auth_members</a>:  &#34;PG_AUTH_MEMBERS&#34;,
+    <a href="index.html#T__txid_snapshot">T__txid_snapshot</a>:   &#34;_TXID_SNAPSHOT&#34;,
+    <a href="index.html#T_uuid">T_uuid</a>:             &#34;UUID&#34;,
+    <a href="index.html#T__uuid">T__uuid</a>:            &#34;_UUID&#34;,
+    <a href="index.html#T_txid_snapshot">T_txid_snapshot</a>:    &#34;TXID_SNAPSHOT&#34;,
+    <a href="index.html#T_fdw_handler">T_fdw_handler</a>:      &#34;FDW_HANDLER&#34;,
+    <a href="index.html#T_pg_lsn">T_pg_lsn</a>:           &#34;PG_LSN&#34;,
+    <a href="index.html#T__pg_lsn">T__pg_lsn</a>:          &#34;_PG_LSN&#34;,
+    <a href="index.html#T_tsm_handler">T_tsm_handler</a>:      &#34;TSM_HANDLER&#34;,
+    <a href="index.html#T_anyenum">T_anyenum</a>:          &#34;ANYENUM&#34;,
+    <a href="index.html#T_tsvector">T_tsvector</a>:         &#34;TSVECTOR&#34;,
+    <a href="index.html#T_tsquery">T_tsquery</a>:          &#34;TSQUERY&#34;,
+    <a href="index.html#T_gtsvector">T_gtsvector</a>:        &#34;GTSVECTOR&#34;,
+    <a href="index.html#T__tsvector">T__tsvector</a>:        &#34;_TSVECTOR&#34;,
+    <a href="index.html#T__gtsvector">T__gtsvector</a>:       &#34;_GTSVECTOR&#34;,
+    <a href="index.html#T__tsquery">T__tsquery</a>:         &#34;_TSQUERY&#34;,
+    <a href="index.html#T_regconfig">T_regconfig</a>:        &#34;REGCONFIG&#34;,
+    <a href="index.html#T__regconfig">T__regconfig</a>:       &#34;_REGCONFIG&#34;,
+    <a href="index.html#T_regdictionary">T_regdictionary</a>:    &#34;REGDICTIONARY&#34;,
+    <a href="index.html#T__regdictionary">T__regdictionary</a>:   &#34;_REGDICTIONARY&#34;,
+    <a href="index.html#T_jsonb">T_jsonb</a>:            &#34;JSONB&#34;,
+    <a href="index.html#T__jsonb">T__jsonb</a>:           &#34;_JSONB&#34;,
+    <a href="index.html#T_anyrange">T_anyrange</a>:         &#34;ANYRANGE&#34;,
+    <a href="index.html#T_event_trigger">T_event_trigger</a>:    &#34;EVENT_TRIGGER&#34;,
+    <a href="index.html#T_int4range">T_int4range</a>:        &#34;INT4RANGE&#34;,
+    <a href="index.html#T__int4range">T__int4range</a>:       &#34;_INT4RANGE&#34;,
+    <a href="index.html#T_numrange">T_numrange</a>:         &#34;NUMRANGE&#34;,
+    <a href="index.html#T__numrange">T__numrange</a>:        &#34;_NUMRANGE&#34;,
+    <a href="index.html#T_tsrange">T_tsrange</a>:          &#34;TSRANGE&#34;,
+    <a href="index.html#T__tsrange">T__tsrange</a>:         &#34;_TSRANGE&#34;,
+    <a href="index.html#T_tstzrange">T_tstzrange</a>:        &#34;TSTZRANGE&#34;,
+    <a href="index.html#T__tstzrange">T__tstzrange</a>:       &#34;_TSTZRANGE&#34;,
+    <a href="index.html#T_daterange">T_daterange</a>:        &#34;DATERANGE&#34;,
+    <a href="index.html#T__daterange">T__daterange</a>:       &#34;_DATERANGE&#34;,
+    <a href="index.html#T_int8range">T_int8range</a>:        &#34;INT8RANGE&#34;,
+    <a href="index.html#T__int8range">T__int8range</a>:       &#34;_INT8RANGE&#34;,
+    <a href="index.html#T_pg_shseclabel">T_pg_shseclabel</a>:    &#34;PG_SHSECLABEL&#34;,
+    <a href="index.html#T_regnamespace">T_regnamespace</a>:     &#34;REGNAMESPACE&#34;,
+    <a href="index.html#T__regnamespace">T__regnamespace</a>:    &#34;_REGNAMESPACE&#34;,
+    <a href="index.html#T_regrole">T_regrole</a>:          &#34;REGROLE&#34;,
+    <a href="index.html#T__regrole">T__regrole</a>:         &#34;_REGROLE&#34;,
+}</pre>
+			
+		
+		
+		
+			
+			
+			<h2 id="Oid">type <a href="http://localhost:8081/src/github.com/lib/pq/oid/doc.go?s=121:136#L1">Oid</a>
+				<a class="permalink" href="index.html#Oid">&#xb6;</a>
+				
+				
+			</h2>
+			<p>Oid is a Postgres Object ID.
+
+			<pre>type Oid <a href="../../../../builtin/index.html#uint32">uint32</a></pre>
+
+			
+				
+				<pre>const (
+    <span id="T_bool">T_bool</span>             <a href="index.html#Oid">Oid</a> = 16
+    <span id="T_bytea">T_bytea</span>            <a href="index.html#Oid">Oid</a> = 17
+    <span id="T_char">T_char</span>             <a href="index.html#Oid">Oid</a> = 18
+    <span id="T_name">T_name</span>             <a href="index.html#Oid">Oid</a> = 19
+    <span id="T_int8">T_int8</span>             <a href="index.html#Oid">Oid</a> = 20
+    <span id="T_int2">T_int2</span>             <a href="index.html#Oid">Oid</a> = 21
+    <span id="T_int2vector">T_int2vector</span>       <a href="index.html#Oid">Oid</a> = 22
+    <span id="T_int4">T_int4</span>             <a href="index.html#Oid">Oid</a> = 23
+    <span id="T_regproc">T_regproc</span>          <a href="index.html#Oid">Oid</a> = 24
+    <span id="T_text">T_text</span>             <a href="index.html#Oid">Oid</a> = 25
+    <span id="T_oid">T_oid</span>              <a href="index.html#Oid">Oid</a> = 26
+    <span id="T_tid">T_tid</span>              <a href="index.html#Oid">Oid</a> = 27
+    <span id="T_xid">T_xid</span>              <a href="index.html#Oid">Oid</a> = 28
+    <span id="T_cid">T_cid</span>              <a href="index.html#Oid">Oid</a> = 29
+    <span id="T_oidvector">T_oidvector</span>        <a href="index.html#Oid">Oid</a> = 30
+    <span id="T_pg_ddl_command">T_pg_ddl_command</span>   <a href="index.html#Oid">Oid</a> = 32
+    <span id="T_pg_type">T_pg_type</span>          <a href="index.html#Oid">Oid</a> = 71
+    <span id="T_pg_attribute">T_pg_attribute</span>     <a href="index.html#Oid">Oid</a> = 75
+    <span id="T_pg_proc">T_pg_proc</span>          <a href="index.html#Oid">Oid</a> = 81
+    <span id="T_pg_class">T_pg_class</span>         <a href="index.html#Oid">Oid</a> = 83
+    <span id="T_json">T_json</span>             <a href="index.html#Oid">Oid</a> = 114
+    <span id="T_xml">T_xml</span>              <a href="index.html#Oid">Oid</a> = 142
+    <span id="T__xml">T__xml</span>             <a href="index.html#Oid">Oid</a> = 143
+    <span id="T_pg_node_tree">T_pg_node_tree</span>     <a href="index.html#Oid">Oid</a> = 194
+    <span id="T__json">T__json</span>            <a href="index.html#Oid">Oid</a> = 199
+    <span id="T_smgr">T_smgr</span>             <a href="index.html#Oid">Oid</a> = 210
+    <span id="T_index_am_handler">T_index_am_handler</span> <a href="index.html#Oid">Oid</a> = 325
+    <span id="T_point">T_point</span>            <a href="index.html#Oid">Oid</a> = 600
+    <span id="T_lseg">T_lseg</span>             <a href="index.html#Oid">Oid</a> = 601
+    <span id="T_path">T_path</span>             <a href="index.html#Oid">Oid</a> = 602
+    <span id="T_box">T_box</span>              <a href="index.html#Oid">Oid</a> = 603
+    <span id="T_polygon">T_polygon</span>          <a href="index.html#Oid">Oid</a> = 604
+    <span id="T_line">T_line</span>             <a href="index.html#Oid">Oid</a> = 628
+    <span id="T__line">T__line</span>            <a href="index.html#Oid">Oid</a> = 629
+    <span id="T_cidr">T_cidr</span>             <a href="index.html#Oid">Oid</a> = 650
+    <span id="T__cidr">T__cidr</span>            <a href="index.html#Oid">Oid</a> = 651
+    <span id="T_float4">T_float4</span>           <a href="index.html#Oid">Oid</a> = 700
+    <span id="T_float8">T_float8</span>           <a href="index.html#Oid">Oid</a> = 701
+    <span id="T_abstime">T_abstime</span>          <a href="index.html#Oid">Oid</a> = 702
+    <span id="T_reltime">T_reltime</span>          <a href="index.html#Oid">Oid</a> = 703
+    <span id="T_tinterval">T_tinterval</span>        <a href="index.html#Oid">Oid</a> = 704
+    <span id="T_unknown">T_unknown</span>          <a href="index.html#Oid">Oid</a> = 705
+    <span id="T_circle">T_circle</span>           <a href="index.html#Oid">Oid</a> = 718
+    <span id="T__circle">T__circle</span>          <a href="index.html#Oid">Oid</a> = 719
+    <span id="T_money">T_money</span>            <a href="index.html#Oid">Oid</a> = 790
+    <span id="T__money">T__money</span>           <a href="index.html#Oid">Oid</a> = 791
+    <span id="T_macaddr">T_macaddr</span>          <a href="index.html#Oid">Oid</a> = 829
+    <span id="T_inet">T_inet</span>             <a href="index.html#Oid">Oid</a> = 869
+    <span id="T__bool">T__bool</span>            <a href="index.html#Oid">Oid</a> = 1000
+    <span id="T__bytea">T__bytea</span>           <a href="index.html#Oid">Oid</a> = 1001
+    <span id="T__char">T__char</span>            <a href="index.html#Oid">Oid</a> = 1002
+    <span id="T__name">T__name</span>            <a href="index.html#Oid">Oid</a> = 1003
+    <span id="T__int2">T__int2</span>            <a href="index.html#Oid">Oid</a> = 1005
+    <span id="T__int2vector">T__int2vector</span>      <a href="index.html#Oid">Oid</a> = 1006
+    <span id="T__int4">T__int4</span>            <a href="index.html#Oid">Oid</a> = 1007
+    <span id="T__regproc">T__regproc</span>         <a href="index.html#Oid">Oid</a> = 1008
+    <span id="T__text">T__text</span>            <a href="index.html#Oid">Oid</a> = 1009
+    <span id="T__tid">T__tid</span>             <a href="index.html#Oid">Oid</a> = 1010
+    <span id="T__xid">T__xid</span>             <a href="index.html#Oid">Oid</a> = 1011
+    <span id="T__cid">T__cid</span>             <a href="index.html#Oid">Oid</a> = 1012
+    <span id="T__oidvector">T__oidvector</span>       <a href="index.html#Oid">Oid</a> = 1013
+    <span id="T__bpchar">T__bpchar</span>          <a href="index.html#Oid">Oid</a> = 1014
+    <span id="T__varchar">T__varchar</span>         <a href="index.html#Oid">Oid</a> = 1015
+    <span id="T__int8">T__int8</span>            <a href="index.html#Oid">Oid</a> = 1016
+    <span id="T__point">T__point</span>           <a href="index.html#Oid">Oid</a> = 1017
+    <span id="T__lseg">T__lseg</span>            <a href="index.html#Oid">Oid</a> = 1018
+    <span id="T__path">T__path</span>            <a href="index.html#Oid">Oid</a> = 1019
+    <span id="T__box">T__box</span>             <a href="index.html#Oid">Oid</a> = 1020
+    <span id="T__float4">T__float4</span>          <a href="index.html#Oid">Oid</a> = 1021
+    <span id="T__float8">T__float8</span>          <a href="index.html#Oid">Oid</a> = 1022
+    <span id="T__abstime">T__abstime</span>         <a href="index.html#Oid">Oid</a> = 1023
+    <span id="T__reltime">T__reltime</span>         <a href="index.html#Oid">Oid</a> = 1024
+    <span id="T__tinterval">T__tinterval</span>       <a href="index.html#Oid">Oid</a> = 1025
+    <span id="T__polygon">T__polygon</span>         <a href="index.html#Oid">Oid</a> = 1027
+    <span id="T__oid">T__oid</span>             <a href="index.html#Oid">Oid</a> = 1028
+    <span id="T_aclitem">T_aclitem</span>          <a href="index.html#Oid">Oid</a> = 1033
+    <span id="T__aclitem">T__aclitem</span>         <a href="index.html#Oid">Oid</a> = 1034
+    <span id="T__macaddr">T__macaddr</span>         <a href="index.html#Oid">Oid</a> = 1040
+    <span id="T__inet">T__inet</span>            <a href="index.html#Oid">Oid</a> = 1041
+    <span id="T_bpchar">T_bpchar</span>           <a href="index.html#Oid">Oid</a> = 1042
+    <span id="T_varchar">T_varchar</span>          <a href="index.html#Oid">Oid</a> = 1043
+    <span id="T_date">T_date</span>             <a href="index.html#Oid">Oid</a> = 1082
+    <span id="T_time">T_time</span>             <a href="index.html#Oid">Oid</a> = 1083
+    <span id="T_timestamp">T_timestamp</span>        <a href="index.html#Oid">Oid</a> = 1114
+    <span id="T__timestamp">T__timestamp</span>       <a href="index.html#Oid">Oid</a> = 1115
+    <span id="T__date">T__date</span>            <a href="index.html#Oid">Oid</a> = 1182
+    <span id="T__time">T__time</span>            <a href="index.html#Oid">Oid</a> = 1183
+    <span id="T_timestamptz">T_timestamptz</span>      <a href="index.html#Oid">Oid</a> = 1184
+    <span id="T__timestamptz">T__timestamptz</span>     <a href="index.html#Oid">Oid</a> = 1185
+    <span id="T_interval">T_interval</span>         <a href="index.html#Oid">Oid</a> = 1186
+    <span id="T__interval">T__interval</span>        <a href="index.html#Oid">Oid</a> = 1187
+    <span id="T__numeric">T__numeric</span>         <a href="index.html#Oid">Oid</a> = 1231
+    <span id="T_pg_database">T_pg_database</span>      <a href="index.html#Oid">Oid</a> = 1248
+    <span id="T__cstring">T__cstring</span>         <a href="index.html#Oid">Oid</a> = 1263
+    <span id="T_timetz">T_timetz</span>           <a href="index.html#Oid">Oid</a> = 1266
+    <span id="T__timetz">T__timetz</span>          <a href="index.html#Oid">Oid</a> = 1270
+    <span id="T_bit">T_bit</span>              <a href="index.html#Oid">Oid</a> = 1560
+    <span id="T__bit">T__bit</span>             <a href="index.html#Oid">Oid</a> = 1561
+    <span id="T_varbit">T_varbit</span>           <a href="index.html#Oid">Oid</a> = 1562
+    <span id="T__varbit">T__varbit</span>          <a href="index.html#Oid">Oid</a> = 1563
+    <span id="T_numeric">T_numeric</span>          <a href="index.html#Oid">Oid</a> = 1700
+    <span id="T_refcursor">T_refcursor</span>        <a href="index.html#Oid">Oid</a> = 1790
+    <span id="T__refcursor">T__refcursor</span>       <a href="index.html#Oid">Oid</a> = 2201
+    <span id="T_regprocedure">T_regprocedure</span>     <a href="index.html#Oid">Oid</a> = 2202
+    <span id="T_regoper">T_regoper</span>          <a href="index.html#Oid">Oid</a> = 2203
+    <span id="T_regoperator">T_regoperator</span>      <a href="index.html#Oid">Oid</a> = 2204
+    <span id="T_regclass">T_regclass</span>         <a href="index.html#Oid">Oid</a> = 2205
+    <span id="T_regtype">T_regtype</span>          <a href="index.html#Oid">Oid</a> = 2206
+    <span id="T__regprocedure">T__regprocedure</span>    <a href="index.html#Oid">Oid</a> = 2207
+    <span id="T__regoper">T__regoper</span>         <a href="index.html#Oid">Oid</a> = 2208
+    <span id="T__regoperator">T__regoperator</span>     <a href="index.html#Oid">Oid</a> = 2209
+    <span id="T__regclass">T__regclass</span>        <a href="index.html#Oid">Oid</a> = 2210
+    <span id="T__regtype">T__regtype</span>         <a href="index.html#Oid">Oid</a> = 2211
+    <span id="T_record">T_record</span>           <a href="index.html#Oid">Oid</a> = 2249
+    <span id="T_cstring">T_cstring</span>          <a href="index.html#Oid">Oid</a> = 2275
+    <span id="T_any">T_any</span>              <a href="index.html#Oid">Oid</a> = 2276
+    <span id="T_anyarray">T_anyarray</span>         <a href="index.html#Oid">Oid</a> = 2277
+    <span id="T_void">T_void</span>             <a href="index.html#Oid">Oid</a> = 2278
+    <span id="T_trigger">T_trigger</span>          <a href="index.html#Oid">Oid</a> = 2279
+    <span id="T_language_handler">T_language_handler</span> <a href="index.html#Oid">Oid</a> = 2280
+    <span id="T_internal">T_internal</span>         <a href="index.html#Oid">Oid</a> = 2281
+    <span id="T_opaque">T_opaque</span>           <a href="index.html#Oid">Oid</a> = 2282
+    <span id="T_anyelement">T_anyelement</span>       <a href="index.html#Oid">Oid</a> = 2283
+    <span id="T__record">T__record</span>          <a href="index.html#Oid">Oid</a> = 2287
+    <span id="T_anynonarray">T_anynonarray</span>      <a href="index.html#Oid">Oid</a> = 2776
+    <span id="T_pg_authid">T_pg_authid</span>        <a href="index.html#Oid">Oid</a> = 2842
+    <span id="T_pg_auth_members">T_pg_auth_members</span>  <a href="index.html#Oid">Oid</a> = 2843
+    <span id="T__txid_snapshot">T__txid_snapshot</span>   <a href="index.html#Oid">Oid</a> = 2949
+    <span id="T_uuid">T_uuid</span>             <a href="index.html#Oid">Oid</a> = 2950
+    <span id="T__uuid">T__uuid</span>            <a href="index.html#Oid">Oid</a> = 2951
+    <span id="T_txid_snapshot">T_txid_snapshot</span>    <a href="index.html#Oid">Oid</a> = 2970
+    <span id="T_fdw_handler">T_fdw_handler</span>      <a href="index.html#Oid">Oid</a> = 3115
+    <span id="T_pg_lsn">T_pg_lsn</span>           <a href="index.html#Oid">Oid</a> = 3220
+    <span id="T__pg_lsn">T__pg_lsn</span>          <a href="index.html#Oid">Oid</a> = 3221
+    <span id="T_tsm_handler">T_tsm_handler</span>      <a href="index.html#Oid">Oid</a> = 3310
+    <span id="T_anyenum">T_anyenum</span>          <a href="index.html#Oid">Oid</a> = 3500
+    <span id="T_tsvector">T_tsvector</span>         <a href="index.html#Oid">Oid</a> = 3614
+    <span id="T_tsquery">T_tsquery</span>          <a href="index.html#Oid">Oid</a> = 3615
+    <span id="T_gtsvector">T_gtsvector</span>        <a href="index.html#Oid">Oid</a> = 3642
+    <span id="T__tsvector">T__tsvector</span>        <a href="index.html#Oid">Oid</a> = 3643
+    <span id="T__gtsvector">T__gtsvector</span>       <a href="index.html#Oid">Oid</a> = 3644
+    <span id="T__tsquery">T__tsquery</span>         <a href="index.html#Oid">Oid</a> = 3645
+    <span id="T_regconfig">T_regconfig</span>        <a href="index.html#Oid">Oid</a> = 3734
+    <span id="T__regconfig">T__regconfig</span>       <a href="index.html#Oid">Oid</a> = 3735
+    <span id="T_regdictionary">T_regdictionary</span>    <a href="index.html#Oid">Oid</a> = 3769
+    <span id="T__regdictionary">T__regdictionary</span>   <a href="index.html#Oid">Oid</a> = 3770
+    <span id="T_jsonb">T_jsonb</span>            <a href="index.html#Oid">Oid</a> = 3802
+    <span id="T__jsonb">T__jsonb</span>           <a href="index.html#Oid">Oid</a> = 3807
+    <span id="T_anyrange">T_anyrange</span>         <a href="index.html#Oid">Oid</a> = 3831
+    <span id="T_event_trigger">T_event_trigger</span>    <a href="index.html#Oid">Oid</a> = 3838
+    <span id="T_int4range">T_int4range</span>        <a href="index.html#Oid">Oid</a> = 3904
+    <span id="T__int4range">T__int4range</span>       <a href="index.html#Oid">Oid</a> = 3905
+    <span id="T_numrange">T_numrange</span>         <a href="index.html#Oid">Oid</a> = 3906
+    <span id="T__numrange">T__numrange</span>        <a href="index.html#Oid">Oid</a> = 3907
+    <span id="T_tsrange">T_tsrange</span>          <a href="index.html#Oid">Oid</a> = 3908
+    <span id="T__tsrange">T__tsrange</span>         <a href="index.html#Oid">Oid</a> = 3909
+    <span id="T_tstzrange">T_tstzrange</span>        <a href="index.html#Oid">Oid</a> = 3910
+    <span id="T__tstzrange">T__tstzrange</span>       <a href="index.html#Oid">Oid</a> = 3911
+    <span id="T_daterange">T_daterange</span>        <a href="index.html#Oid">Oid</a> = 3912
+    <span id="T__daterange">T__daterange</span>       <a href="index.html#Oid">Oid</a> = 3913
+    <span id="T_int8range">T_int8range</span>        <a href="index.html#Oid">Oid</a> = 3926
+    <span id="T__int8range">T__int8range</span>       <a href="index.html#Oid">Oid</a> = 3927
+    <span id="T_pg_shseclabel">T_pg_shseclabel</span>    <a href="index.html#Oid">Oid</a> = 4066
+    <span id="T_regnamespace">T_regnamespace</span>     <a href="index.html#Oid">Oid</a> = 4089
+    <span id="T__regnamespace">T__regnamespace</span>    <a href="index.html#Oid">Oid</a> = 4090
+    <span id="T_regrole">T_regrole</span>          <a href="index.html#Oid">Oid</a> = 4096
+    <span id="T__regrole">T__regrole</span>         <a href="index.html#Oid">Oid</a> = 4097
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.24.3.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://localhost:8081/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>
