@@ -1,4 +1,4 @@
-# FavouritesService
+# Favourites Service
 
 This service manages the favourite movies and shows a user can have for a streaming app
 
